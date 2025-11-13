@@ -1,8 +1,15 @@
 import Link from 'next/link'
 import MarkCommitsRead from '../components/MarkCommitsRead'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import rehypeRaw from 'rehype-raw'
+import dynamic from 'next/dynamic'
+
+const CommitMessage = dynamic(() => import('../components/CommitMessage'), {
+  ssr: false,
+  loading: () => (
+    <div className="prose prose-invert prose-sm max-w-none mb-3 break-words opacity-50">
+      Загрузка сообщения…
+    </div>
+  )
+})
 
 async function getCommits() {
   try {
@@ -222,14 +229,7 @@ export default async function NewsPage() {
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <div className="prose prose-invert prose-sm max-w-none mb-3 break-words">
-                        <ReactMarkdown
-                          remarkPlugins={[remarkGfm]}
-                          rehypePlugins={[rehypeRaw]}
-                        >
-                          {commit.commit.message}
-                        </ReactMarkdown>
-                      </div>
+                      <CommitMessage message={commit.commit.message} />
 
                       <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
                         <div className="flex items-center gap-2">
