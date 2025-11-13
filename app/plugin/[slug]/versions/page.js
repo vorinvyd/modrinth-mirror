@@ -70,7 +70,7 @@ export default async function PluginVersionsPage({ params, searchParams }) {
         </div>
         
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebar resource={plugin} teamMembers={teamMembers} />
+          <ResourceSidebar resource={plugin} teamMembers={teamMembers} contentType="plugin" />
         </div>
       </div>
     </div>

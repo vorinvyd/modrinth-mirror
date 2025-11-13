@@ -98,7 +98,7 @@ export default async function DatapackGalleryPage({ params }) {
         </div>
         
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebar resource={pack} teamMembers={[]} />
+          <ResourceSidebar resource={pack} teamMembers={[]} contentType="datapack" />
         </div>
       </div>
     </div>

@@ -40,7 +40,7 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
     const categories = []
     let openSource = false
 
-    const platformIds = ['bungeecord', 'waterfall', 'velocity']
+    const platformIds = ['bungeecord', 'waterfall', 'velocity', 'geyser']
 
     const gParams = searchParams.getAll('g')
     gParams.forEach(param => {

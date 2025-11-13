@@ -42,7 +42,7 @@ export default async function PluginsPage({ searchParams }) {
   let includeOpenSource = false
   let excludeOpenSource = false
 
-  const platformIds = ['bungeecord', 'waterfall', 'velocity']
+  const platformIds = ['bungeecord', 'waterfall', 'velocity', 'geyser']
 
   const gParams = Array.isArray(searchParams.g) ? searchParams.g : (searchParams.g ? [searchParams.g] : [])
   gParams.forEach(param => {

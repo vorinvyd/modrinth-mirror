@@ -132,7 +132,7 @@ export default async function PluginChangelogPage({ params }) {
         </div>
         
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebar resource={plugin} teamMembers={teamMembers} />
+          <ResourceSidebar resource={plugin} teamMembers={teamMembers} contentType="plugin" />
         </div>
       </div>
     </div>

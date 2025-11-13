@@ -96,7 +96,7 @@ export default async function DatapackChangelogPage({ params }) {
         </div>
         
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebar resource={pack} teamMembers={teamMembers} />
+          <ResourceSidebar resource={pack} teamMembers={teamMembers} contentType="datapack" />
         </div>
       </div>
     </div>

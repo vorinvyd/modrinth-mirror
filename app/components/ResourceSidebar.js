@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { LOADERS } from '@/lib/loaders'
 import { groupVersionsByMajor } from '@/lib/modrinth'
 
-export default function ResourceSidebar({ resource, teamMembers = [] }) {
+export default function ResourceSidebar({ resource, teamMembers = [], contentType = null }) {
   const gameVersions = resource.game_versions || []
   const loaders = (resource.loaders || []).filter(l => l !== 'minecraft')
   
@@ -45,8 +45,8 @@ export default function ResourceSidebar({ resource, teamMembers = [] }) {
                     const loader = LOADERS.find(l => l.id === loaderId)
                     if (!loader) return null
                     
-                    const contentType = getContentType(resource.project_type)
-                    const filterUrl = `/${contentType}?g=categories:${loaderId}`
+                    const contentTypeRoute = resolveContentTypeRoute(contentType, resource.project_type)
+                    const filterUrl = `/${contentTypeRoute}?g=categories:${loaderId}`
                     
                     return (
                       <Link
@@ -257,16 +257,31 @@ function translateDonationPlatform(platform) {
 }
 
 
-function getContentType(projectType) {
+function resolveContentTypeRoute(contentTypeProp, projectType) {
   const typeMap = {
     'mod': 'mods',
+    'mods': 'mods',
     'plugin': 'plugins',
+    'plugins': 'plugins',
     'modpack': 'modpacks',
+    'modpacks': 'modpacks',
     'resourcepack': 'resourcepacks',
+    'resourcepacks': 'resourcepacks',
     'shader': 'shaders',
-    'datapack': 'datapacks'
+    'shaders': 'shaders',
+    'datapack': 'datapacks',
+    'datapacks': 'datapacks'
   }
-  return typeMap[projectType] || 'mods'
+
+  if (contentTypeProp && typeMap[contentTypeProp]) {
+    return typeMap[contentTypeProp]
+  }
+
+  if (projectType && typeMap[projectType]) {
+    return typeMap[projectType]
+  }
+
+  return 'mods'
 }
 
 function getEnvironment(clientSide, serverSide) {
