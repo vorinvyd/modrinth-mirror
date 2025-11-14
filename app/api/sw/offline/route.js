@@ -223,22 +223,18 @@ export async function GET() {
 </head>
 <body>
     <div class="container">
-        <!-- Иконка -->
         <div class="icon">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
             </svg>
         </div>
 
-        <!-- Заголовок -->
         <h1>Сайт временно недоступен</h1>
 
-        <!-- Описание проблемы -->
         <p class="description">
-            Не удается подключиться к серверу. Возможные причины:
+            Не удается подключиться к серверу.             Возможные причины:
         </p>
 
-        <!-- Список причин -->
         <div class="reasons">
             <ul>
                 <li>
@@ -260,7 +256,6 @@ export async function GET() {
             </ul>
         </div>
 
-        <!-- Что делать -->
         <div class="solutions">
             <h2>Что можно сделать:</h2>
             <ol>
@@ -283,17 +278,14 @@ export async function GET() {
             </ol>
         </div>
 
-        <!-- Локальная копия -->
         <div class="local-setup">
             <h2>Запуск локальной копии:</h2>
             <p style="color: #d1d5db; margin-bottom: 0.75rem; font-size: 0.875rem;">
                 Если основной сайт недоступен, вы можете запустить собственную копию:
             </p>
             <div class="code-block">
-                <div class="comment"># Скачать проект</div>
                 <div class="command">git clone https://github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0/modrinth-proxy.git</div>
                 <div class="command">cd modrinth-proxy</div>
-                <div class="comment" style="margin-top: 1rem;"># Установить и запустить</div>
                 <div class="command">npm install</div>
                 <div class="command">npm run dev</div>
             </div>
@@ -302,7 +294,6 @@ export async function GET() {
             </p>
         </div>
 
-        <!-- Кнопки действий -->
         <div class="buttons">
             <button onclick="window.location.reload()" class="btn btn-primary">
                 Попробовать снова
@@ -312,7 +303,6 @@ export async function GET() {
             </a>
         </div>
 
-        <!-- Дополнительная информация -->
         <div class="footer">
             <p>
                 Если проблема повторяется, возможно сайт заблокирован в вашем регионе.
@@ -323,7 +313,6 @@ export async function GET() {
     </div>
 
     <script>
-        // Регистрируем service worker если его нет
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js').catch(function(error) {
                 console.log('SW registration failed');
@@ -337,7 +326,7 @@ export async function GET() {
     status: 200,
     headers: {
       'Content-Type': 'text/html; charset=utf-8',
-      'Cache-Control': 'public, max-age=31536000, immutable', // Кэшируем на год
+      'Cache-Control': 'public, max-age=31536000, immutable',
       'Last-Modified': new Date().toUTCString(),
     },
   })

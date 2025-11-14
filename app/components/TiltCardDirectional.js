@@ -8,14 +8,11 @@ export default function TiltCardDirectional({ children, className, direction = '
   const handleMouseEnter = () => {
     if (!cardRef.current) return
     
-    // Фиксированный наклон в зависимости от direction
     let rotateX = 0
     
     if (direction === 'top') {
-      // Верх назад (положительный rotateX)
       rotateX = 15
     } else if (direction === 'bottom') {
-      // Низ назад (отрицательный rotateX)
       rotateX = -15
     }
     

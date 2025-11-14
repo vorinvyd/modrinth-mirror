@@ -9,7 +9,6 @@ export default function NotFound() {
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4">
       <div className="text-center max-w-2xl mx-auto">
-        {/* Анимированная иконка */}
         <div className="mb-8 relative">
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-32 h-32 bg-red-500/20 rounded-full animate-ping"></div>
@@ -32,7 +31,6 @@ export default function NotFound() {
           </div>
         </div>
 
-        {/* Заголовок с градиентом */}
         <h1 className="text-6xl md:text-8xl font-black mb-6 bg-gradient-to-r from-red-500 via-orange-500 to-red-500 bg-clip-text text-transparent animate-pulse">
           404
         </h1>
@@ -46,7 +44,6 @@ export default function NotFound() {
           Возможно, она была удалена или никогда не существовала.
         </p>
 
-        {/* Кнопки навигации */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Link 
             href="/"
@@ -70,7 +67,6 @@ export default function NotFound() {
           </Link>
         </div>
 
-        {/* Популярные разделы */}
         <div className="mt-12 pt-8 border-t border-gray-800">
           <p className="text-gray-500 text-sm mb-4">Или перейдите в популярные разделы:</p>
           <div className="flex flex-wrap justify-center gap-3">

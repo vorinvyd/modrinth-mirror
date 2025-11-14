@@ -59,13 +59,11 @@ export default function AuthorProjectTabs({ userId, currentType, typeStats, tota
       }
     }
 
-    // Небольшая задержка для корректного рендера
     const timer = setTimeout(updateActiveTabStyle, 10)
     
     return () => clearTimeout(timer)
   }, [currentType, tabs])
 
-  // Также обновляем при изменении размера окна
   useEffect(() => {
     const handleResize = () => {
       if (navRef.current) {
