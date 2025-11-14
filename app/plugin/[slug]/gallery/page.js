@@ -6,13 +6,29 @@ import ContentNavigation from '@/app/components/ContentNavigation'
 import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import GalleryGrid from '@/app/components/GalleryGrid'
+import IconPreload from '@/app/components/IconPreload'
 
 export async function generateMetadata({ params }) {
   try {
     const plugin = await getMod(params.slug)
+    const url = `https://modrinth.black/plugin/${params.slug}/gallery`
     return {
       title: `${plugin.title} - Галерея | ModrinthProxy`,
       description: `Просмотрите галерею изображений для ${plugin.title}`,
+      openGraph: {
+        siteName: 'modrinth.black',
+        type: 'website',
+        url: url,
+        title: `${plugin.title} - Галерея | ModrinthProxy`,
+        description: `Просмотрите галерею изображений для ${plugin.title}`,
+        images: plugin.icon_url ? [{ url: plugin.icon_url }] : [],
+      },
+      twitter: {
+        card: 'summary',
+        title: `${plugin.title} - Галерея | ModrinthProxy`,
+        description: `Просмотрите галерею изображений для ${plugin.title}`,
+        images: plugin.icon_url ? [plugin.icon_url] : [],
+      },
     }
   } catch {
     return {
@@ -88,6 +104,7 @@ export default async function PluginGalleryPage({ params }) {
 
   return (
     <div className="max-w-7xl mx-auto">
+      <IconPreload iconUrl={plugin.icon_url} />
       <ResourceHeader resource={plugin} contentType="plugin" versions={versions} />
       
       <ContentNavigation slug={slug} contentType="plugin" versionsCount={versions.length} galleryCount={gallery.length} />

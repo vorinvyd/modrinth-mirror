@@ -6,12 +6,29 @@ import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ContentNavigation from '@/app/components/ContentNavigation'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import VersionsList from '@/app/components/VersionsList'
+import IconPreload from '@/app/components/IconPreload'
 
 export async function generateMetadata({ params }) {
   try {
     const pack = await getMod(params.slug)
+    const url = `https://modrinth.black/datapack/${params.slug}/versions`
     return {
       title: `${pack.title} - Версии | ModrinthProxy`,
+      description: `Все версии датапака ${pack.title}.`,
+      openGraph: {
+        siteName: 'modrinth.black',
+        type: 'website',
+        url: url,
+        title: `${pack.title} - Версии | ModrinthProxy`,
+        description: `Все версии датапака ${pack.title}.`,
+        images: pack.icon_url ? [{ url: pack.icon_url }] : [],
+      },
+      twitter: {
+        card: 'summary',
+        title: `${pack.title} - Версии | ModrinthProxy`,
+        description: `Все версии датапака ${pack.title}.`,
+        images: pack.icon_url ? [pack.icon_url] : [],
+      },
     }
   } catch {
     return {
@@ -49,6 +66,7 @@ export default async function DatapackVersionsPage({ params, searchParams = {} }
 
   return (
     <div className="max-w-7xl mx-auto">
+      <IconPreload iconUrl={pack.icon_url} />
       <ResourceHeader resource={pack} contentType="datapack" versions={versions} />
       
       <ContentNavigation slug={slug} contentType="datapack" versionsCount={versions.length} galleryCount={pack.gallery?.length || 0} />

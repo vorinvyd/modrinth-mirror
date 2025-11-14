@@ -5,6 +5,7 @@ import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBl
 import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ContentNavigation from '@/app/components/ContentNavigation'
 import ResourceHeader from '@/app/components/ResourceHeader'
+import IconPreload from '@/app/components/IconPreload'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
@@ -12,7 +13,25 @@ import rehypeRaw from 'rehype-raw'
 export async function generateMetadata({ params }) {
   try {
     const modpack = await getMod(params.slug)
-    return { title: `${modpack.title} - Изменения | ModrinthProxy` }
+    const url = `https://modrinth.black/modpack/${params.slug}/changelog`
+    return {
+      title: `${modpack.title} - Изменения | ModrinthProxy`,
+      description: `История изменений модпака ${modpack.title}`,
+      openGraph: {
+        siteName: 'modrinth.black',
+        type: 'website',
+        url: url,
+        title: `${modpack.title} - Изменения | ModrinthProxy`,
+        description: `История изменений модпака ${modpack.title}`,
+        images: modpack.icon_url ? [{ url: modpack.icon_url }] : [],
+      },
+      twitter: {
+        card: 'summary',
+        title: `${modpack.title} - Изменения | ModrinthProxy`,
+        description: `История изменений модпака ${modpack.title}`,
+        images: modpack.icon_url ? [modpack.icon_url] : [],
+      },
+    }
   } catch {
     return { title: 'Модпак не найден | ModrinthProxy' }
   }
@@ -36,6 +55,7 @@ export default async function ModpackChangelogPage({ params }) {
 
   return (
     <div className="max-w-7xl mx-auto">
+      <IconPreload iconUrl={modpack.icon_url} />
       <ResourceHeader resource={modpack} contentType="modpack" versions={versions} />
       
       <ContentNavigation slug={slug} contentType="modpack" versionsCount={versions.length} galleryCount={modpack.gallery?.length || 0} />

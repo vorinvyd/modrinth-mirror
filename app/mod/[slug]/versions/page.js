@@ -6,13 +6,29 @@ import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ContentNavigation from '@/app/components/ContentNavigation'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import VersionsList from '@/app/components/VersionsList'
+import IconPreload from '@/app/components/IconPreload'
 
 export async function generateMetadata({ params }) {
   try {
     const mod = await getMod(params.slug)
+    const url = `https://modrinth.black/mod/${params.slug}/versions`
     return {
       title: `${mod.title} - Версии | ModrinthProxy`,
       description: `Все версии мода ${mod.title}. Скачать для любой версии Minecraft.`,
+      openGraph: {
+        siteName: 'modrinth.black',
+        type: 'website',
+        url: url,
+        title: `${mod.title} - Версии | ModrinthProxy`,
+        description: `Все версии мода ${mod.title}. Скачать для любой версии Minecraft.`,
+        images: mod.icon_url ? [{ url: mod.icon_url }] : [],
+      },
+      twitter: {
+        card: 'summary',
+        title: `${mod.title} - Версии | ModrinthProxy`,
+        description: `Все версии мода ${mod.title}. Скачать для любой версии Minecraft.`,
+        images: mod.icon_url ? [mod.icon_url] : [],
+      },
     }
   } catch {
     return {
@@ -103,6 +119,7 @@ export default async function ModVersionsPage({ params, searchParams }) {
 
   return (
     <div className="max-w-7xl mx-auto">
+      <IconPreload iconUrl={mod.icon_url} />
       <ResourceHeader resource={mod} contentType="mod" versions={versions} />
       
       <ContentNavigation slug={slug} contentType="mod" versionsCount={versions.length} galleryCount={mod.gallery?.length || 0} />

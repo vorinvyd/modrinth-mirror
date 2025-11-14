@@ -6,13 +6,29 @@ import ContentNavigation from '@/app/components/ContentNavigation'
 import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import GalleryGrid from '@/app/components/GalleryGrid'
+import IconPreload from '@/app/components/IconPreload'
 
 export async function generateMetadata({ params }) {
   try {
     const shader = await getMod(params.slug)
+    const url = `https://modrinth.black/shader/${params.slug}/gallery`
     return {
       title: `${shader.title} - Галерея | ModrinthProxy`,
       description: `Просмотрите галерею изображений для ${shader.title}`,
+      openGraph: {
+        siteName: 'modrinth.black',
+        type: 'website',
+        url: url,
+        title: `${shader.title} - Галерея | ModrinthProxy`,
+        description: `Просмотрите галерею изображений для ${shader.title}`,
+        images: shader.icon_url ? [{ url: shader.icon_url }] : [],
+      },
+      twitter: {
+        card: 'summary',
+        title: `${shader.title} - Галерея | ModrinthProxy`,
+        description: `Просмотрите галерею изображений для ${shader.title}`,
+        images: shader.icon_url ? [shader.icon_url] : [],
+      },
     }
   } catch {
     return {
@@ -88,6 +104,7 @@ export default async function ShaderGalleryPage({ params }) {
 
   return (
     <div className="max-w-7xl mx-auto">
+      <IconPreload iconUrl={shader.icon_url} />
       <ResourceHeader resource={shader} contentType="shader" versions={versions} />
       
       <ContentNavigation slug={slug} contentType="shader" versionsCount={versions.length} galleryCount={gallery.length} />

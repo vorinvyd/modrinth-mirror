@@ -6,13 +6,29 @@ import ContentNavigation from '@/app/components/ContentNavigation'
 import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import GalleryGrid from '@/app/components/GalleryGrid'
+import IconPreload from '@/app/components/IconPreload'
 
 export async function generateMetadata({ params }) {
   try {
     const pack = await getMod(params.slug)
+    const url = `https://modrinth.black/resourcepack/${params.slug}/gallery`
     return {
       title: `${pack.title} - Галерея | ModrinthProxy`,
       description: `Просмотрите галерею изображений для ${pack.title}`,
+      openGraph: {
+        siteName: 'modrinth.black',
+        type: 'website',
+        url: url,
+        title: `${pack.title} - Галерея | ModrinthProxy`,
+        description: `Просмотрите галерею изображений для ${pack.title}`,
+        images: pack.icon_url ? [{ url: pack.icon_url }] : [],
+      },
+      twitter: {
+        card: 'summary',
+        title: `${pack.title} - Галерея | ModrinthProxy`,
+        description: `Просмотрите галерею изображений для ${pack.title}`,
+        images: pack.icon_url ? [pack.icon_url] : [],
+      },
     }
   } catch {
     return {
@@ -88,6 +104,7 @@ export default async function ResourcepackGalleryPage({ params }) {
 
   return (
     <div className="max-w-7xl mx-auto">
+      <IconPreload iconUrl={pack.icon_url} />
       <ResourceHeader resource={pack} contentType="resourcepack" versions={versions} />
       
       <ContentNavigation slug={slug} contentType="resourcepack" versionsCount={versions.length} galleryCount={gallery.length} />

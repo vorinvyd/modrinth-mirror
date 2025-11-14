@@ -6,11 +6,30 @@ import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ContentNavigation from '@/app/components/ContentNavigation'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import VersionsList from '@/app/components/VersionsList'
+import IconPreload from '@/app/components/IconPreload'
 
 export async function generateMetadata({ params }) {
   try {
     const shader = await getMod(params.slug)
-    return { title: `${shader.title} - Версии | ModrinthProxy` }
+    const url = `https://modrinth.black/shader/${params.slug}/versions`
+    return {
+      title: `${shader.title} - Версии | ModrinthProxy`,
+      description: `Все версии шейдера ${shader.title}.`,
+      openGraph: {
+        siteName: 'modrinth.black',
+        type: 'website',
+        url: url,
+        title: `${shader.title} - Версии | ModrinthProxy`,
+        description: `Все версии шейдера ${shader.title}.`,
+        images: shader.icon_url ? [{ url: shader.icon_url }] : [],
+      },
+      twitter: {
+        card: 'summary',
+        title: `${shader.title} - Версии | ModrinthProxy`,
+        description: `Все версии шейдера ${shader.title}.`,
+        images: shader.icon_url ? [shader.icon_url] : [],
+      },
+    }
   } catch {
     return { title: 'Шейдер не найден | ModrinthProxy' }
   }
@@ -36,6 +55,7 @@ export default async function ShaderVersionsPage({ params, searchParams = {} }) 
 
   return (
     <div className="max-w-7xl mx-auto">
+      <IconPreload iconUrl={shader.icon_url} />
       <ResourceHeader resource={shader} contentType="shader" versions={versions} />
       
       <ContentNavigation slug={slug} contentType="shader" versionsCount={versions.length} galleryCount={shader.gallery?.length || 0} />

@@ -5,6 +5,7 @@ import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBl
 import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ContentNavigation from '@/app/components/ContentNavigation'
 import ResourceHeader from '@/app/components/ResourceHeader'
+import IconPreload from '@/app/components/IconPreload'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
@@ -12,9 +13,24 @@ import rehypeRaw from 'rehype-raw'
 export async function generateMetadata({ params }) {
   try {
     const plugin = await getMod(params.slug)
+    const url = `https://modrinth.black/plugin/${params.slug}/changelog`
     return {
       title: `${plugin.title} - Изменения | ModrinthProxy`,
       description: `История изменений плагина ${plugin.title}`,
+      openGraph: {
+        siteName: 'modrinth.black',
+        type: 'website',
+        url: url,
+        title: `${plugin.title} - Изменения | ModrinthProxy`,
+        description: `История изменений плагина ${plugin.title}`,
+        images: plugin.icon_url ? [{ url: plugin.icon_url }] : [],
+      },
+      twitter: {
+        card: 'summary',
+        title: `${plugin.title} - Изменения | ModrinthProxy`,
+        description: `История изменений плагина ${plugin.title}`,
+        images: plugin.icon_url ? [plugin.icon_url] : [],
+      },
     }
   } catch {
     return {
@@ -92,6 +108,7 @@ export default async function PluginChangelogPage({ params }) {
 
   return (
     <div className="max-w-7xl mx-auto">
+      <IconPreload iconUrl={plugin.icon_url} />
       <ResourceHeader resource={plugin} contentType="plugin" versions={versions} />
       
       <ContentNavigation slug={slug} contentType="plugin" versionsCount={versions.length} galleryCount={plugin.gallery?.length || 0} />

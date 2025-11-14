@@ -6,11 +6,30 @@ import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ContentNavigation from '@/app/components/ContentNavigation'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import VersionsList from '@/app/components/VersionsList'
+import IconPreload from '@/app/components/IconPreload'
 
 export async function generateMetadata({ params }) {
   try {
     const modpack = await getMod(params.slug)
-    return { title: `${modpack.title} - Версии | ModrinthProxy` }
+    const url = `https://modrinth.black/modpack/${params.slug}/versions`
+    return {
+      title: `${modpack.title} - Версии | ModrinthProxy`,
+      description: `Все версии модпака ${modpack.title}.`,
+      openGraph: {
+        siteName: 'modrinth.black',
+        type: 'website',
+        url: url,
+        title: `${modpack.title} - Версии | ModrinthProxy`,
+        description: `Все версии модпака ${modpack.title}.`,
+        images: modpack.icon_url ? [{ url: modpack.icon_url }] : [],
+      },
+      twitter: {
+        card: 'summary',
+        title: `${modpack.title} - Версии | ModrinthProxy`,
+        description: `Все версии модпака ${modpack.title}.`,
+        images: modpack.icon_url ? [modpack.icon_url] : [],
+      },
+    }
   } catch {
     return { title: 'Модпак не найден | ModrinthProxy' }
   }
@@ -36,6 +55,7 @@ export default async function ModpackVersionsPage({ params, searchParams }) {
 
   return (
     <div className="max-w-7xl mx-auto">
+      <IconPreload iconUrl={modpack.icon_url} />
       <ResourceHeader resource={modpack} contentType="modpack" versions={versions} />
       
       <ContentNavigation slug={slug} contentType="modpack" versionsCount={versions.length} galleryCount={modpack.gallery?.length || 0} />
