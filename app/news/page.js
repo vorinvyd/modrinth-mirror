@@ -204,7 +204,7 @@ export default async function NewsPage() {
         </div>
 
         {commits.length > 0 ? (
-          <div className="space-y-4">
+          <div className="space-y-4 overflow-hidden">
             {commits.map((commit, index) => {
               const type = getCommitType(commit.commit.message)
               
@@ -215,8 +215,8 @@ export default async function NewsPage() {
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500">
-                    <div className="absolute -inset-[100%] bg-gradient-to-tr from-transparent via-white/30 to-transparent animate-shimmer"></div>
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500 overflow-hidden rounded-2xl">
+                    <div className="absolute -inset-[50%] bg-gradient-to-tr from-transparent via-white/30 to-transparent animate-shimmer"></div>
                   </div>
 
                   <div className="relative flex flex-col md:flex-row gap-4 md:gap-6">
