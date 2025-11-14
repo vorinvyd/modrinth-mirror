@@ -7,9 +7,16 @@ import SortDropdown from '@/app/components/SortDropdown'
 import ResourceCard from '@/app/components/ResourceCard'
 import ReloadButton from '@/app/components/ReloadButton'
 
-export const metadata = {
-  title: 'Моды для Minecraft - Скачать бесплатно | ModrinthProxy',
-  description: 'Скачать моды для Minecraft на русском языке. Fabric, Forge, NeoForge, Quilt. Тысячи модификаций для любой версии Minecraft.',
+export async function generateMetadata({ searchParams }) {
+  const page = parseInt(searchParams?.page || '1');
+  const title = page > 1 
+    ? `Моды для Minecraft - Скачать бесплатно (стр. ${page}) | ModrinthProxy`
+    : 'Моды для Minecraft - Скачать бесплатно | ModrinthProxy';
+  
+  return {
+    title,
+    description: 'Скачать моды для Minecraft на русском языке. Fabric, Forge, NeoForge, Quilt. Тысячи модификаций для любой версии Minecraft.',
+  };
 }
 
 export default async function ModsPage({ searchParams }) {

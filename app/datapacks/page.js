@@ -7,9 +7,16 @@ import SortDropdown from '@/app/components/SortDropdown'
 import ResourceCard from '@/app/components/ResourceCard'
 import ReloadButton from '@/app/components/ReloadButton'
 
-export const metadata = {
-  title: 'Датапаки для Minecraft - Скачать бесплатно | ModrinthProxy',
-  description: 'Скачать датапаки для Minecraft. Новые механики, миры, приключения. Тысячи датапаков для любой версии Minecraft.',
+export async function generateMetadata({ searchParams }) {
+  const page = parseInt(searchParams?.page || '1');
+  const title = page > 1 
+    ? `Датапаки для Minecraft - Скачать бесплатно (стр. ${page}) | ModrinthProxy`
+    : 'Датапаки для Minecraft - Скачать бесплатно | ModrinthProxy';
+  
+  return {
+    title,
+    description: 'Скачать датапаки для Minecraft. Новые механики, миры, приключения. Тысячи датапаков для любой версии Minecraft.',
+  };
 }
 
 export default async function DatapacksPage({ searchParams }) {

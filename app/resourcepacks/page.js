@@ -7,9 +7,16 @@ import SortDropdown from '@/app/components/SortDropdown'
 import ResourceCard from '@/app/components/ResourceCard'
 import ReloadButton from '@/app/components/ReloadButton'
 
-export const metadata = {
-  title: 'Ресурспаки для Minecraft - Скачать бесплатно | ModrinthProxy',
-  description: 'Скачать ресурспаки для Minecraft. Текстуры, модели, звуки. Реалистичные, мультяшные, HD. Тысячи ресурспаков для любой версии.',
+export async function generateMetadata({ searchParams }) {
+  const page = parseInt(searchParams?.page || '1');
+  const title = page > 1 
+    ? `Ресурспаки для Minecraft - Скачать бесплатно (стр. ${page}) | ModrinthProxy`
+    : 'Ресурспаки для Minecraft - Скачать бесплатно | ModrinthProxy';
+  
+  return {
+    title,
+    description: 'Скачать ресурспаки для Minecraft. Текстуры, модели, звуки. Реалистичные, мультяшные, HD. Тысячи ресурспаков для любой версии.',
+  };
 }
 
 export default async function ResourcepacksPage({ searchParams }) {
