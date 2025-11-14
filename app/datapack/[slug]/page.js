@@ -12,7 +12,7 @@ import rehypeRaw from 'rehype-raw'
 export async function generateMetadata({ params }) {
   try {
     const pack = await getMod(params.slug)
-    const url = `https://modrinth.white-minecraft.ru/datapack/${params.slug}`
+    const url = `https://modrinth.black/datapack/${params.slug}`
     const fullDescription = pack.description || `Скачать ${pack.title} для Minecraft. ${formatDownloads(pack.downloads)} загрузок. Поддержка версий: ${pack.game_versions?.slice(0, 3).join(', ')}.`
     
     return {
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }) {
       description: fullDescription,
       robots: 'all',
       openGraph: {
-        siteName: 'modrinth.white-minecraft',
+        siteName: 'modrinth.black',
         type: 'website',
         url: url,
         title: `${pack.title} - Майнкрафт Датапак`,

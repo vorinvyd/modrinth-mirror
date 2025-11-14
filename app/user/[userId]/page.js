@@ -30,7 +30,7 @@ export async function generateMetadata({ params, searchParams }) {
       description: `Профиль автора ${author.username}. ${stats.projectCount} проектов, ${formatDownloads(stats.totalDownloads)} загрузок.`,
       robots: 'all',
       openGraph: {
-        siteName: 'modrinth.white-minecraft',
+        siteName: 'modrinth.black',
         type: 'profile',
         title: `${author.username} - Автор проектов`,
         description: author.bio || `Профиль автора ${author.username}`,
