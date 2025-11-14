@@ -28,6 +28,7 @@
   --color-green-hover: #22e477;
   --color-green-rgb: 27, 217, 106;
   --color-green-bright: #00bd3c;
+  --color-download-link: #1bd96a;
   --color-blue-light: #a7d0ff;
   --text-primary: #ffffff;
   --text-secondary: #d1d5db;
@@ -36,6 +37,7 @@
   --text-gray: #b0bac5;
   --text-link: #999999;
   --text-subdued: #666666;
+  --landing-border-color: rgba(168, 177, 221, .55);
 }
 
 @keyframes bubbleUpNagliy {
@@ -913,4 +915,48 @@ input[type="url"]:-webkit-autofill {
 .border {
   border-width: 2px !important;
   border-color: transparent;
+}
+
+.download-link {
+  color: var(--color-download-link) !important;
+  display: block;
+  width: 100%;
+  font-weight: 700;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  transform: scale(1);
+  text-align: center;
+}
+
+.download-link:hover {
+  transform: scale(0.95);
+}
+
+.download-link-sm {
+  color: var(--color-download-link) !important;
+  display: block;
+  width: 100%;
+  font-weight: 700;
+  padding: 3px;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  transform: scale(1);
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.download-link-sm:hover {
+  transform: scale(0.95);
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+.divider {
+  background: var(--landing-border-color);
+  height: 13rem;
+  margin: 0;
+  width: 1px;
 }

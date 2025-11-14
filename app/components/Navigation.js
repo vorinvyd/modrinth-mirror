@@ -20,6 +20,7 @@ export default function Navigation() {
     if (path.startsWith('/shaders')) return 'cyan'
     if (path.startsWith('/modpacks')) return 'red'
     if (path.startsWith('/plugins')) return 'blue'
+    if (path.startsWith('/app')) return 'modrinth-green'
     if (path.startsWith('/news')) return 'yellow'
     return 'modrinth-green'
   }
@@ -47,7 +48,7 @@ export default function Navigation() {
           width: elementRect.width,
           height: elementRect.height,
           opacity: 1,
-          color: getColorForPath(activeKey)
+          color: getColorForPath(pathname)
         })
         
         prevPathnameRef.current = pathname
@@ -59,13 +60,14 @@ export default function Navigation() {
 
   const getGradientClass = (color) => {
     const gradients = {
-      'modrinth-green': 'from-modrinth-green/10 to-green-500/10',
+      'modrinth-green': 'from-green-500/20 to-emerald-500/20',
       'purple': 'from-purple-500/10 to-pink-500/10',
       'orange': 'from-orange-500/10 to-amber-500/10',
       'cyan': 'from-cyan-500/10 to-blue-500/10',
       'red': 'from-red-500/10 to-rose-500/10',
       'blue': 'from-blue-500/10 to-cyan-500/10',
-      'yellow': 'from-yellow-500/10 to-amber-500/10'
+      'yellow': 'from-yellow-500/10 to-amber-500/10',
+      'emerald': 'from-emerald-500/10 to-teal-500/10'
     }
     return gradients[color] || gradients['modrinth-green']
   }
@@ -80,15 +82,17 @@ export default function Navigation() {
           height: `${indicator.height}px`,
           opacity: indicator.opacity,
           transform: 'translateZ(0)',
-          top: '0'
+          top: '0',
+          zIndex: 0
         }}
       />
       
       <Link 
         ref={el => linksRef.current['/mods'] = el}
         href="/mods" 
-        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-modrinth-green/10">
-        <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/mods') ? 'text-modrinth-green' : 'text-gray-300 group-hover:text-modrinth-green'}`}>
+        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10">
+        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-green-500/20 to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <span className={`relative text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/mods') ? 'text-modrinth-green' : 'text-gray-300 group-hover:text-modrinth-green'}`}>
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16"></path>
             <path d="M3.29 7 12 12l8.71-5M12 22V12"></path>
@@ -163,6 +167,19 @@ export default function Navigation() {
       </Link>
       
       <div className="flex-1"></div>
+      
+      <Link 
+        ref={el => linksRef.current['/app'] = el}
+        href="/app" 
+        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10">
+        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-emerald-500/10 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <span className={`relative text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/app') ? 'text-emerald-400' : 'text-gray-300 group-hover:text-emerald-400'}`}>
+          <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
+            <path d="M4 16v1a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1m-4-4-4 4m0 0-4-4m4 4V4"></path>
+          </svg>
+          <span>Modrinth App</span>
+        </span>
+      </Link>
       
       <Link 
         ref={el => linksRef.current['/news'] = el}
