@@ -11,13 +11,6 @@ const withPWA = require('@ducanh2912/next-pwa').default({
     /\/_next\/static\/.*/i,
     /\/_next\/data\/.*/i,
   ],
-  publicExcludes: [
-    /\/_next\/static\/.*/i,
-    /\/_next\/data\/.*/i,
-    /\/_next\/.*\.js$/i,
-    /\/_next\/.*\.css$/i,
-    /\/_next\/.*\.map$/i,
-  ],
   workboxOptions: {
     disableDevLogs: true,
     cleanupOutdatedCaches: true,
@@ -51,9 +44,6 @@ const nextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: true,
-  },
-  experimental: {
-    staticPageGenerationTimeout: 300,
   },
   staticPageGenerationTimeout: 300,
   trailingSlash: false,
