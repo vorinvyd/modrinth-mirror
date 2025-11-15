@@ -71,20 +71,20 @@ export default function Footer() {
                 <h3 className="text-lg font-bold text-white mb-3">
                   О проекте
                 </h3>
-                <div className="flex flex-col gap-2">
-                  <a href="/bmadnco" className="flex items-center gap-2 text-gray-400 hover:text-modrinth-green text-sm transition-colors group">
+                <div className="flex flex-col gap-2 items-center md:items-start">
+                  <a href="/bmadnco" className="flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-modrinth-green text-sm transition-colors group">
                     <svg className="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <span className="font-medium">Как это работает</span>
                   </a>
-                  <a href="/extension" className="flex items-center gap-2 text-gray-400 hover:text-modrinth-green text-sm transition-colors group">
+                  <a href="/extension" className="flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-modrinth-green text-sm transition-colors group">
                     <svg className="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                     </svg>
                     <span className="font-medium">Браузерное расширение</span>
                   </a>
-                  <a href="/app" className="flex items-center gap-2 text-gray-400 hover:text-modrinth-green text-sm transition-colors group">
+                  <a href="/app" className="flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-modrinth-green text-sm transition-colors group">
                     <svg className="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1m-4-4-4 4m0 0-4-4m4 4V4" />
                     </svg>
@@ -124,6 +124,9 @@ export default function Footer() {
                   </p>
                   <p className="text-gray-500 text-sm leading-relaxed max-w-2xl">
                     Not an official Minecraft service. Not approved by or associated with Mojang or Microsoft.
+                    <br />
+                    <span className="block text-center my-1">&</span>
+                    modrinth.black is an independent project and has no relation to the original Modrinth and Rinth, Inc. "Modrinth" is a trademark of Rinth, Inc. Modrinth App is a product of Rinth, Inc. All rights to Modrinth and Modrinth App belong to Rinth, Inc. Any use of the Modrinth trademark is for descriptive purposes only and does not imply endorsement, affiliation, or sponsorship by Rinth, Inc.
                   </p>
                 </div>
               </div>
