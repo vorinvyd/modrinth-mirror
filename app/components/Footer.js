@@ -126,7 +126,7 @@ export default function Footer() {
                     Not an official Minecraft service. Not approved by or associated with Mojang or Microsoft.
                     <br />
                     <span className="block text-center my-1">&</span>
-                    modrinth.black is an independent project and has no relation to the original Modrinth and Rinth, Inc. "Modrinth" is a trademark of Rinth, Inc. Modrinth App is a product of Rinth, Inc. All rights to Modrinth and Modrinth App belong to Rinth, Inc. Any use of the Modrinth trademark is for descriptive purposes only and does not imply endorsement, affiliation, or sponsorship by Rinth, Inc.
+                    modrinth.black is an independent project and has no relation to the original Modrinth and Rinth, Inc. "Modrinth" is a trademark of Rinth, Inc. Modrinth App is a product of Rinth, Inc. All rights to Modrinth and Modrinth App belong to Rinth, Inc. The domain name modrinth.black and any use of the Modrinth trademark is for descriptive/nominative purposes only to identify the service this project interacts with, and does not imply endorsement, affiliation, or sponsorship by Rinth, Inc.
                   </p>
                 </div>
               </div>
