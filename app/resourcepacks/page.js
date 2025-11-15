@@ -4,6 +4,7 @@ import { filterModsList } from '@/lib/contentFilter'
 import ResourcepackSidebarFilters from './ResourcepackSidebarFilters'
 import MobileMenu from './MobileMenu'
 import SortDropdown from '@/app/components/SortDropdown'
+import ActiveFilters from '@/app/components/ActiveFilters'
 import ResourceCard from '@/app/components/ResourceCard'
 import ReloadButton from '@/app/components/ReloadButton'
 
@@ -173,14 +174,17 @@ export default async function ResourcepacksPage({ searchParams }) {
               </form>
             </div>
             
-            <div className="flex items-center gap-2">
-              <SortDropdown 
-                currentSort={sortBy} 
-                query={query} 
-                version={version} 
-                categoryPath="resourcepacks"
-                searchParams={searchParams}
-              />
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <SortDropdown 
+                  currentSort={sortBy} 
+                  query={query} 
+                  version={version} 
+                  categoryPath="resourcepacks"
+                  searchParams={searchParams}
+                />
+              </div>
+              <ActiveFilters categoryPath="resourcepacks" />
             </div>
           </div>
 

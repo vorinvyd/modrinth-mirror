@@ -4,6 +4,7 @@ import { filterModsList } from '@/lib/contentFilter'
 import ShaderSidebarFilters from './ShaderSidebarFilters'
 import MobileMenu from './MobileMenu'
 import SortDropdown from '@/app/components/SortDropdown'
+import ActiveFilters from '@/app/components/ActiveFilters'
 import ResourceCard from '@/app/components/ResourceCard'
 import ReloadButton from '@/app/components/ReloadButton'
 
@@ -197,14 +198,17 @@ export default async function ShadersPage({ searchParams }) {
               </form>
             </div>
             
-            <div className="flex items-center gap-2">
-              <SortDropdown 
-                currentSort={sortBy} 
-                query={query} 
-                version={version} 
-                categoryPath="shaders"
-                searchParams={searchParams}
-              />
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <SortDropdown 
+                  currentSort={sortBy} 
+                  query={query} 
+                  version={version} 
+                  categoryPath="shaders"
+                  searchParams={searchParams}
+                />
+              </div>
+              <ActiveFilters categoryPath="shaders" />
             </div>
           </div>
 

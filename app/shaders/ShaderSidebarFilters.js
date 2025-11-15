@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { SHADER_STYLES, SHADER_FEATURES, SHADER_PERFORMANCE } from '@/lib/shaderCategories'
 import { SHADER_LOADERS } from '@/lib/loaders'
@@ -27,6 +27,7 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
     const performanceIds = SHADER_PERFORMANCE.map(p => p.id)
     
     const processParam = (param) => {
+      if (!param) return
       let decoded = decodeURIComponent(param)
       
       if (decoded.includes('categories:')) {
@@ -45,6 +46,7 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
     fParams.forEach(processParam)
     
     gParams.forEach(param => {
+      if (!param) return
       const decoded = decodeURIComponent(param)
       if (decoded.includes('categories:')) {
         const value = decoded.replace('categories:', '')
@@ -70,6 +72,20 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
   const [openSource, setOpenSource] = useState(initialOpenSource)
   const [showAllVersions, setShowAllVersions] = useState(false)
   const [versionSearch, setVersionSearch] = useState('')
+
+  useEffect(() => {
+    const parsedFilters = parseFacets()
+    const urlQuery = searchParams.get('q') || ''
+    const urlVersion = searchParams.get('v') || ''
+    
+    setSearchQuery(urlQuery)
+    setSelectedVersion(urlVersion)
+    setSelectedStyles(parsedFilters.styles)
+    setSelectedFeatures(parsedFilters.features)
+    setSelectedPerformance(parsedFilters.performance)
+    setSelectedLoaders(parsedFilters.loaders)
+    setOpenSource(parsedFilters.openSource)
+  }, [searchParams])
 
   const updateFilters = (updates) => {
     const params = new URLSearchParams()

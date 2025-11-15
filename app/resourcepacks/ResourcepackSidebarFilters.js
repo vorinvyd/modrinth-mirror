@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { RESOURCEPACK_CATEGORIES } from '@/lib/resourcepackCategories'
 
@@ -47,6 +47,7 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
     const resolutionIds = RESOLUTIONS.map(r => r.id)
     
     const processParam = (param) => {
+      if (!param) return
       let decoded = decodeURIComponent(param.replace(/\+/g, '%2B'))
       
       if (decoded.includes('categories:')) {
@@ -83,6 +84,18 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
   const [selectedResolutions, setSelectedResolutions] = useState(initialResolutions)
   const [showAllVersions, setShowAllVersions] = useState(false)
   const [versionSearch, setVersionSearch] = useState('')
+
+  useEffect(() => {
+    const parsedFilters = parseFacets()
+    const urlQuery = searchParams.get('q') || ''
+    const urlVersion = searchParams.get('v') || ''
+    
+    setSearchQuery(urlQuery)
+    setSelectedVersion(urlVersion)
+    setSelectedCategories(parsedFilters.categories)
+    setSelectedFeatures(parsedFilters.features)
+    setSelectedResolutions(parsedFilters.resolutions)
+  }, [searchParams])
 
   const updateFilters = (updates) => {
     const params = new URLSearchParams()

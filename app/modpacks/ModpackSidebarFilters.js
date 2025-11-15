@@ -28,10 +28,17 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
 
   useEffect(() => {
     const parsedFilters = parseFacets()
+    const urlQuery = searchParams.get('q') || ''
+    const urlVersion = searchParams.get('v') || ''
+    const urlEnvironment = searchParams.get('e') || ''
+    
+    setSearchQuery(urlQuery)
+    setSelectedVersion(urlVersion)
     setSelectedLoaders(parsedFilters.loaders)
     setSelectedCategories(parsedFilters.categories)
     setOpenSource(parsedFilters.openSource)
-  }, [])
+    setEnvironment(urlEnvironment)
+  }, [searchParams])
 
   const parseFacets = () => {
     const loaders = []
@@ -40,6 +47,7 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
 
     const gParams = searchParams.getAll('g')
     gParams.forEach(param => {
+      if (!param) return
       const decoded = decodeURIComponent(param)
       if (decoded.startsWith('categories:')) {
         const loaderId = decoded.substring(11)
@@ -51,6 +59,7 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
 
     const fParams = searchParams.getAll('f')
     fParams.forEach(param => {
+      if (!param) return
       const decoded = decodeURIComponent(param)
       if (decoded.startsWith('categories:')) {
         const catId = decoded.substring(11)
@@ -62,6 +71,7 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
 
     const lParams = searchParams.getAll('l')
     lParams.forEach(param => {
+      if (!param) return
       const decoded = decodeURIComponent(param)
       if (decoded === 'open_source:true') {
         openSource = true

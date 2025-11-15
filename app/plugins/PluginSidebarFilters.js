@@ -3,12 +3,12 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
-import { PLUGIN_LOADERS, PLUGIN_PLATFORMS } from '@/lib/loaders'
-import { CATEGORIES } from '@/lib/categories'
+import { getFilterConfig } from '@/lib/filterConfig'
 
-const PLUGIN_CATEGORIES = CATEGORIES.filter(cat => 
-  ['adventure', 'cursed', 'decoration', 'economy', 'equipment', 'food', 'game-mechanics', 'library', 'magic', 'management', 'minigame', 'mobs', 'optimization', 'social', 'storage', 'technology', 'transportation', 'utility', 'worldgen'].includes(cat.id)
-)
+const config = getFilterConfig('plugins')
+const PLUGIN_LOADERS = config.loaders
+const PLUGIN_PLATFORMS = config.platforms
+const PLUGIN_CATEGORIES = config.categories
 
 export default function PluginSidebarFilters({ isMobile = false, onFilterChange, initialVersions = null }) {
   const router = useRouter()
@@ -28,11 +28,16 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
 
   useEffect(() => {
     const parsedFilters = parseFacets()
+    const urlQuery = searchParams.get('q') || ''
+    const urlVersion = searchParams.get('v') || ''
+    
+    setSearchQuery(urlQuery)
+    setSelectedVersion(urlVersion)
     setSelectedLoaders(parsedFilters.loaders)
     setSelectedPlatforms(parsedFilters.platforms)
     setSelectedCategories(parsedFilters.categories)
     setOpenSource(parsedFilters.openSource)
-  }, [])
+  }, [searchParams])
 
   const parseFacets = () => {
     const loaders = []
@@ -44,6 +49,7 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
 
     const gParams = searchParams.getAll('g')
     gParams.forEach(param => {
+      if (!param) return
       const decoded = decodeURIComponent(param)
       if (decoded.startsWith('categories:')) {
         const id = decoded.substring(11)
@@ -61,6 +67,7 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
 
     const fParams = searchParams.getAll('f')
     fParams.forEach(param => {
+      if (!param) return
       const decoded = decodeURIComponent(param)
       if (decoded.startsWith('categories:')) {
         const catId = decoded.substring(11)
@@ -72,6 +79,7 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
 
     const lParams = searchParams.getAll('l')
     lParams.forEach(param => {
+      if (!param) return
       const decoded = decodeURIComponent(param)
       if (decoded === 'open_source:true') {
         openSource = true

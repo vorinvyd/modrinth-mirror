@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { CATEGORIES } from '@/lib/categories'
 
@@ -17,6 +17,7 @@ export default function DatapackSidebarFilters({ onFilterChange, isMobile = fals
     const categories = []
     
     fParams.forEach(param => {
+      if (!param) return
       const decoded = decodeURIComponent(param)
       if (decoded.includes('categories:')) {
         const value = decoded.replace('categories:', '')
@@ -39,6 +40,17 @@ export default function DatapackSidebarFilters({ onFilterChange, isMobile = fals
   const [openSource, setOpenSource] = useState(initialOpenSource)
   const [showAllVersions, setShowAllVersions] = useState(false)
   const [versionSearch, setVersionSearch] = useState('')
+
+  useEffect(() => {
+    const parsedFilters = parseFacets()
+    const urlQuery = searchParams.get('q') || ''
+    const urlVersion = searchParams.get('v') || ''
+    
+    setSearchQuery(urlQuery)
+    setSelectedVersion(urlVersion)
+    setSelectedCategories(parsedFilters.categories)
+    setOpenSource(parsedFilters.openSource)
+  }, [searchParams])
 
   const updateFilters = (updates) => {
     const params = new URLSearchParams()

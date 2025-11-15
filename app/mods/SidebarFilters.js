@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { MOD_LOADERS, MAIN_LOADERS_COUNT } from '@/lib/loaders'
 import { CATEGORIES } from '@/lib/categories'
@@ -25,6 +25,7 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
     const categories = []
     
     gParams.forEach(param => {
+      if (!param) return
       const decoded = decodeURIComponent(param)
       if (decoded.includes('categories:')) {
         const value = decoded.replace('categories:', '')
@@ -33,6 +34,7 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
     })
     
     fParams.forEach(param => {
+      if (!param) return
       const decoded = decodeURIComponent(param)
       if (decoded.includes('categories:')) {
         const value = decoded.replace('categories:', '')
@@ -55,6 +57,19 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
   const [showAllVersions, setShowAllVersions] = useState(false)
   const [versionSearch, setVersionSearch] = useState('')
   const [showAllLoaders, setShowAllLoaders] = useState(false)
+
+  useEffect(() => {
+    const parsedFilters = parseFacets()
+    const urlQuery = searchParams.get('q') || ''
+    const urlVersion = searchParams.get('v') || ''
+    const urlEnvironment = searchParams.get('e') || ''
+    
+    setSearchQuery(urlQuery)
+    setSelectedVersion(urlVersion)
+    setSelectedLoaders(parsedFilters.loaders)
+    setSelectedCategories(parsedFilters.categories)
+    setSelectedEnvironment(urlEnvironment)
+  }, [searchParams])
 
   const updateFilters = (updates) => {
     const params = new URLSearchParams()
