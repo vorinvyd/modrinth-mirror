@@ -11,6 +11,13 @@ const withPWA = require('@ducanh2912/next-pwa').default({
     /\/_next\/static\/.*/i,
     /\/_next\/data\/.*/i,
   ],
+  publicExcludes: [
+    /\/_next\/static\/.*/i,
+    /\/_next\/data\/.*/i,
+    /\/_next\/.*\.js$/i,
+    /\/_next\/.*\.css$/i,
+    /\/_next\/.*\.map$/i,
+  ],
   workboxOptions: {
     disableDevLogs: true,
     cleanupOutdatedCaches: true,
@@ -33,34 +40,6 @@ const withPWA = require('@ducanh2912/next-pwa').default({
           },
         },
       },
-      {
-        urlPattern: /\/_next\/static\/.*/i,
-        handler: 'NetworkOnly',
-        options: {
-          cacheName: 'next-static',
-          plugins: [
-            {
-              handlerDidError: async () => {
-                return Response.error();
-              },
-            },
-          ],
-        },
-      },
-      {
-        urlPattern: /\/_next\/data\/.*/i,
-        handler: 'NetworkOnly',
-        options: {
-          cacheName: 'next-data',
-          plugins: [
-            {
-              handlerDidError: async () => {
-                return Response.error();
-              },
-            },
-          ],
-        },
-      },
     ],
   },
 })
@@ -77,6 +56,19 @@ const nextConfig = {
     staticPageGenerationTimeout: 300,
   },
   staticPageGenerationTimeout: 300,
+  trailingSlash: false,
+  poweredByHeader: false,
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+      }
+    }
+    return config
+  },
 }
 
 module.exports = withPWA(nextConfig)
