@@ -24,8 +24,8 @@ export default function ContentNavigation({ slug, contentType, versionsCount = 0
   ].filter(Boolean)
   
   return (
-    <div className="overflow-x-auto mb-4 mobile-nav-spacing">
-      <nav className="relative flex w-fit overflow-x-auto rounded-full bg-gray-800 p-1 text-sm font-bold">
+    <div className="overflow-x-clip mb-4 mobile-nav-spacing">
+      <nav className="relative flex w-fit overflow-x-clip rounded-full bg-gray-800 p-1 text-sm font-bold">
         {tabs.map((tab) => (
           <Link
             key={tab.href}

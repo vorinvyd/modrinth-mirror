@@ -68,21 +68,11 @@ export default function Navigation() {
       updateIndicator()
     }
     
-    const handleScroll = () => {
-      updateIndicator()
-    }
-    
     window.addEventListener('resize', handleResize)
-    if (navRef.current) {
-      navRef.current.addEventListener('scroll', handleScroll)
-    }
     
     return () => {
       clearTimeout(timeoutId)
       window.removeEventListener('resize', handleResize)
-      if (navRef.current) {
-        navRef.current.removeEventListener('scroll', handleScroll)
-      }
     }
   }, [pathname])
 
@@ -101,7 +91,7 @@ export default function Navigation() {
   }
 
   return (
-    <div ref={navRef} className="hidden lg:flex items-center gap-0.5 md:gap-1 flex-1 overflow-x-auto custom-scrollbar relative">
+    <div ref={navRef} className="hidden lg:flex items-center gap-0.5 md:gap-1 flex-1 overflow-x-clip relative">
       <div 
         className={`absolute rounded-lg bg-gradient-to-r pointer-events-none ${getGradientClass(indicator.color)} ${hasAnimated ? 'transition-all duration-700 ease-out' : ''}`}
         style={{
