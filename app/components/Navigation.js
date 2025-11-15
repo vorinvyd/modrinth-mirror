@@ -31,30 +31,58 @@ export default function Navigation() {
   }
 
   useEffect(() => {
-    const activeKey = Object.keys(linksRef.current).find(key => isActive(key))
-    if (activeKey && linksRef.current[activeKey]) {
-      const element = linksRef.current[activeKey]
-      const navElement = navRef.current
-      if (element && navElement) {
-        const navRect = navElement.getBoundingClientRect()
-        const elementRect = element.getBoundingClientRect()
-        
-        if (prevPathnameRef.current !== null && prevPathnameRef.current !== pathname) {
-          setHasAnimated(true)
+    const updateIndicator = () => {
+      requestAnimationFrame(() => {
+        const activeKey = Object.keys(linksRef.current).find(key => isActive(key))
+        if (activeKey && linksRef.current[activeKey]) {
+          const element = linksRef.current[activeKey]
+          const navElement = navRef.current
+          if (element && navElement) {
+            if (prevPathnameRef.current !== null && prevPathnameRef.current !== pathname) {
+              setHasAnimated(true)
+            }
+            
+            setIndicator({
+              left: element.offsetLeft,
+              width: element.offsetWidth,
+              height: element.offsetHeight,
+              opacity: 1,
+              color: getColorForPath(pathname)
+            })
+            
+            prevPathnameRef.current = pathname
+          }
+        } else {
+          setIndicator(prev => ({ ...prev, opacity: 0 }))
         }
-        
-        setIndicator({
-          left: elementRect.left - navRect.left,
-          width: elementRect.width,
-          height: elementRect.height,
-          opacity: 1,
-          color: getColorForPath(pathname)
-        })
-        
-        prevPathnameRef.current = pathname
+      })
+    }
+
+    updateIndicator()
+    
+    const timeoutId = setTimeout(() => {
+      updateIndicator()
+    }, 100)
+    
+    const handleResize = () => {
+      updateIndicator()
+    }
+    
+    const handleScroll = () => {
+      updateIndicator()
+    }
+    
+    window.addEventListener('resize', handleResize)
+    if (navRef.current) {
+      navRef.current.addEventListener('scroll', handleScroll)
+    }
+    
+    return () => {
+      clearTimeout(timeoutId)
+      window.removeEventListener('resize', handleResize)
+      if (navRef.current) {
+        navRef.current.removeEventListener('scroll', handleScroll)
       }
-    } else {
-      setIndicator(prev => ({ ...prev, opacity: 0 }))
     }
   }, [pathname])
 
