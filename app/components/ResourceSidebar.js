@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { LOADERS } from '@/lib/loaders'
 import { groupVersionsByMajor } from '@/lib/modrinth'
+import AdBlock from './AdBlock'
 
 export default function ResourceSidebar({ resource, teamMembers = [], contentType = null }) {
   const gameVersions = resource.game_versions || []
@@ -89,6 +90,8 @@ export default function ResourceSidebar({ resource, teamMembers = [], contentTyp
           </div>
         </div>
       )}
+
+      <AdBlock />
 
       {(resource.discord_url || resource.source_url || resource.wiki_url || resource.issues_url || (resource.donation_urls && resource.donation_urls.length > 0)) && (
         <div className="bg-modrinth-dark border border-gray-800 rounded-lg p-4">
