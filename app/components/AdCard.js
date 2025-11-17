@@ -124,7 +124,7 @@ export default function AdCard() {
           style={{ backgroundImage: `url(${currentBanner})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/85" />
-        <div className="absolute top-2 right-2 md:top-3 md:right-3 z-20">
+        <div className="absolute bottom-2 left-2 md:top-3 md:right-3 md:bottom-auto md:left-auto z-20">
           <span className="inline-flex items-center px-2 py-1 text-[10px] md:text-xs font-medium text-gray-400/70">
             Реклама
           </span>

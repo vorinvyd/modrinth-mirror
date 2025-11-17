@@ -69,7 +69,7 @@ export default function RootLayout({ children }) {
           ym(105182235, 'init', {ssr:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});`}
         </Script>
       </head>
-      <body className={`${nunito.className} overflow-x-hidden min-h-screen m-0`}>
+      <body className={`${nunito.className} min-h-screen m-0`}>
         <noscript dangerouslySetInnerHTML={{ __html: '<div><img src="https://mc.yandex.ru/watch/105182235" style="position:absolute; left:-9999px;" alt="" /></div>' }} />
         <VersionsPreloader />
         <BannerPreloader />

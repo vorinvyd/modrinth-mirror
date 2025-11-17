@@ -107,7 +107,7 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
 
   return (
     <div className="bg-modrinth-dark border border-gray-800 rounded-lg overflow-hidden">
-      <div className="flex border-b border-gray-800 overflow-x-clip">
+      <div className="flex border-b border-gray-800">
         <button
           onClick={() => handleTabChange('description')}
           className={`px-4 md:px-6 py-2 md:py-3 font-semibold transition text-sm md:text-base whitespace-nowrap ${

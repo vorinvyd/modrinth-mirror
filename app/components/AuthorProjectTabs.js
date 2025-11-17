@@ -88,8 +88,8 @@ export default function AuthorProjectTabs({ userId, currentType, typeStats, tota
   }
 
   return (
-    <div className="mb-6 max-w-full overflow-x-clip">
-      <nav ref={navRef} className="relative flex w-fit overflow-x-clip rounded-full bg-modrinth-dark border border-gray-800 p-1 text-sm font-bold shadow-lg">
+    <div className="mb-6 max-w-full">
+      <nav ref={navRef} className="relative flex w-fit rounded-full bg-modrinth-dark border border-gray-800 p-1 text-sm font-bold shadow-lg">
         {tabs.map((tab) => (
           <Link
             key={tab.key || 'all'}
