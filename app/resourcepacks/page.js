@@ -7,6 +7,7 @@ import SortDropdown from '@/app/components/SortDropdown'
 import ActiveFilters from '@/app/components/ActiveFilters'
 import ResourceCard from '@/app/components/ResourceCard'
 import ReloadButton from '@/app/components/ReloadButton'
+import AdCard from '@/app/components/AdCard'
 
 export async function generateMetadata({ searchParams }) {
   const page = parseInt(searchParams?.page || '1');
@@ -254,9 +255,17 @@ export default async function ResourcepacksPage({ searchParams }) {
           )}
 
           <div className="space-y-3">
-            {data.hits.map((pack) => (
-              <ResourceCard key={pack.project_id} resource={pack} type="resourcepack" />
-            ))}
+            {data.hits.map((pack, index) => {
+              const items = [
+                <ResourceCard key={pack.project_id} resource={pack} type="resourcepack" />
+              ]
+              
+              if (data.hits.length >= 19 && index === 18) {
+                items.push(<AdCard key="ad-card" />)
+              }
+              
+              return items
+            }).flat()}
           </div>
 
           {totalPages > 1 && (

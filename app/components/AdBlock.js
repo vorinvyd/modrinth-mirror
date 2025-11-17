@@ -194,6 +194,11 @@ export default function AdBlock() {
                 )}
               </div>
             </div>
+            <div className="absolute bottom-3 left-3 z-20">
+              <span className="inline-flex items-center px-2 py-1 text-[10px] font-medium text-gray-400/70">
+                Реклама
+              </span>
+            </div>
             {currentAd.domain && domainGlowColor && (
               <div className="absolute bottom-3 right-3 z-20">
                 <p 
