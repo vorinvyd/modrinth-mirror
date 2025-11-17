@@ -132,17 +132,7 @@ export default function AdCard() {
         <div className="relative z-10 h-full flex flex-col md:flex-row md:items-center p-4 md:p-5">
           <div className="flex-1 mb-2 md:mb-0">
             <h4 
-              className="text-sm md:text-base font-extrabold text-white mb-2 md:mb-3 line-clamp-2 md:line-clamp-1 group-hover:text-modrinth-green transition-all duration-300 drop-shadow-2xl"
-              style={{
-                textShadow: '0 0 0px currentColor',
-                transition: 'text-shadow 0.3s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.textShadow = '0 0 20px rgba(27, 217, 106, 0.8), 0 0 40px rgba(27, 217, 106, 0.4)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.textShadow = '0 0 0px currentColor'
-              }}
+              className="text-sm md:text-base font-extrabold text-white mb-2 md:mb-3 line-clamp-2 md:line-clamp-1 drop-shadow-2xl transition-colors duration-300 group-hover:text-modrinth-green"
             >
               {currentAd.title}
             </h4>
@@ -151,18 +141,9 @@ export default function AdCard() {
                 {currentAd.description.split(' • ').map((item, idx) => (
                   <p 
                     key={idx} 
-                    className="text-[11px] md:text-xs text-gray-200 drop-shadow-lg flex items-center transition-all duration-300"
-                    style={{
-                      textShadow: '0 0 0px currentColor',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.textShadow = '0 0 15px rgba(27, 217, 106, 0.7), 0 0 30px rgba(27, 217, 106, 0.3)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.textShadow = '0 0 0px currentColor'
-                    }}
+                    className="text-[11px] md:text-xs text-gray-200 drop-shadow-lg flex items-center"
                   >
-                    <span className="w-1 h-1 bg-modrinth-green rounded-full mr-1.5 flex-shrink-0 group-hover:shadow-[0_0_8px_rgba(27,217,106,0.8)] transition-shadow duration-300"></span>
+                    <span className="w-1 h-1 bg-modrinth-green rounded-full mr-1.5 flex-shrink-0"></span>
                     {item}
                   </p>
                 ))}
