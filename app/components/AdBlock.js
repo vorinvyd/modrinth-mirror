@@ -5,10 +5,22 @@ import { detectBlocking, createFallbackBlock } from '../../lib/ads/blockerDetect
 
 const ROTATION_INTERVAL = 3 * 60 * 1000
 
+const GLOW_COLORS = [
+  'rgba(27, 217, 106, 0.9)',
+  'rgba(59, 130, 246, 0.9)',
+  'rgba(168, 85, 247, 0.9)',
+  'rgba(236, 72, 153, 0.9)',
+  'rgba(251, 146, 60, 0.9)',
+  'rgba(34, 197, 94, 0.9)',
+  'rgba(99, 102, 241, 0.9)',
+  'rgba(219, 39, 119, 0.9)'
+]
+
 export default function AdBlock() {
   const [currentAd, setCurrentAd] = useState(null)
   const [currentHash, setCurrentHash] = useState(null)
   const [currentBanner, setCurrentBanner] = useState(null)
+  const [domainGlowColor, setDomainGlowColor] = useState(null)
   const [isVisible, setIsVisible] = useState(false)
   const [ads, setAds] = useState([])
   const [banners, setBanners] = useState([])
@@ -59,9 +71,11 @@ export default function AdBlock() {
       const item = getRandomItem()
       if (item) {
         const bannerImage = item.image || getRandomBanner()
+        const randomGlowColor = GLOW_COLORS[Math.floor(Math.random() * GLOW_COLORS.length)]
         
         setCurrentBanner(bannerImage)
         setCurrentAd(item)
+        setDomainGlowColor(randomGlowColor)
         
         try {
           const hashResponse = await fetch('/api/link-hash', {
@@ -141,14 +155,38 @@ export default function AdBlock() {
             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/85" />
             <div className="relative z-10 h-full flex flex-col p-5">
               <div className="flex-1 flex flex-col justify-center">
-                <h4 className="text-lg font-extrabold text-white mb-3 line-clamp-2 group-hover:text-modrinth-green transition-colors drop-shadow-2xl leading-tight">
+                <h4 
+                  className="text-lg font-extrabold text-white mb-3 line-clamp-2 group-hover:text-modrinth-green transition-all duration-300 drop-shadow-2xl leading-tight"
+                  style={{
+                    textShadow: '0 0 0px currentColor',
+                    transition: 'text-shadow 0.3s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.textShadow = '0 0 20px rgba(27, 217, 106, 0.8), 0 0 40px rgba(27, 217, 106, 0.4)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.textShadow = '0 0 0px currentColor'
+                  }}
+                >
                   {currentAd.title}
                 </h4>
                 {currentAd.description && (
                   <div className="space-y-1.5">
                     {currentAd.description.split(' • ').map((item, idx) => (
-                      <p key={idx} className="text-xs text-gray-100 drop-shadow-lg flex items-center">
-                        <span className="w-1.5 h-1.5 bg-modrinth-green rounded-full mr-2 flex-shrink-0"></span>
+                      <p 
+                        key={idx} 
+                        className="text-xs text-gray-100 drop-shadow-lg flex items-center transition-all duration-300"
+                        style={{
+                          textShadow: '0 0 0px currentColor',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.textShadow = '0 0 15px rgba(27, 217, 106, 0.7), 0 0 30px rgba(27, 217, 106, 0.3)'
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.textShadow = '0 0 0px currentColor'
+                        }}
+                      >
+                        <span className="w-1.5 h-1.5 bg-modrinth-green rounded-full mr-2 flex-shrink-0 group-hover:shadow-[0_0_10px_rgba(27,217,106,0.8)] transition-shadow duration-300"></span>
                         {item}
                       </p>
                     ))}
@@ -156,10 +194,23 @@ export default function AdBlock() {
                 )}
               </div>
             </div>
-            {currentAd.domain && (
+            {currentAd.domain && domainGlowColor && (
               <div className="absolute bottom-3 right-3 z-20">
-                <p className="text-[10px] text-gray-200/90 font-mono tracking-wider bg-black/30 backdrop-blur-sm px-2 py-1 rounded border border-white/10">
-                  {currentAd.domain}
+                <p 
+                  className="text-[10px] text-gray-200/90 font-mono tracking-wider bg-black/30 backdrop-blur-sm px-2 py-1 rounded border border-white/10 transition-all duration-300"
+                  style={{
+                    textShadow: 'none',
+                    ['--glow-color']: domainGlowColor
+                  }}
+                >
+                  <style dangerouslySetInnerHTML={{
+                    __html: `
+                      .group:hover [data-domain-glow="${domainGlowColor}"] {
+                        text-shadow: 0 0 8px ${domainGlowColor}, 0 0 16px ${domainGlowColor}, 0 0 24px ${domainGlowColor} !important;
+                      }
+                    `
+                  }} />
+                  <span data-domain-glow={domainGlowColor}>{currentAd.domain}</span>
                 </p>
               </div>
             )}
