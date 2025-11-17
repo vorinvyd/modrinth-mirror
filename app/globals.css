@@ -678,6 +678,15 @@ body {
   margin: 0 0.25rem !important;
 }
 
+.prose iframe {
+  max-width: 100% !important;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 16 / 9 !important;
+  border-radius: 0.5rem !important;
+  margin: 1rem 0 !important;
+}
+
 .prose center {
   text-align: center !important;
   margin: 2rem 0 !important;
