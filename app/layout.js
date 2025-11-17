@@ -9,6 +9,7 @@ import TopNav from "./components/TopNav"
 import Footer from './components/Footer'
 import Logo from './components/Logo'
 import VersionsPreloader from './components/VersionsPreloader'
+import BannerPreloader from './components/BannerPreloader'
 
 const nunito = Nunito({
   subsets: ['latin', 'cyrillic'],
@@ -48,6 +49,16 @@ export default function RootLayout({ children }) {
         <link rel="apple-touch-icon" href="/icon.png" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        {Array.from({ length: 12 }, (_, i) => i + 1).map(num => (
+          <link
+            key={num}
+            rel="preload"
+            href={`/ads/banners/${num}.webp`}
+            as="image"
+            type="image/webp"
+            fetchPriority="low"
+          />
+        ))}
         <Script id="yandex-metrika" strategy="afterInteractive">
           {`(function(m,e,t,r,i,k,a){
             m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -61,6 +72,7 @@ export default function RootLayout({ children }) {
       <body className={`${nunito.className} overflow-x-hidden min-h-screen m-0`}>
         <noscript dangerouslySetInnerHTML={{ __html: '<div><img src="https://mc.yandex.ru/watch/105182235" style="position:absolute; left:-9999px;" alt="" /></div>' }} />
         <VersionsPreloader />
+        <BannerPreloader />
         <TopNav />
         <nav className="bg-modrinth-darker shadow-lg hidden lg:block">
           <div className="container mx-auto px-4 py-3 md:py-4">
