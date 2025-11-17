@@ -7,7 +7,7 @@ import SortDropdown from '@/app/components/SortDropdown'
 import ActiveFilters from '@/app/components/ActiveFilters'
 import ResourceCard from '@/app/components/ResourceCard'
 import ReloadButton from '@/app/components/ReloadButton'
-import AdCard from '@/app/components/AdCard'
+import AdCard from '@/app/components/2'
 
 export async function generateMetadata({ searchParams }) {
   const page = parseInt(searchParams?.page || '1');

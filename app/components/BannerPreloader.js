@@ -7,7 +7,7 @@ export default function BannerPreloader() {
     const preloadBanners = () => {
       for (let i = 1; i <= 12; i++) {
         const img = new Image()
-        img.src = `/ads/banners/${i}.webp`
+        img.src = `/p/1/${i}.webp`
       }
     }
 

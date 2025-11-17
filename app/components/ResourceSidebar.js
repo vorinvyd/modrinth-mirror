@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { LOADERS } from '@/lib/loaders'
 import { groupVersionsByMajor } from '@/lib/modrinth'
-import AdBlock from './AdBlock'
+import AdBlock from './1'
 
 export default function ResourceSidebar({ resource, teamMembers = [], contentType = null }) {
   const gameVersions = resource.game_versions || []

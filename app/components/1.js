@@ -1,20 +1,24 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { detectBlocking, createFallbackBlock } from '../../lib/ads/blockerDetector'
+import { detectBlocking, createFallbackBlock } from '../../lib/d/2'
 
 const ROTATION_INTERVAL = 3 * 60 * 1000
 
-const GLOW_COLORS = [
-  'rgba(27, 217, 106, 0.9)',
-  'rgba(59, 130, 246, 0.9)',
-  'rgba(168, 85, 247, 0.9)',
-  'rgba(236, 72, 153, 0.9)',
-  'rgba(251, 146, 60, 0.9)',
-  'rgba(34, 197, 94, 0.9)',
-  'rgba(99, 102, 241, 0.9)',
-  'rgba(219, 39, 119, 0.9)'
-]
+function getGlowColors() {
+  if (typeof window === 'undefined') return []
+  const root = document.documentElement
+  return [
+    getComputedStyle(root).getPropertyValue('--glow-color-0').trim(),
+    getComputedStyle(root).getPropertyValue('--glow-color-1').trim(),
+    getComputedStyle(root).getPropertyValue('--glow-color-2').trim(),
+    getComputedStyle(root).getPropertyValue('--glow-color-3').trim(),
+    getComputedStyle(root).getPropertyValue('--glow-color-4').trim(),
+    getComputedStyle(root).getPropertyValue('--glow-color-5').trim(),
+    getComputedStyle(root).getPropertyValue('--glow-color-6').trim(),
+    getComputedStyle(root).getPropertyValue('--glow-color-7').trim()
+  ].filter(Boolean)
+}
 
 export default function AdBlock() {
   const [currentAd, setCurrentAd] = useState(null)
@@ -71,7 +75,10 @@ export default function AdBlock() {
       const item = getRandomItem()
       if (item) {
         const bannerImage = item.image || getRandomBanner()
-        const randomGlowColor = GLOW_COLORS[Math.floor(Math.random() * GLOW_COLORS.length)]
+        const glowColors = getGlowColors()
+        const randomGlowColor = glowColors.length > 0 
+          ? glowColors[Math.floor(Math.random() * glowColors.length)]
+          : 'rgba(27, 217, 106, 0.9)'
         
         setCurrentBanner(bannerImage)
         setCurrentAd(item)
@@ -148,9 +155,11 @@ export default function AdBlock() {
       >
         {currentAd && currentBanner ? (
           <>
-            <div 
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-              style={{ backgroundImage: `url(${currentBanner})` }}
+            <img
+              src={currentBanner}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/85" />
             <div className="relative z-10 h-full flex flex-col p-5">

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { hashUrlSync } from '../../../lib/ads/urlHasher'
+import { hashUrlSync } from '../../../lib/d/urlHasher'
 
 export async function POST(request) {
   try {

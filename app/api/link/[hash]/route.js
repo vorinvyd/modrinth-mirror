@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getAdByHash } from '../../../../lib/ads/adManager'
+import { getAdByHash } from '../../../../lib/d/1'
 
 export async function GET(request, { params }) {
   const { hash } = params

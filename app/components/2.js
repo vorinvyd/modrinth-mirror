@@ -1,19 +1,26 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname, useSearchParams } from 'next/navigation'
 
-const GLOW_COLORS = [
-  'rgba(27, 217, 106, 0.9)',
-  'rgba(59, 130, 246, 0.9)',
-  'rgba(168, 85, 247, 0.9)',
-  'rgba(236, 72, 153, 0.9)',
-  'rgba(251, 146, 60, 0.9)',
-  'rgba(34, 197, 94, 0.9)',
-  'rgba(99, 102, 241, 0.9)',
-  'rgba(219, 39, 119, 0.9)'
-]
+function getGlowColors() {
+  if (typeof window === 'undefined') return []
+  const root = document.documentElement
+  return [
+    getComputedStyle(root).getPropertyValue('--glow-color-0').trim(),
+    getComputedStyle(root).getPropertyValue('--glow-color-1').trim(),
+    getComputedStyle(root).getPropertyValue('--glow-color-2').trim(),
+    getComputedStyle(root).getPropertyValue('--glow-color-3').trim(),
+    getComputedStyle(root).getPropertyValue('--glow-color-4').trim(),
+    getComputedStyle(root).getPropertyValue('--glow-color-5').trim(),
+    getComputedStyle(root).getPropertyValue('--glow-color-6').trim(),
+    getComputedStyle(root).getPropertyValue('--glow-color-7').trim()
+  ].filter(Boolean)
+}
 
 export default function AdCard() {
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
   const [currentAd, setCurrentAd] = useState(null)
   const [currentHash, setCurrentHash] = useState(null)
   const [currentBanner, setCurrentBanner] = useState(null)
@@ -65,7 +72,10 @@ export default function AdCard() {
     const item = getRandomItem()
     if (item) {
       const bannerImage = item.image || getRandomBanner()
-      const randomGlowColor = GLOW_COLORS[Math.floor(Math.random() * GLOW_COLORS.length)]
+      const glowColors = getGlowColors()
+      const randomGlowColor = glowColors.length > 0 
+        ? glowColors[Math.floor(Math.random() * glowColors.length)]
+        : 'rgba(27, 217, 106, 0.9)'
       
       setCurrentBanner(bannerImage)
       setCurrentAd(item)
@@ -93,7 +103,7 @@ export default function AdCard() {
 
       loadHash()
     }
-  }, [ads, banners])
+  }, [ads, banners, pathname, searchParams])
 
   const hashedUrl = currentHash ? `/api/link/${currentHash}` : '#'
 
@@ -119,9 +129,11 @@ export default function AdCard() {
         rel="noopener noreferrer"
         data-link="external"
       >
-        <div 
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-          style={{ backgroundImage: `url(${currentBanner})` }}
+        <img
+          src={currentBanner}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/85" />
         <div className="absolute bottom-2 left-2 md:top-3 md:right-3 md:bottom-auto md:left-auto z-20">

@@ -53,7 +53,7 @@ export default function RootLayout({ children }) {
           <link
             key={num}
             rel="preload"
-            href={`/ads/banners/${num}.webp`}
+            href={`/p/1/${num}.webp`}
             as="image"
             type="image/webp"
             fetchPriority="low"

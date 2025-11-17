@@ -4,12 +4,12 @@ import { join } from 'path'
 
 export async function GET() {
   try {
-    const bannersDir = join(process.cwd(), 'public', 'ads', 'banners-wide')
+    const bannersDir = join(process.cwd(), 'public', 'p', '2')
     const files = await readdir(bannersDir)
     
     const banners = files
       .filter(file => /\.(jpg|jpeg|png|webp|gif)$/i.test(file))
-      .map(file => `/ads/banners-wide/${file}`)
+      .map(file => `/p/2/${file}`)
       .sort((a, b) => {
         const numA = parseInt(a.match(/(\d+)\.webp$/)?.[1] || '0')
         const numB = parseInt(b.match(/(\d+)\.webp$/)?.[1] || '0')

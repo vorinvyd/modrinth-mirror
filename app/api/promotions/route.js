@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getAllAds } from '../../../lib/ads/adManager'
+import { getAllAds } from '../../../lib/d/1'
 
 export async function GET() {
   try {
