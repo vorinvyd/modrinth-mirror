@@ -1,5 +1,6 @@
 import DownloadButtons from './DownloadButtons'
 import { getLauncherData } from '@/lib/launcher'
+import AdCard from '@/app/components/2'
 
 export const metadata = {
   title: 'Modrinth App - Скачать лаунчер',
@@ -158,6 +159,9 @@ export default async function AppPage() {
       <div className="max-w-6xl mx-auto px-4 py-8" id="download-options">
 
         <div className="mb-8">
+          <div className="mb-8">
+            <AdCard />
+          </div>
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Варианты загрузки</h2>
             <p className="text-lg text-gray-400">Выберите версию для вашей операционной системы</p>

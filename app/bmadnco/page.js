@@ -2,13 +2,35 @@ import { BLACKLIST_PROJECTS, BLACKLIST_ORGANIZATIONS, BLACKLIST_PATTERNS, BLACKL
 import EmailCopyButton from '@/app/components/EmailCopyButton'
 import TiltCard from '@/app/components/TiltCard'
 import TiltCardDirectional from '@/app/components/TiltCardDirectional'
+import ProtectionBlock from './ProtectionBlock'
+import InfrastructureIcon from './InfrastructureIcon'
 
 export const metadata = {
   title: 'О проекте - ModrinthProxy',
   description: 'Как работает наш сервис и технические детали',
 }
 
+function pluralize(count, one, few, many) {
+  const mod10 = count % 10
+  const mod100 = count % 100
+  
+  if (mod100 >= 11 && mod100 <= 19) {
+    return many
+  }
+  if (mod10 === 1) {
+    return one
+  }
+  if (mod10 >= 2 && mod10 <= 4) {
+    return few
+  }
+  return many
+}
+
 export default function AboutPage() {
+  const projectsCount = BLACKLIST_PROJECTS.length
+  const orgsCount = BLACKLIST_ORGANIZATIONS.length
+  const mediaCount = BLACKLIST_PATTERNS.length + BLACKLIST_AVATARS.length
+
   return (
     <div className="min-h-screen">
       <div className="max-w-7xl mx-auto">
@@ -255,10 +277,10 @@ export default function AboutPage() {
                   <TiltCard className="bg-gradient-to-br from-red-900/40 to-red-800/20 rounded-xl p-6 border border-red-600/30 hover:border-red-500/60 transition-all duration-500 select-none cursor-default" shadowColor="rgba(239, 68, 68, 0.2)">
                     <div className="text-center">
                       <div className="text-5xl font-bold text-red-400 mb-2 animate-pulse-slow">
-                        {BLACKLIST_PROJECTS.length}
+                        {projectsCount}
                       </div>
-                      <div className="text-sm text-gray-400 mb-1">Заблокированных</div>
-                      <div className="text-lg font-semibold text-white">Проектов</div>
+                      <div className="text-lg font-semibold text-white mb-1">{pluralize(projectsCount, 'Проект', 'Проекта', 'Проектов')}</div>
+                      <div className="text-sm text-gray-400">Заблокировано</div>
                       <div className="mt-3 pt-3 border-t border-red-800/50">
                         <p className="text-xs text-red-300/80 leading-relaxed">
                           Отдельные моды, плагины, шейдеры, ресурспаки, датапаки и модпаки, содержащие запрещённый контент. 
@@ -271,10 +293,10 @@ export default function AboutPage() {
                   <TiltCard className="bg-gradient-to-br from-orange-900/40 to-orange-800/20 rounded-xl p-6 border border-orange-600/30 hover:border-orange-500/60 transition-all duration-500 select-none cursor-default" shadowColor="rgba(249, 115, 22, 0.2)">
                     <div className="text-center">
                       <div className="text-5xl font-bold text-orange-400 mb-2 animate-pulse-slow" style={{ animationDelay: '0.2s' }}>
-                        {BLACKLIST_ORGANIZATIONS.length}
+                        {orgsCount}
                       </div>
-                      <div className="text-sm text-gray-400 mb-1">Заблокированных</div>
-                      <div className="text-lg font-semibold text-white">Организаций</div>
+                      <div className="text-lg font-semibold text-white mb-1">{pluralize(orgsCount, 'Организация', 'Организации', 'Организаций')}</div>
+                      <div className="text-sm text-gray-400">Заблокировано</div>
                       <div className="mt-3 pt-3 border-t border-orange-800/50">
                         <p className="text-xs text-orange-300/80 leading-relaxed">
                           Разработчики и команды, все проекты которых полностью скрыты. 
@@ -287,10 +309,10 @@ export default function AboutPage() {
                   <TiltCard className="bg-gradient-to-br from-yellow-900/40 to-yellow-800/20 rounded-xl p-6 border border-yellow-600/30 hover:border-yellow-500/60 transition-all duration-500 select-none cursor-default" shadowColor="rgba(234, 179, 8, 0.2)">
                     <div className="text-center">
                       <div className="text-5xl font-bold text-yellow-400 mb-2 animate-pulse-slow" style={{ animationDelay: '0.4s' }}>
-                        {BLACKLIST_PATTERNS.length + BLACKLIST_AVATARS.length}
+                        {mediaCount}
                       </div>
-                      <div className="text-sm text-gray-400 mb-1">Заблокированных</div>
-                      <div className="text-lg font-semibold text-white">Медиафайлов</div>
+                      <div className="text-lg font-semibold text-white mb-1">{pluralize(mediaCount, 'Медиафайл', 'Медиафайла', 'Медиафайлов')}</div>
+                      <div className="text-sm text-gray-400">Заблокировано</div>
                       <div className="mt-3 pt-3 border-t border-yellow-800/50">
                         <p className="text-xs text-yellow-300/80 leading-relaxed">
                           Изображения с запрещённой символикой: аватары авторов, иконки проектов, скриншоты в галереях и картинки в описаниях. 
@@ -333,101 +355,128 @@ export default function AboutPage() {
             </div>
           </section>
 
-          <section className="bg-gradient-to-br from-orange-900/30 to-orange-800/20 rounded-2xl p-8 border border-orange-700/50 shadow-2xl">
+          <section className="p-8 md:p-12">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Технический стек
+              </h2>
+            </div>
+
+            <div className="relative flex flex-col items-center justify-center">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 w-full relative z-0">
+                <div className="w-full md:w-auto max-w-sm">
+                  <div className="flex flex-col items-center text-center gap-4 p-6 transition-opacity duration-300 hover:opacity-80">
+                    <div className="w-10 h-10 flex items-center justify-center mb-1">
+                      <svg className="w-10 h-10 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-xl font-semibold text-white">Next.js 14</h3>
+                    <p className="text-sm text-gray-400 leading-relaxed max-w-xs">React-фреймворк с серверным рендерингом. Построен на последних возможностях React, включая Server Components и Actions.</p>
+                  </div>
+                </div>
+
+                <div className="w-full md:w-auto max-w-sm">
+                  <div className="flex flex-col items-center text-center gap-4 p-6 transition-opacity duration-300 hover:opacity-80">
+                    <div className="w-10 h-10 flex items-center justify-center mb-1">
+                      <svg id="fi_15466168" enableBackground="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" className="w-10 h-10">
+                        <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1=".625" x2="23.714" y1="5.724" y2="16.49">
+                          <stop offset="0" stopColor="#fff" stopOpacity=".2"></stop>
+                          <stop offset="1" stopColor="#fff" stopOpacity="0"></stop>
+                        </linearGradient>
+                        <g>
+                          <path d="m22.1713867 7.3562379c.1484375-.9858675.0483398-3.5209553-.8637695-5.9873295l-.1367188-.3689084-.3911133.0462962c-.0961914.0112087-2.3491211.3011696-5.7329102 2.7461014-.736328-.1759258-1.8256835-.2753411-3.0468749-.2753411s-2.3100586.0994153-3.046875.2753412c-3.3847656-2.4454192-5.6376953-2.7348928-5.7338867-2.7461015l-.3911133-.0462962-.1367187.3689084c-.9121094 2.4663742-1.0117188 5.001462-.8632813 5.9873295-1.2294922 1.5175433-1.828125 3.2646193-1.828125 5.3333335 0 6.6476612 3.4921875 10.3084793 9.8334961 10.3084793l2.1669922.0019493 2.1655273-.0019493c6.3413086 0 9.8339844-3.6608181 9.8339844-10.3084793 0-2.0687142-.5986328-3.8162775-1.8286133-5.3333335z" fill="#333"></path>
+                          <path d="m19.5366211 11.1315794c-1.293457-1.3084803-3.2001953-1.1608191-5.21875-1.0034113-.7363281.0575047-1.4975586.1169586-2.2822266.1169586h-.0708008c-.784668 0-1.5458984-.059454-2.2822266-.1169586-2.0185547-.1564331-3.9248047-.305069-5.2197266 1.0038986-.970703.9844046-1.4628905 2.2115002-1.4628905 3.6461983 0 5.7451267 4.4287109 6.2256336 9.0356445 6.2256336 4.5356446 0 8.9643555-.4805069 8.9643555-6.2256336 0-1.4346981-.4921875-2.6617937-1.4633789-3.6466856z" fill="#e0c1a9"></path>
+                          <path d="m2.828125 1.2495127.3911133.0462962c.0961914.0112087 2.3491211.3006823 5.7338867 2.7461013.7368164-.1759258 1.8256836-.2753411 3.046875-.2753411s2.3105469.0994153 3.046875.275341c3.3837891-2.4449315 5.6367188-2.7348926 5.7329102-2.7461014l.3911133-.0462962.1367188.3689084c.6672974 1.8043981.8974609 3.6392546.9161987 4.8836503.0111084-1.2386699-.2017822-3.2013283-.9161987-5.133163l-.1367189-.3689082-.3911133.0462962c-.0961914.0112087-2.3491211.3011696-5.7329102 2.7461014-.736328-.1759258-1.8256835-.2753411-3.0468749-.2753411s-2.3100586.0994153-3.046875.2753412c-3.3847656-2.4454192-5.6376953-2.7348928-5.7338867-2.7461015l-.3911133-.0462962-.1367187.3689084c-.7142945 1.9314692-.927002 3.8938842-.9157715 5.1325536.0186157-1.2443958.2485962-3.0789473.9157715-4.8830409z" fill="#fff" opacity=".1"></path>
+                          <path d="m22.1929321 7.3546753c.0236816-.2418823.0361328-.5344238.0308838-.8848267-.0031128.3434448-.0202637.6417236-.0524292.855835.0076904.0094604.013916.0194702.0215454.0289917z" fill="#82c342"></path>
+                          <path d="m14.1660156 22.7485371-2.1655273.0019512-2.1669922-.0019512c-6.298584 0-9.7823486-3.6150703-9.8291016-10.1778746-.0004882.040144-.0043945.0785208-.0043945.1189089 0 6.6476612 3.4921875 10.3084793 9.8334961 10.3084793l2.1669922.0019493 2.1655273-.0019493c6.3413086 0 9.8339844-3.6608181 9.8339844-10.3084793 0-.0403881-.0039063-.0787649-.0043945-.1189089-.046753 6.5628653-3.5310059 10.1778746-9.8295899 10.1778746z" fill="#010101" opacity=".2"></path>
+                          <path d="m1.7756348 6.4692383c-.005249.350647.0072632.6434326.0309448.885437.0076294-.0095215.013855-.0195313.0215454-.0289917-.0321655-.2142334-.0493774-.5127564-.0524902-.8564453z" fill="#82c342"></path>
+                          <path d="m9.6826172 10.3530273c.7363281.0576172 1.4975586.1171875 2.2822266.1171875h.0708008c.784668 0 1.5458984-.0595703 2.2822266-.1171875 2.0185547-.1577148 3.925293-.3056641 5.21875 1.0053711.9501343.9654541 1.4345703 2.1661987 1.4553833 3.5637817.0008544-.0554809.0079955-.1034545.0079955-.1599731 0-1.4375-.4921875-2.6669922-1.4633789-3.6538086-1.293457-1.3110352-3.2001953-1.1630859-5.21875-1.0053711-.7363281.0576172-1.4975586.1171875-2.2822266.1171875h-.0708008c-.784668 0-1.5458984-.0595703-2.2822266-.1171875-2.0185547-.1567383-3.9248047-.3056641-5.2197266 1.0058594-.970703.9863281-1.4628905 2.2158203-1.4628905 3.6533203 0 .0565186.0071411.1044922.0079956.1599731.020813-1.397583.505249-2.5983276 1.454895-3.5632935 1.2949219-1.3115233 3.2011719-1.1625975 5.2197266-1.0058593z" fill="#010101" opacity=".1"></path>
+                          <path d="m16 12c-1.1401367 0-2 1.5048828-2 3.5s.8598633 3.5 2 3.5 2-1.5048828 2-3.5-.8598633-3.5-2-3.5z" fill="#fff"></path>
+                          <path d="m16 12.5c-.8551025 0-1.5 1.2898998-1.5 3s.6448975 3 1.5 3 1.5-1.2898998 1.5-3-.6448975-3-1.5-3z" fill="#994822"></path>
+                          <circle cx="15.585" cy="14.085" fill="#fff" r=".415"></circle>
+                          <circle cx="12.085" cy="18.085" fill="#994822" r=".415"></circle>
+                          <g>
+                            <path d="m12.0854492 19.5795898c-1.0776367 0-1.5073242-.6821289-1.6420898-.9750977l.4541016-.2089844c.0947266.2055664.3994141.684082 1.1879883.684082.5683594 0 .96875-.2314453 1.1894531-.6884766l.4501953.2177734c-.3027344.6259768-.8847657.9707033-1.6396485.9707033z" fill="#994822"></path>
+                          </g>
+                          <path d="m8 12c-1.1401367 0-2 1.5048828-2 3.5s.8598633 3.5 2 3.5 2-1.5048828 2-3.5-.8598633-3.5-2-3.5z" fill="#fff"></path>
+                          <path d="m8 12.5c-.8551025 0-1.5 1.2898998-1.5 3s.6448975 3 1.5 3 1.5-1.2898998 1.5-3-.6448975-3-1.5-3z" fill="#994822"></path>
+                          <circle cx="7.585" cy="14.085" fill="#fff" r=".415"></circle>
+                          <path d="m22.1713867 7.3562379c.1484375-.9858675.0483398-3.5209553-.8637695-5.9873295l-.1367188-.3689084-.3911133.0462962c-.0961914.0112087-2.3491211.3011696-5.7329102 2.7461014-.736328-.1759258-1.8256835-.2753411-3.0468749-.2753411s-2.3100586.0994153-3.046875.2753412c-3.3847656-2.4454192-5.6376953-2.7348928-5.7338867-2.7461015l-.3911133-.0462962-.1367187.3689084c-.9121094 2.4663742-1.0117188 5.001462-.8632813 5.9873295-1.2294922 1.5175433-1.828125 3.2646193-1.828125 5.3333335 0 6.6476612 3.4921875 10.3084793 9.8334961 10.3084793l2.1669922.0019493 2.1655273-.0019493c6.3413086 0 9.8339844-3.6608181 9.8339844-10.3084793 0-2.0687142-.5986328-3.8162775-1.8286133-5.3333335z" fill="url(#SVGID_1_)"></path>
+                        </g>
+                      </svg>
+                    </div>
+                    <h3 className="text-xl font-semibold text-white">Open Source</h3>
+                    <p className="text-sm text-gray-400 leading-relaxed max-w-xs">Исходный код полностью открыт и доступен на GitHub для изучения и участия в разработке.</p>
+                  </div>
+                </div>
+
+                <div className="w-full md:w-auto max-w-sm">
+                  <div className="flex flex-col items-center text-center gap-4 p-6 transition-opacity duration-300 hover:opacity-80">
+                    <div className="w-10 h-10 flex items-center justify-center mb-1">
+                      <InfrastructureIcon />
+                    </div>
+                    <h3 className="text-xl font-semibold text-white">Облачная инфраструктура</h3>
+                    <p className="text-sm text-gray-400 leading-relaxed max-w-xs">Развертывание на современной облачной платформе обеспечивает высокую производительность и надежность работы сервиса.</p>
+                  </div>
+                </div>
+              </div>
+
+              <ProtectionBlock />
+            </div>
+          </section>
+
+          <section className="bg-gradient-to-br from-indigo-900/30 to-indigo-800/20 rounded-2xl p-8 border border-indigo-700/50 shadow-2xl">
             <h2 className="text-3xl font-bold mb-4 flex items-center gap-3">
-              <svg className="w-8 h-8 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+              <svg className="w-8 h-8 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              Технический стек
+              О рекламе на сайте
             </h2>
             <div className="text-gray-300 space-y-4 leading-relaxed">
-              <p>
-                Проект построен с использованием современных веб-технологий:
+              <p className="text-lg">
+                ModrinthProxy — это <span className="font-semibold text-indigo-300">полностью бесплатный проект</span>, созданный для удобства русскоязычных пользователей.
               </p>
-              <div className="grid md:grid-cols-2 gap-4 my-4">
-                <div className="bg-gray-900/50 rounded-lg p-4 border border-gray-700">
-                  <h4 className="font-bold text-white mb-2 flex items-center gap-2">
-                    <span className="text-blue-400">⚛️</span>
-                    Next.js 14
-                  </h4>
-                  <p className="text-sm">React-фреймворк с серверным рендерингом</p>
+              
+              <div className="bg-indigo-950/30 border border-indigo-700/30 rounded-lg p-6 mt-6">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-indigo-500/20 rounded-full flex-shrink-0">
+                    <svg className="w-6 h-6 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg text-white mb-3">Почему на сайте есть реклама?</h3>
+                    <p className="text-gray-300 leading-relaxed mb-4">
+                      Мы не взимаем плату с пользователей за использование сервиса. Однако для поддержания работы сайта требуются финансовые затраты:
+                    </p>
+                    <ul className="space-y-2 ml-4">
+                      <li className="flex items-start gap-2">
+                        <span className="text-indigo-400 text-lg flex-shrink-0">•</span>
+                        <span><strong className="text-white">Хостинг:</strong> аренда серверов для обработки запросов и развертывания проекта</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-                <div className="bg-gray-900/50 rounded-lg p-4 border border-gray-700">
-                  <h4 className="font-bold text-white mb-2 flex items-center gap-2">
-                    <span className="text-cyan-400">🎨</span>
-                    Tailwind CSS
-                  </h4>
-                  <p className="text-sm">Современный CSS-фреймворк для UI</p>
-                </div>
-                <div className="bg-gray-900/50 rounded-lg p-4 border border-gray-700">
-                  <h4 className="font-bold text-white mb-2 flex items-center gap-2">
-                    <span className="text-orange-400">▲</span>
-                    Vercel
-                  </h4>
-                  <p className="text-sm">Глобальная сеть для быстрой загрузки страниц</p>
-                </div>
-                <div className="bg-gray-900/50 rounded-lg p-4 border border-gray-700">
-                  <h4 className="font-bold text-white mb-2 flex items-center gap-2">
-                    <span className="text-green-400">🔓</span>
-                    Open Source
-                  </h4>
-                  <p className="text-sm">Исходный код доступен на GitHub</p>
+              </div>
+
+              <div className="bg-gradient-to-r from-indigo-900/20 via-purple-900/20 to-indigo-900/20 rounded-xl p-6 mt-6">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-green-500/20 rounded-full flex-shrink-0">
+                    <svg className="w-6 h-6 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg text-white mb-2">Наши принципы</h3>
+                    <p className="text-gray-300 leading-relaxed">
+                      Мы стараемся, чтобы реклама не мешала пользователю сайта и была как украшением дизайна. 
+                      Реклама на сайте принимается только та, продуктами которой мы сами пользуемся.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </section>
-
-          <section className="bg-gradient-to-br from-red-900/30 to-red-800/20 rounded-2xl p-8 border border-red-700/50 shadow-2xl">
-            <h2 className="text-3xl font-bold mb-4 flex items-center gap-3">
-              <svg className="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-              </svg>
-              Важные уведомления
-            </h2>
-            <div className="text-gray-300 space-y-4 leading-relaxed">
-              <div className="bg-red-950/30 border border-red-700/50 rounded-lg p-4">
-                <p className="font-semibold text-white mb-2">⚠️ Официальное уведомление:</p>
-                <p className="text-sm text-red-200">
-                  Этот сайт НЕ является официальным сервисом Minecraft. 
-                  Не одобрен и не связан с Mojang Studios или Microsoft Corporation.
-                </p>
-              </div>
-              <div className="bg-yellow-950/30 border border-yellow-700/50 rounded-lg p-4">
-                <p className="font-semibold text-white mb-2">📋 Авторские права:</p>
-                <p className="text-sm text-yellow-200">
-                  Все модификации и их содержимое принадлежат их соответствующим авторам. 
-                  Мы не претендуем на авторство контента и предоставляем только ссылки.
-                </p>
-              </div>
-              <div className="bg-blue-950/30 border border-blue-700/50 rounded-lg p-4">
-                <p className="font-semibold text-white mb-2">🔗 Прямые ссылки:</p>
-                <p className="text-sm text-blue-200">
-                  При нажатии кнопки "Скачать" вы будете перенаправлены на серверы авторов модификаций. 
-                  Файлы загружаются напрямую от разработчиков, минуя наши серверы.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section className="bg-gradient-to-br from-modrinth-green/20 to-green-800/20 rounded-2xl p-8 border border-green-700/50 shadow-2xl text-center">
-            <h2 className="text-3xl font-bold mb-4">Открытый исходный код</h2>
-            <p className="text-gray-300 mb-6">
-              Проект полностью открыт и доступен для изучения на GitHub
-            </p>
-            <a 
-              href="https://github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0/modrinth-proxy" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-xl transition-all duration-300 group font-medium shadow-lg hover:shadow-modrinth-green/30 hover:scale-105"
-            >
-              <svg className="w-6 h-6 group-hover:rotate-12 transition-transform" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-              </svg>
-              <span>Посмотреть на GitHub</span>
-              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </a>
           </section>
         </div>
       </div>
