@@ -62,7 +62,7 @@ export default function AboutPage() {
               
               <div className="space-y-6">
                 <p className="text-xl md:text-2xl text-gray-200 leading-relaxed font-medium">
-                  ModrinthProxy — это <span className="text-modrinth-green font-bold">современная платформа</span> для поиска и скачивания модификаций для Minecraft. 
+                  ModrinthProxy — это <span className="text-modrinth-green font-bold">платформа</span> для поиска и скачивания модификаций для Minecraft. 
                   Мы объединяем тысячи модов, плагинов, шейдеров и других материалов в одном удобном месте с русским интерфейсом.
                 </p>
 
