@@ -142,7 +142,8 @@ export default function AdBlock() {
   return (
     <div 
       ref={containerRef}
-      className="bg-modrinth-dark border border-transparent rounded-lg overflow-hidden"
+      translate="no"
+      className="notranslate bg-modrinth-dark border border-transparent rounded-lg overflow-hidden"
       data-promo="true"
       data-type="content"
     >

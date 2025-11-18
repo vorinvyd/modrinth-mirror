@@ -121,7 +121,7 @@ export default function AdCard() {
   }
 
   return (
-    <div className="bg-modrinth-dark border border-transparent rounded-lg overflow-hidden">
+    <div translate="no" className="notranslate bg-modrinth-dark border border-transparent rounded-lg overflow-hidden">
       <a
         href={hashedUrl}
         onClick={handleClick}
