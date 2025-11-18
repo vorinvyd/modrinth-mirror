@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import DownloadButtons from './DownloadButtons'
 import { getLauncherData } from '@/lib/launcher'
 import AdCard from '@/app/components/2'
@@ -160,7 +161,9 @@ export default async function AppPage() {
 
         <div className="mb-8">
           <div className="mb-8">
-            <AdCard />
+            <Suspense fallback={null}>
+              <AdCard />
+            </Suspense>
           </div>
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Варианты загрузки</h2>
