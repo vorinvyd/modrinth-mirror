@@ -121,12 +121,66 @@ export default async function ModpacksPage({ searchParams }) {
   let error = null;
   
   try {
-    data = await searchMods({ query, facets, limit, offset, index: sortBy });
-    const filtered = filterModsList(data.hits);
-    data.hits = filtered.hits;
-    blockedCount = filtered.blockedCount;
-    blockedByProject = filtered.blockedByProject;
-    blockedByOrganization = filtered.blockedByOrganization;
+    const initialData = await searchMods({ query, facets, limit: 1, offset: 0, index: sortBy });
+    const totalHits = initialData.total_hits;
+    
+    let totalBlockedCount = 0, totalBlockedByProject = 0, totalBlockedByOrganization = 0;
+    let currentOffset = 0;
+    const batchSize = 100;
+    const maxBatches = Math.ceil(totalHits / batchSize);
+    
+    for (let i = 0; i < Math.min(maxBatches, 10); i++) {
+      const batchData = await searchMods({ query, facets, limit: batchSize, offset: currentOffset, index: sortBy });
+      const filtered = filterModsList(batchData.hits);
+      totalBlockedCount += filtered.blockedCount;
+      totalBlockedByProject += filtered.blockedByProject;
+      totalBlockedByOrganization += filtered.blockedByOrganization;
+      
+      if (currentOffset + batchData.hits.length >= totalHits) {
+        break;
+      }
+      
+      currentOffset += batchSize;
+    }
+    
+    blockedCount = totalBlockedCount;
+    blockedByProject = totalBlockedByProject;
+    blockedByOrganization = totalBlockedByOrganization;
+    
+    let currentPageOffset = offset;
+    let allFilteredHits = [];
+    let firstData = null;
+    const maxAttempts = 20;
+    let attempts = 0;
+    
+    while (allFilteredHits.length < limit && attempts < maxAttempts) {
+      const batchData = await searchMods({ query, facets, limit: limit * 2, offset: currentPageOffset, index: sortBy });
+      
+      if (!firstData) {
+        firstData = batchData;
+      }
+      
+      const filtered = filterModsList(batchData.hits);
+      allFilteredHits = allFilteredHits.concat(filtered.hits);
+      
+      if (allFilteredHits.length >= limit) {
+        break;
+      }
+      
+      if (currentPageOffset + batchData.hits.length >= batchData.total_hits) {
+        break;
+      }
+      
+      currentPageOffset += batchData.hits.length;
+      attempts++;
+    }
+    
+    if (firstData) {
+      data = {
+        ...firstData,
+        hits: allFilteredHits.slice(0, limit)
+      };
+    }
   } catch (err) {
     console.error('Failed to load modpacks:', err);
     error = err;
@@ -182,11 +236,7 @@ export default async function ModpacksPage({ searchParams }) {
                       {data.total_hits.toLocaleString('ru-RU')} модпаков найдено
                       {blockedCount > 0 && (
                         <span className="text-red-400 ml-2">
-                          (из них {blockedCount} заблокировано по требованиям РКН
-                          {blockedByProject > 0 && blockedByOrganization > 0 && (
-                            <>: {blockedByProject} по проекту, {blockedByOrganization} по организации</>
-                          )}
-                          )
+                          (из поисковой выдачи удалено {blockedCount} {blockedCount % 10 === 1 && blockedCount % 100 !== 11 ? 'ресурс' : blockedCount % 10 >= 2 && blockedCount % 10 <= 4 && (blockedCount % 100 < 10 || blockedCount % 100 >= 20) ? 'ресурса' : 'ресурсов'})
                         </span>
                       )}
                     </>
@@ -245,15 +295,15 @@ export default async function ModpacksPage({ searchParams }) {
               </svg>
               <p className="text-xl font-semibold text-red-400 mb-3">Все модпаки на этой странице заблокированы</p>
               <p className="text-gray-400 text-sm">
-                Из {data.total_hits.toLocaleString('ru-RU')} найденных модпаков, {blockedCount} на текущей странице заблокированы по требованиям РКН
+                Из {data.total_hits.toLocaleString('ru-RU')} найденных модпаков, все {blockedCount} на текущей странице заблокированы по требованиям РКН
                 {blockedByProject > 0 && blockedByOrganization > 0 && (
                   <> ({blockedByProject} по проекту, {blockedByOrganization} по организации)</>
                 )}
                 {blockedByProject > 0 && blockedByOrganization === 0 && (
-                  <> (по проекту)</>
+                  <> ({blockedByProject} по проекту)</>
                 )}
                 {blockedByProject === 0 && blockedByOrganization > 0 && (
-                  <> (по организации)</>
+                  <> ({blockedByOrganization} по организации)</>
                 )}
                 . Попробуйте изменить параметры поиска или фильтры.
               </p>
