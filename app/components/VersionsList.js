@@ -28,6 +28,15 @@ export default function VersionsList({ versions, contentType, slug, initialLoade
     setCurrentPage(1)
   }
 
+  const handleLoaderClick = (e, loaderId) => {
+    e.stopPropagation()
+    if (selectedLoaders.includes(loaderId)) {
+      handleLoadersChange(selectedLoaders.filter(l => l !== loaderId))
+    } else {
+      handleLoadersChange([...selectedLoaders, loaderId])
+    }
+  }
+
   const handleVersionChange = (version) => {
     setSelectedMcVersion(version)
     setCurrentPage(1)
@@ -182,23 +191,21 @@ export default function VersionsList({ versions, contentType, slug, initialLoade
               return (
                 <div key={version.id}>
                   <div className="group relative">
-                    <Link 
-                      href={`/${contentType}/${slug}/version/${version.id}`}
-                      className="absolute before:absolute before:inset-0 before:transition-all before:content-[''] hover:before:backdrop-brightness-110"
-                      style={{ inset: 'calc(-1rem - 2px) -2rem' }}
-                    />
-                  
                     <div className="px-3 py-2">
                       <div className="grid grid-cols-[40px_1fr_40px] max-[390px]:flex max-[390px]:flex-col max-[390px]:items-center sm:grid sm:grid-cols-[40px_minmax(150px,1fr)_minmax(120px,180px)_minmax(100px,150px)_40px] xl:grid-cols-[40px_minmax(150px,1fr)_minmax(100px,200px)_minmax(100px,200px)_minmax(100px,150px)_minmax(80px,100px)_40px] gap-3 items-center">
                         <div className={`relative z-10 w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm ${versionTypeColor}`}>
                           {version.version_type[0].toUpperCase()}
                         </div>
 
-                        <div className="relative z-10 pointer-events-none min-w-0 max-[390px]:text-center">
-                          <div className="font-bold text-sm group-hover:underline">{version.version_number || version.name}</div>
-                          <div className="text-xs font-medium text-gray-400 sm:hidden">{version.name}</div>
-                          <div className="text-xs font-medium text-gray-400 hidden sm:block xl:hidden">{version.name}</div>
-                        </div>
+                        <Link 
+                          href={`/${contentType}/${slug}/version/${version.id}`}
+                          className="relative z-10 min-w-0 max-[390px]:text-center group-hover:underline"
+                        >
+                          <div className="font-bold text-sm">{version.version_number || version.name}</div>
+                          {version.name && (
+                            <div className="text-xs font-medium text-gray-400">{version.name}</div>
+                          )}
+                        </Link>
 
                       <div className="relative z-10 hidden sm:flex xl:hidden flex-wrap gap-1 items-start content-start">
                         {compressVersionRanges(version.game_versions).slice(0, 2).map((range, i) => (
@@ -217,7 +224,8 @@ export default function VersionsList({ versions, contentType, slug, initialLoade
                           return (
                             <span 
                               key={loaderId}
-                              className="px-2 py-1 text-xs font-semibold rounded-full capitalize inline-flex items-center gap-1"
+                              onClick={(e) => handleLoaderClick(e, loaderId)}
+                              className="px-2 py-1 text-xs font-semibold rounded-full hover:underline cursor-pointer capitalize inline-flex items-center gap-1 relative z-10"
                               style={{ 
                                 backgroundColor: 'var(--bg-tertiary)', 
                                 color: loaderData.color || 'var(--text-muted)' 
@@ -251,13 +259,13 @@ export default function VersionsList({ versions, contentType, slug, initialLoade
                       </div>
 
                       <div className="relative z-10 hidden xl:flex flex-wrap gap-1 items-start content-start">
-                        {groupVersionsByMajor(version.game_versions).map((versionGroup, i) => (
+                        {compressVersionRanges(version.game_versions).map((range, i) => (
                           <span 
                             key={i}
                             className="px-2 py-1 text-xs font-semibold rounded-full whitespace-nowrap"
                             style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}
                           >
-                            {versionGroup}
+                            {range}
                           </span>
                         ))}
                       </div>
@@ -270,7 +278,8 @@ export default function VersionsList({ versions, contentType, slug, initialLoade
                           return (
                             <span 
                               key={loaderId}
-                              className="px-2 py-1 text-xs font-semibold rounded-full hover:underline cursor-pointer capitalize inline-flex items-center gap-1"
+                              onClick={(e) => handleLoaderClick(e, loaderId)}
+                              className="px-2 py-1 text-xs font-semibold rounded-full hover:underline cursor-pointer capitalize inline-flex items-center gap-1 relative z-10"
                               style={{ 
                                 backgroundColor: 'var(--bg-tertiary)', 
                                 color: loaderData.color || 'var(--text-muted)' 
@@ -311,8 +320,9 @@ export default function VersionsList({ versions, contentType, slug, initialLoade
                               
                               return (
                                 <span 
-                                  key={loaderId} 
-                                  className="px-2 py-0.5 text-xs rounded-full capitalize inline-flex items-center gap-1" 
+                                  key={loaderId}
+                                  onClick={(e) => handleLoaderClick(e, loaderId)}
+                                  className="px-2 py-0.5 text-xs rounded-full hover:underline cursor-pointer capitalize inline-flex items-center gap-1 relative z-10" 
                                   style={{ 
                                     backgroundColor: 'var(--bg-tertiary)', 
                                     color: loaderData.color || 'var(--text-muted)' 
