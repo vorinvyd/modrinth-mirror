@@ -46,7 +46,7 @@ export default async function PluginVersionsPage({ params, searchParams }) {
       <div className="text-center py-16 max-w-2xl mx-auto">
         <Link 
           href="/plugins"
-          className="inline-flex items-center gap-2 bg-modrinth-green text-black px-6 py-3 rounded-lg font-semibold hover:bg-green-400 transition"
+          className="inline-flex items-center gap-2 bg-modrinth-green text-black px-6 py-3 rounded-lg font-semibold hover:bg-modrinth-green-light transition"
         >
           <span>Вернуться к плагинам</span>
         </Link>

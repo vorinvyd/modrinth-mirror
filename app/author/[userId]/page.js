@@ -111,7 +111,7 @@ export default async function AuthorPage({ params, searchParams }) {
                 className="w-24 h-24 rounded-lg object-cover flex-shrink-0"
               />
             ) : (
-              <div className="w-24 h-24 bg-gradient-to-br from-modrinth-green to-green-400 rounded-lg flex items-center justify-center text-2xl font-bold flex-shrink-0">
+              <div className="w-24 h-24 bg-gradient-to-br from-modrinth-green to-modrinth-green-light rounded-lg flex items-center justify-center text-2xl font-bold flex-shrink-0">
                 {author.username.charAt(0).toUpperCase()}
               </div>
             )}

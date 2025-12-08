@@ -180,7 +180,7 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
                   }`}
                   style={
                     isSelected
-                          ? { backgroundColor: 'rgba(27, 217, 106, 0.25)' }
+                          ? { backgroundColor: 'rgba(236, 127, 171, 0.25)' }
                           : undefined
                     }
                   >
@@ -295,7 +295,7 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
                   }`}
                   style={
                     isSelected
-                      ? { backgroundColor: 'rgba(27, 217, 106, 0.25)' }
+                      ? { backgroundColor: 'rgba(236, 127, 171, 0.25)' }
                       : undefined
                   }
                 >
@@ -329,7 +329,7 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
                   }`}
                   style={
                     isSelected
-                      ? { backgroundColor: 'rgba(27, 217, 106, 0.25)' }
+                      ? { backgroundColor: 'rgba(236, 127, 171, 0.25)' }
                       : undefined
                   }
                 >
@@ -361,7 +361,7 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
             }`}
             style={
               openSource
-                ? { backgroundColor: 'rgba(27, 217, 106, 0.25)' }
+                ? { backgroundColor: 'rgba(236, 127, 171, 0.25)' }
                 : undefined
             }
           >

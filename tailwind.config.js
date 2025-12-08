@@ -11,6 +11,7 @@ module.exports = {
         black: 'var(--bg-black)',
         modrinth: {
           green: 'var(--color-green)',
+          'green-light': 'var(--color-green-light)',
           dark: 'var(--bg-secondary)',
           darker: 'var(--bg-primary)',
           darkest: 'var(--bg-darker)',

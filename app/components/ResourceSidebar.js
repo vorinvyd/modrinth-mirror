@@ -151,7 +151,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], contentTyp
               <>
                 <hr className="border-gray-700 my-2" />
                 {resource.donation_urls.map((donation, idx) => (
-                  <a key={idx} href={donation.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs text-gray-300 hover:text-green-400 transition-colors group">
+                  <a key={idx} href={donation.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs text-gray-300 hover:text-modrinth-green-light transition-colors group">
                     <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
                     </svg>
@@ -189,7 +189,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], contentTyp
                     className="w-8 h-8 rounded-lg object-cover flex-shrink-0"
                   />
                 ) : (
-                  <div className="w-8 h-8 bg-gradient-to-br from-modrinth-green to-green-400 rounded-lg flex items-center justify-center text-xs font-bold flex-shrink-0">
+                  <div className="w-8 h-8 bg-gradient-to-br from-modrinth-green to-modrinth-green-light rounded-lg flex items-center justify-center text-xs font-bold flex-shrink-0">
                     {member.user.username.charAt(0).toUpperCase()}
                   </div>
                 )}

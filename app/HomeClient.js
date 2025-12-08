@@ -1,6 +1,5 @@
 'use client'
 import Link from 'next/link'
-import AnimatedProjectCarousel from './components/AnimatedProjectCarousel'
 import { useEffect, useState } from 'react'
 
 export default function HomeClient() {
@@ -20,20 +19,8 @@ export default function HomeClient() {
 
   return (
     <div className="relative min-h-screen" style={{ marginTop: '-34px', marginBottom: '-34px' }}>
-      <div 
-        className="relative w-screen bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: 'url(/landing.webp)',
-          backgroundAttachment: 'scroll',
-          left: '50%',
-          right: '50%',
-          marginLeft: '-50vw',
-          marginRight: '-50vw'
-        }}
-      >
-        <div className="absolute inset-0 bg-black/50"></div>
-        
-        <div className="relative z-10 flex items-center justify-center py-12 sm:py-16 md:py-20">
+      <div className="relative">
+        <div className="flex items-center justify-center">
           <div className="max-w-7xl mx-auto px-2 sm:px-4 text-center">
           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-3 sm:mb-4 md:mb-6 animate-fade-in-up animation-delay-200 px-2 sm:px-4">
               <span className="text-white drop-shadow-2xl">
@@ -72,26 +59,21 @@ export default function HomeClient() {
             </div>
           </div>
           
-            <p className="text-sm sm:text-base md:text-lg text-gray-200 max-w-4xl mx-auto mb-6 sm:mb-8 md:mb-12 animate-fade-in-up animation-delay-600 px-2 sm:px-4 drop-shadow-md font-light leading-relaxed">
-            Открывайте, играйте и делитесь контентом Minecraft через нашу платформу, созданную сообществом для сообщества!
-          </p>
+            <p className="text-sm sm:text-base md:text-lg text-gray-200 max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8 animate-fade-in-up animation-delay-600 px-2 sm:px-4 drop-shadow-md font-light leading-relaxed">
+              Открывайте, играйте и делитесь контентом Minecraft через нашу платформу, созданную сообществом для сообщества!
+            </p>
           </div>
         </div>
 
-        <div className="relative z-10 animate-fade-in-up animation-delay-2200">
-          {isClient && !/iPad|iPhone|iPod/.test(navigator.userAgent || '') && (
-            <AnimatedProjectCarousel />
-          )}
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 py-16">
-          <div className="text-center mb-16">
-            <div className="inline-block bg-modrinth-green/20 text-modrinth-green px-4 py-2 rounded-full text-sm font-semibold mb-4">
-              Для игроков
-            </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 pt-8 pb-16">
+          <div className="text-center mb-12">
+          
             <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
               Откройте для себя более 75 000 творений
             </h2>
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-modrinth-green/20 to-blue-500/20 text-modrinth-green px-6 py-3 rounded-full text-base font-bold mb-4 ">
+              <span>Для игроков Minecraft</span>
+            </div>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">
               От магических биомов до проклятых подземелий — вы обязательно найдете контент, который выведет ваш геймплей на новый уровень.
             </p>
@@ -107,27 +89,15 @@ export default function HomeClient() {
               </p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-modrinth-green rounded-full flex items-center justify-center flex-shrink-0">
-                    <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                    </svg>
-                  </div>
+                 
                   <span className="text-gray-300">Актуальные версии и файлы</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-modrinth-green rounded-full flex items-center justify-center flex-shrink-0">
-                    <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                    </svg>
-                  </div>
+                 
                   <span className="text-gray-300">Прямые ссылки на скачивание</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-modrinth-green rounded-full flex items-center justify-center flex-shrink-0">
-                    <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                    </svg>
-                  </div>
+                  
                   <span className="text-gray-300">Без хранения файлов на сервере</span>
                 </div>
               </div>
@@ -201,7 +171,7 @@ export default function HomeClient() {
                   </Link>
                   <Link href="/mods?g=categories%3Aneoforge" className="relative text-center p-4 pt-12 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
                     <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
-                      <svg className="w-6 h-6 text-green-400" enableBackground="new 0 0 24 24" version="1.1" viewBox="0 0 24 24" xmlSpace="preserve">
+                      <svg className="w-6 h-6 text-modrinth-green-light" enableBackground="new 0 0 24 24" version="1.1" viewBox="0 0 24 24" xmlSpace="preserve">
                         <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
                           <path d="m12 19.2v2m0-2v2"></path>
                           <path d="m8.4 1.3c0.5 1.5 0.7 3 0.1 4.6-0.2 0.5-0.9 1.5-1.6 1.5m8.7-6.1c-0.5 1.5-0.7 3-0.1 4.6 0.2 0.6 0.9 1.5 1.6 1.5"></path>
@@ -266,55 +236,19 @@ export default function HomeClient() {
               </div>
             </div>
           </div>
+        </div>
       </div>
 
-        <div 
-          className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none"
-          style={{
-            background: 'linear-gradient(0deg, var(--bg-gradient-start) 0%, rgba(var(--bg-gradient-trans), 0) 100%)',
-            width: '100vw',
-            left: '50%',
-            right: '50%',
-            marginLeft: '-50vw',
-            marginRight: '-50vw'
-          }}
-        />
-      </div>
-
-      <div 
-        className="relative w-screen bg-cover"
-          style={{
-            background: 'linear-gradient(0deg, var(--bg-gradient-mid), rgba(var(--bg-gradient-overlay), 0)), url(/landing-lower.webp)',
-            backgroundBlendMode: 'multiply',
-            backgroundSize: 'cover',
-            backgroundAttachment: 'scroll',
-            paddingBottom: '5rem',
-            paddingTop: '34px',
-            left: '50%',
-            right: '50%',
-            marginLeft: '-50vw',
-            marginRight: '-50vw'
-          }}
-      >
-        <div 
-          className="absolute top-0 left-0 right-0 h-48 pointer-events-none"
-          style={{
-            background: 'linear-gradient(0deg, rgba(var(--bg-gradient-trans), 0) 0%, var(--bg-gradient-start) 100%)',
-            width: '100vw',
-            left: '50%',
-            right: '50%',
-            marginLeft: '-50vw',
-            marginRight: '-50vw'
-          }}
-        />
-        <div className="relative z-10 max-w-7xl mx-auto px-4" style={{marginTop: '-46px'}}>
+      <div className="relative home-section">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
-            <div className="inline-block bg-yellow-500/20 text-orange-300 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-              Для создателей серверов
-            </div>
+            
             <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
               Тысячи плагинов для вашего сервера
             </h2>
+            <div className="inline-block bg-yellow-500/20 text-orange-300 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+              Для создателей серверов
+            </div>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">
               От простых утилит до сложных игровых механик — найдите идеальные плагины для создания уникального игрового опыта на вашем сервере.
             </p>
@@ -330,27 +264,15 @@ export default function HomeClient() {
               </p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center flex-shrink-0">
-                    <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                    </svg>
-                  </div>
+                
                   <span className="text-gray-300">Совместимость с Paper, Spigot, Bukkit</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center flex-shrink-0">
-                    <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                    </svg>
-                  </div>
+                  
                   <span className="text-gray-300">Поддержка современных платформ</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center flex-shrink-0">
-                    <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                    </svg>
-                  </div>
+                 
                   <span className="text-gray-300">Актуальные версии плагинов</span>
                 </div>
               </div>

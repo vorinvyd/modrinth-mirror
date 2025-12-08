@@ -20,7 +20,7 @@ export default function DownloadButtons({ launcherData }) {
     <div className="button-group flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
       <button
         onClick={() => handleDownload(launcherData.downloads.windows)}
-        className="iconified-button brand-button btn btn-large bg-gradient-to-r from-modrinth-green to-green-400 text-black font-bold py-4 px-8 rounded-2xl hover:from-green-400 hover:to-modrinth-green transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center gap-3 text-lg cursor-pointer"
+        className="iconified-button brand-button btn btn-large bg-gradient-to-r from-modrinth-green to-modrinth-green-light text-black font-bold py-4 px-8 rounded-2xl hover:from-modrinth-green-light hover:to-modrinth-green transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center gap-3 text-lg cursor-pointer"
       >
         <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4875 4875" fill="currentColor">
           <path d="M0 0h2311v2310H0zm2564 0h2311v2310H2564zM0 2564h2311v2311H0zm2564 0h2311v2311H2564"></path>

@@ -56,7 +56,7 @@ export default async function ShaderGalleryPage({ params }) {
         </div>
         <Link 
           href="/shaders"
-          className="inline-flex items-center gap-2 bg-modrinth-green text-black px-6 py-3 rounded-lg font-semibold hover:bg-green-400 transition"
+          className="inline-flex items-center gap-2 bg-modrinth-green text-black px-6 py-3 rounded-lg font-semibold hover:bg-modrinth-green-light transition"
         >
           <span>Вернуться к шейдерам</span>
         </Link>
@@ -87,7 +87,7 @@ export default async function ShaderGalleryPage({ params }) {
           </div>
           <Link 
             href="/shaders"
-            className="inline-flex items-center gap-2 bg-modrinth-green text-black px-6 py-3 rounded-lg font-semibold hover:bg-green-400 transition"
+            className="inline-flex items-center gap-2 bg-modrinth-green text-black px-6 py-3 rounded-lg font-semibold hover:bg-modrinth-green-light transition"
           >
             <span>Вернуться к шейдерам</span>
           </Link>

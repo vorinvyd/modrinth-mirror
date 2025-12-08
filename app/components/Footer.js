@@ -15,7 +15,7 @@ export default function Footer() {
       <div className="relative container mx-auto px-4 py-8 md:py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div className="text-center md:text-left">
-            <h3 className="text-lg font-bold bg-gradient-to-r from-modrinth-green to-green-400 bg-clip-text text-transparent mb-3 select-none">
+            <h3 className="text-lg font-bold bg-gradient-to-r from-modrinth-green to-modrinth-green-light bg-clip-text text-transparent mb-3 select-none">
               ModrinthProxy
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed">
@@ -80,7 +80,7 @@ export default function Footer() {
               <p className="text-gray-400 text-sm leading-relaxed">
                 Нашли баг? Есть предложения? 
                 <br/>
-                <a href="https://github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0/modrinth-proxy/issues" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-modrinth-green hover:text-green-400 transition-colors font-medium group">
+                <a href="https://github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0/modrinth-proxy/issues" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-modrinth-green hover:text-modrinth-green-light transition-colors font-medium group">
                   <span>GitHub Issues</span>
                   <svg className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"></path>
@@ -145,9 +145,6 @@ export default function Footer() {
                   </p>
                   <p className="text-gray-500 text-sm leading-relaxed max-w-2xl">
                     Not an official Minecraft service. Not approved by or associated with Mojang or Microsoft.
-                    <br />
-                    <span className="block text-center my-1">&</span>
-                    modrinth.black is an independent project and has no relation to the original Modrinth and Rinth, Inc. "Modrinth" is a trademark of Rinth, Inc. Modrinth App is a product of Rinth, Inc. All rights to Modrinth and Modrinth App belong to Rinth, Inc. The domain name modrinth.black and any use of the Modrinth trademark is for descriptive/nominative purposes only to identify the service this project interacts with, and does not imply endorsement, affiliation, or sponsorship by Rinth, Inc.
                   </p>
                 </div>
               </div>

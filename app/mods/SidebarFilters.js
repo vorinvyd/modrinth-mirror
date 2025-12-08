@@ -246,7 +246,7 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
                   }`}
                   style={
                     isSelected
-                      ? { backgroundColor: 'rgba(27, 217, 106, 0.25)' }
+                      ? { backgroundColor: 'rgba(236, 127, 171, 0.25)' }
                       : undefined
                   }
                 >
@@ -293,7 +293,7 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
                   }`}
                   style={
                     isSelected
-                      ? { backgroundColor: 'rgba(27, 217, 106, 0.25)' }
+                      ? { backgroundColor: 'rgba(236, 127, 171, 0.25)' }
                       : undefined
                   }
                 >

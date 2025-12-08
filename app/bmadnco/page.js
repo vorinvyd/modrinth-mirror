@@ -35,8 +35,17 @@ export default function AboutPage() {
     <div className="min-h-screen">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12 animate-fade-in">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-modrinth-green via-blue-400 to-purple-400 bg-clip-text text-transparent">
-            О проекте ModrinthProxy
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+            <span className="animated-title">
+              {'О проекте '.split('').map((char, i) => (
+                <span key={i} className={char === ' ' ? 'inline-block w-2' : ''}>{char === ' ' ? '\u00A0' : char}</span>
+              ))}
+            </span>
+            <span className="animated-title title-glow text-modrinth-green">
+              {'ModrinthProxy'.split('').map((char, i) => (
+                <span key={i}>{char}</span>
+              ))}
+            </span>
           </h1>
           <p className="text-xl text-gray-400">
             Технические детали и принципы работы
@@ -55,7 +64,7 @@ export default function AboutPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
                 </div>
-                <span className="bg-gradient-to-r from-white via-modrinth-green to-white bg-clip-text text-transparent">
+                <span className="text-white drop-shadow-[0_0_20px_rgba(27,217,106,0.3)]">
               Что это такое?
                 </span>
             </h2>
@@ -145,6 +154,42 @@ export default function AboutPage() {
             </div>
           </section>
 
+          <section className="relative bg-gradient-to-br from-purple-900/40 via-indigo-900/30 to-purple-800/40 rounded-2xl p-8 md:p-10 shadow-2xl overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl"></div>
+            <div className="relative">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-3 bg-gradient-to-br from-purple-500/30 to-indigo-500/30 rounded-xl border border-purple-400/40">
+                  <svg className="w-8 h-8 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-300 via-indigo-300 to-purple-300 bg-clip-text text-transparent">
+                  Legal Information / Юридическая информация
+                </h2>
+              </div>
+              <div className="rounded-xl p-6 md:p-8">
+                <div className="space-y-4">
+                  <p className="text-gray-200 leading-relaxed">
+                    <span className="font-bold text-white">modrinth.black</span> is an independent project and has no relation to the original Modrinth and Rinth, Inc.
+                  </p>
+                  <p className="text-gray-200 leading-relaxed">
+                    "Modrinth" is a trademark of Rinth, Inc. Modrinth App is a product of Rinth, Inc. All rights to Modrinth and Modrinth App belong to Rinth, Inc.
+                  </p>
+                  <p className="text-gray-200 leading-relaxed">
+                    The domain name <span className="font-semibold text-purple-300">modrinth.black</span> and any use of the Modrinth trademark is for descriptive/nominative purposes only to identify the service this project interacts with, and does not imply endorsement, affiliation, or sponsorship by Rinth, Inc.
+                  </p>
+                  <div className="h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent mt-6"></div>
+                  <div className="bg-purple-950/30 rounded-lg p-4 mt-4">
+                    <p className="text-gray-300 leading-relaxed text-sm">
+                      Эта информация служит для правообладателей и пользователей, чтобы четко обозначить независимость нашего проекта от официального Modrinth и Rinth, Inc. Мы уважаем права интеллектуальной собственности и используем товарные знаки исключительно в описательных целях для идентификации сервиса, с которым взаимодействует наш проект.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <section className="bg-gradient-to-br from-blue-900/30 to-blue-800/20 rounded-2xl p-8 border border-blue-700/50 shadow-2xl">
             <h2 className="text-3xl font-bold mb-4 flex items-center gap-3">
               <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -206,7 +251,7 @@ export default function AboutPage() {
                 <TiltCardDirectional className="flex-1 relative group" direction="top">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-teal-600/30 to-green-600/30 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
                   <div className="relative bg-gradient-to-br from-teal-900/50 to-teal-800/30 rounded-2xl p-6 border border-teal-600/40 text-center">
-                    <div className="flex items-center justify-center w-14 h-14 mb-4 rounded-full bg-green-500/20 border-2 border-green-400 mx-auto">
+                    <div className="flex items-center justify-center w-14 h-14 mb-4 rounded-full bg-green-500/20 border-2 border-modrinth-green-light mx-auto">
                       <svg className="w-7 h-7 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
@@ -242,28 +287,28 @@ export default function AboutPage() {
               </p>
               <ul className="space-y-3 ml-4">
                 <li className="flex items-start gap-3">
-                  <span className="text-green-400 text-xl flex-shrink-0">✓</span>
+                  <span className="text-modrinth-green-light text-xl flex-shrink-0">✓</span>
                   <div>
                     <strong className="text-white">Блокировка проектов:</strong> Проекты, содержащие запрещенный контент, 
                     автоматически исключаются из поиска и недоступны для просмотра.
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-green-400 text-xl flex-shrink-0">✓</span>
+                  <span className="text-modrinth-green-light text-xl flex-shrink-0">✓</span>
                   <div>
                     <strong className="text-white">Фильтрация изображений:</strong> Изображения с запрещенной символикой 
                     автоматически заменяются на нейтральные заглушки.
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-green-400 text-xl flex-shrink-0">✓</span>
+                  <span className="text-modrinth-green-light text-xl flex-shrink-0">✓</span>
                   <div>
                     <strong className="text-white">Замена текста:</strong> Запрещенные термины автоматически заменяются 
                     на нейтральные символы в описаниях и названиях.
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-green-400 text-xl flex-shrink-0">✓</span>
+                  <span className="text-modrinth-green-light text-xl flex-shrink-0">✓</span>
                   <div>
                     <strong className="text-white">Блокировка организаций:</strong> Проекты от определенных организаций 
                     могут быть ограничены в доступе.

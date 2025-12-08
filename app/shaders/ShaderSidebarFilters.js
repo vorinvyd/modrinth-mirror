@@ -171,7 +171,7 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
                   }`}
                   style={
                     isSelected
-                      ? { backgroundColor: 'rgba(27, 217, 106, 0.25)' }
+                      ? { backgroundColor: 'rgba(236, 127, 171, 0.25)' }
                       : undefined
                   }
                 >
@@ -205,7 +205,7 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
                   }`}
                   style={
                     isSelected
-                      ? { backgroundColor: 'rgba(27, 217, 106, 0.25)' }
+                      ? { backgroundColor: 'rgba(236, 127, 171, 0.25)' }
                       : undefined
                   }
                 >
@@ -239,7 +239,7 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
                   }`}
                   style={
                     isSelected
-                      ? { backgroundColor: 'rgba(27, 217, 106, 0.25)' }
+                      ? { backgroundColor: 'rgba(236, 127, 171, 0.25)' }
                       : undefined
                   }
                 >
@@ -353,7 +353,7 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
                   }`}
                   style={
                     isSelected
-                      ? { backgroundColor: 'rgba(27, 217, 106, 0.25)' }
+                      ? { backgroundColor: 'rgba(236, 127, 171, 0.25)' }
                       : undefined
                   }
                 >
@@ -385,7 +385,7 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
             }`}
             style={
               openSource
-                ? { backgroundColor: 'rgba(27, 217, 106, 0.25)' }
+                ? { backgroundColor: 'rgba(236, 127, 171, 0.25)' }
                 : undefined
             }
           >

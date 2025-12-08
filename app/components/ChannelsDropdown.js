@@ -24,7 +24,7 @@ export default function ChannelsDropdown({ selectedChannel, onChannelChange }) {
 
   const channels = [
     { id: 'all', label: 'Все', color: null },
-    { id: 'release', label: 'Релиз', color: 'text-green-400' },
+    { id: 'release', label: 'Релиз', color: 'text-modrinth-green-light' },
     { id: 'beta', label: 'Бета', color: 'text-yellow-400' },
     { id: 'alpha', label: 'Альфа', color: 'text-red-400' },
   ]

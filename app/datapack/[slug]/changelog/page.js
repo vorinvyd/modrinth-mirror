@@ -45,7 +45,7 @@ export default async function DatapackChangelogPage({ params }) {
   if (isProjectBlocked(slug)) {
     return (
       <div className="text-center py-16">
-        <Link href="/datapacks" className="inline-flex items-center gap-2 bg-modrinth-green text-black px-6 py-3 rounded-lg font-semibold hover:bg-green-400 transition">
+        <Link href="/datapacks" className="inline-flex items-center gap-2 bg-modrinth-green text-black px-6 py-3 rounded-lg font-semibold hover:bg-modrinth-green-light transition">
           <span>Вернуться к датапакам</span>
         </Link>
       </div>

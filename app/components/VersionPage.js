@@ -247,7 +247,7 @@ function FileItem({ file }) {
         download
         className={`flex-shrink-0 inline-flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition ${
           isPrimary
-            ? 'bg-modrinth-green hover:bg-green-400 text-black'
+            ? 'bg-modrinth-green hover:bg-modrinth-green-light text-black'
             : 'bg-modrinth-dark hover:bg-[var(--bg-hover-alt)] text-gray-400'
         }`}
       >

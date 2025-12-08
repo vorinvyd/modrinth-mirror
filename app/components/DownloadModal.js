@@ -159,7 +159,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
                   ) : (
                     <button
                       onClick={() => setShowAllVersions(!showAllVersions)}
-                      className="text-xs text-modrinth-green hover:text-green-400 transition-colors"
+                      className="text-xs text-modrinth-green hover:text-modrinth-green-light transition-colors"
                     >
                       {showAllVersions ? 'Только релизы' : 'Показать все'}
                     </button>
@@ -284,7 +284,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
                     setIsOpen(false)
                     window.location.href = `/${contentType.replace(/s$/, '')}/${mod.slug}/versions`
                   }}
-                  className="text-sm text-modrinth-green hover:text-green-400 transition-all duration-300 inline-flex items-center gap-1 hover:gap-2 mt-3"
+                  className="text-sm text-modrinth-green hover:text-modrinth-green-light transition-all duration-300 inline-flex items-center gap-1 hover:gap-2 mt-3"
                 >
                   <span>Посмотреть все версии</span>
                   <svg className="w-4 h-4 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

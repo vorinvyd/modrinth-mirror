@@ -26,7 +26,7 @@ export default function MobileNav({ onFilterClick }) {
       href: '/mods', 
       label: 'Моды', 
       icon: <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16"></path><path d="M3.29 7 12 12l8.71-5M12 22V12"></path></svg>,
-      color: 'from-green-500 to-emerald-500' 
+      color: 'from-modrinth-green to-modrinth-green-light' 
     },
     { 
       href: '/resourcepacks', 
@@ -162,13 +162,13 @@ export default function MobileNav({ onFilterClick }) {
   return (
     <>
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 pb-safe">
-        <div className="flex items-center justify-center gap-2 px-4 py-3 bg-[#16181c] backdrop-blur-xl shadow-[0_-4px_20px_rgba(27,217,106,0.15)] rounded-t-[24px]">
+        <div className="flex items-center justify-center gap-2 px-4 py-3 bg-[#16181c] backdrop-blur-xl shadow-[0_-4px_20px_rgba(236,127,171,0.15)] rounded-t-[24px]">
           <Link
             href="/"
             className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all duration-300 ${
               pathname === '/' 
-                ? 'bg-gradient-to-r from-[#1bd96a] to-[#22e477] text-black shadow-lg shadow-[#1bd96a]/30 scale-105' 
-                : 'bg-[#27292e] hover:bg-[#34363c] text-[#d1d5db] hover:text-[#1bd96a]'
+                ? 'bg-gradient-to-r from-modrinth-green to-modrinth-green-light text-black shadow-lg shadow-[rgba(236,127,171,0.3)] scale-105' 
+                : 'bg-[#27292e] hover:bg-[#34363c] text-[#d1d5db] hover:text-modrinth-green'
             }`}
           >
             <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
@@ -182,8 +182,8 @@ export default function MobileNav({ onFilterClick }) {
             onClick={() => setIsOpen(!isOpen)}
             className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all duration-300 ${
               isOpen 
-                ? 'bg-gradient-to-r from-[#1bd96a] to-[#22e477] text-black shadow-lg shadow-[#1bd96a]/30 scale-105' 
-                : 'bg-[#27292e] hover:bg-[#34363c] text-[#d1d5db] hover:text-[#1bd96a]'
+                ? 'bg-gradient-to-r from-modrinth-green to-modrinth-green-light text-black shadow-lg shadow-[rgba(236,127,171,0.3)] scale-105' 
+                : 'bg-[#27292e] hover:bg-[#34363c] text-[#d1d5db] hover:text-modrinth-green'
             }`}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -195,7 +195,7 @@ export default function MobileNav({ onFilterClick }) {
           {showFilterButton && (
             <button
               onClick={handleFilterClick}
-              className="flex items-center justify-center gap-1.5 px-4 py-2.5 bg-[#27292e] hover:bg-[#34363c] text-[#d1d5db] hover:text-[#1bd96a] rounded-xl text-xs font-semibold transition-all duration-300"
+              className="flex items-center justify-center gap-1.5 px-4 py-2.5 bg-[#27292e] hover:bg-[#34363c] text-[#d1d5db] hover:text-modrinth-green rounded-xl text-xs font-semibold transition-all duration-300"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
@@ -214,18 +214,18 @@ export default function MobileNav({ onFilterClick }) {
           <div className="absolute inset-0 bg-black/70 backdrop-blur-md"></div>
           
           <div 
-            className="absolute bottom-0 left-0 right-0 bg-[#16181c] rounded-t-[32px] shadow-[0_-8px_40px_rgba(27,217,106,0.25)] pb-safe animate-slide-up"
+            className="absolute bottom-0 left-0 right-0 bg-[#16181c] rounded-t-[32px] shadow-[0_-8px_40px_rgba(236,127,171,0.25)] pb-safe animate-slide-up"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-center pt-4 pb-3">
-              <div className="w-16 h-1.5 bg-gradient-to-r from-transparent via-[#1bd96a] to-transparent rounded-full"></div>
+              <div className="w-16 h-1.5 bg-gradient-to-r from-transparent via-modrinth-green to-transparent rounded-full"></div>
             </div>
             
             <div className="px-4 pb-20">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#1bd96a]/30 to-transparent"></div>
-                <h3 className="text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#1bd96a] to-[#22e477] px-3">Навигация</h3>
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#1bd96a]/30 to-transparent"></div>
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-modrinth-green/30 to-transparent"></div>
+                <h3 className="text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-modrinth-green to-modrinth-green-light px-3">Навигация</h3>
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-modrinth-green/30 to-transparent"></div>
               </div>
               
               <div className="grid grid-cols-2 gap-3 mobile-nav-grid">
@@ -238,20 +238,20 @@ export default function MobileNav({ onFilterClick }) {
                       onClick={() => setIsOpen(false)}
                       className={`group relative flex flex-col items-center justify-center gap-2.5 p-4 rounded-2xl transition-all duration-300 transform ${
                         active
-                          ? 'bg-gradient-to-br ' + item.color + ' shadow-lg shadow-[#1bd96a]/30 scale-105'
+                          ? 'bg-gradient-to-br ' + item.color + ' shadow-lg shadow-[rgba(236,127,171,0.3)] scale-105'
                           : 'bg-[#27292e] hover:bg-[#34363c] hover:scale-105'
                       }`}
                     >
-                      <div className={`transition-all duration-300 ${active ? 'text-white scale-110' : 'text-[#9ca3af] group-hover:text-[#1bd96a] group-hover:scale-110'}`}>
+                      <div className={`transition-all duration-300 ${active ? 'text-white scale-110' : 'text-[#9ca3af] group-hover:text-modrinth-green group-hover:scale-110'}`}>
                         {item.icon}
                       </div>
                       <span className={`text-sm font-semibold text-center transition-colors duration-300 ${
-                        active ? 'text-white' : 'text-[#d1d5db] group-hover:text-[#1bd96a]'
+                        active ? 'text-white' : 'text-[#d1d5db] group-hover:text-modrinth-green'
                       }`}>
                         {item.label}
                       </span>
                       {active && (
-                        <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#1bd96a] rounded-full shadow-lg shadow-[#1bd96a]/50 animate-pulse"></div>
+                        <div className="absolute -top-1 -right-1 w-3 h-3 bg-modrinth-green rounded-full shadow-lg shadow-[rgba(236,127,171,0.5)] animate-pulse"></div>
                       )}
                     </Link>
                   )
