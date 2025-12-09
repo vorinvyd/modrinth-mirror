@@ -54,37 +54,30 @@ export default function ExtensionBanner() {
 					</svg>
 				</button>
 
-				<div className="relative flex items-start gap-3 sm:gap-4">
-					<div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-modrinth-green to-modrinth-green-light flex items-center justify-center shadow-lg">
-						<svg className="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-						</svg>
-					</div>
-
+				<div className="relative">
 					<div className="flex-1 min-w-0">
 						<h3 className="text-base sm:text-lg font-bold text-white mb-1 flex items-center gap-2 flex-wrap">
-							<span>Официальное расширение для Chrome</span>
-							<span className="px-2 py-0.5 text-xs bg-modrinth-green/20 text-modrinth-green border border-modrinth-green/30 rounded-full">Новое</span>
+							<span>Расширение для Chrome</span>
 						</h3>
 						<p className="text-xs sm:text-sm text-gray-300 mb-3 sm:mb-4 leading-relaxed">
-							Скачайте из Google Chrome Web Store и автоматически перенаправляйтесь с Modrinth на наш быстрый интерфейс на русском
+							Установите в Chrome и автоматически переходите с Modrinth на быстрый русскоязычный интерфейс
 						</p>
 
 						<div className="sm:hidden">
 							<span className="text-xs text-gray-400 italic">Доступно только с ПК</span>
 						</div>
 
-						<a
-							href="https://chromewebstore.google.com/detail/modrinth-redirect/poamgpbaabemlgienajmcolicdiapekg"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="hidden sm:inline-flex items-center justify-center gap-2 bg-modrinth-green hover:bg-modrinth-green-light text-black px-5 py-3 rounded-lg font-bold text-base transition-all duration-300 hover:scale-95 shadow-lg hover:shadow-modrinth-green/50"
-						>
-							<svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-								<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-							</svg>
-							Скачать из Chrome Web Store
-						</a>
+						<div className="hidden sm:flex justify-center mt-3">
+							<a
+								href="/extension"
+								className="inline-flex items-center justify-center gap-2 bg-modrinth-green hover:bg-modrinth-green-light text-black px-3 py-2 rounded-lg font-bold text-sm transition-all duration-300 hover:scale-95 shadow-lg hover:shadow-modrinth-green/50"
+							>
+								<svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+									<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+								</svg>
+								Что за расширение?
+							</a>
+						</div>
 					</div>
 				</div>
 
