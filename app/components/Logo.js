@@ -120,7 +120,7 @@ export default function Logo() {
         className={`w-8 h-8 md:w-9 md:h-9 object-contain drop-shadow-[0_0_8px_rgba(236,127,171,0.5)] transition-all duration-300 select-none pointer-events-none ${
           isLoading 
             ? 'animate-spin scale-110 drop-shadow-[0_0_12px_rgba(236,127,171,0.7)]' 
-            : 'group-hover:scale-110 group-hover:rotate-6 group-hover:drop-shadow-[0_0_12px_rgba(236,127,171,0.7)]'
+            : 'group-hover:scale-110 group-hover:drop-shadow-[0_0_12px_rgba(236,127,171,0.7)]'
         }`}
         style={isLoading ? { animationDuration: '0.8s' } : {}}
       />
