@@ -27,7 +27,6 @@ export default async function PluginsPage({ searchParams }) {
   const sortBy = searchParams.sort || 'relevance';
   const page = parseInt(searchParams.page || '1');
   const limit = 20;
-  const offset = (page - 1) * limit;
   
   let mcVersions = { release: [], full: [] };
   try {
@@ -160,13 +159,14 @@ export default async function PluginsPage({ searchParams }) {
     blockedByProject = totalBlockedByProject;
     blockedByOrganization = totalBlockedByOrganization;
     
-    let currentPageOffset = offset;
+    let currentPageOffset = 0;
     let allFilteredHits = [];
     let firstData = null;
     const maxAttempts = 20;
     let attempts = 0;
+    const skipCount = (page - 1) * limit;
     
-    while (allFilteredHits.length < limit && attempts < maxAttempts) {
+    while (allFilteredHits.length < skipCount + limit && attempts < maxAttempts) {
       const batchData = await searchMods({ query, facets, limit: limit * 2, offset: currentPageOffset, index: sortBy });
       
       if (!firstData) {
@@ -176,7 +176,7 @@ export default async function PluginsPage({ searchParams }) {
       const filtered = filterModsList(batchData.hits);
       allFilteredHits = allFilteredHits.concat(filtered.hits);
       
-      if (allFilteredHits.length >= limit) {
+      if (allFilteredHits.length >= skipCount + limit) {
         break;
       }
       
@@ -191,7 +191,7 @@ export default async function PluginsPage({ searchParams }) {
     if (firstData) {
       data = {
         ...firstData,
-        hits: allFilteredHits.slice(0, limit)
+        hits: allFilteredHits.slice(skipCount, skipCount + limit)
       };
     }
   } catch (err) {
