@@ -38,7 +38,7 @@ export default function ExtensionBanner() {
 
 	return (
 		<div className="fixed bottom-4 right-4 left-4 sm:left-auto sm:bottom-6 sm:right-6 z-50 sm:max-w-md animate-slide-up">
-			<div className="relative bg-gradient-to-br from-modrinth-green/20 via-green-500/10 to-emerald-500/20 backdrop-blur-xl border border-modrinth-green/30 rounded-2xl p-4 sm:p-6 shadow-2xl overflow-hidden group">
+			<div className="relative bg-gradient-to-br from-modrinth-green/20 via-modrinth-green-light/10 to-modrinth-green-light/20 backdrop-blur-xl border border-modrinth-green/30 rounded-2xl p-4 sm:p-6 shadow-2xl overflow-hidden group">
 				<div className="absolute inset-0 bg-gradient-to-br from-modrinth-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 				
 				<div className="absolute inset-0 opacity-30">
@@ -55,7 +55,7 @@ export default function ExtensionBanner() {
 				</button>
 
 				<div className="relative flex items-start gap-3 sm:gap-4">
-					<div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-modrinth-green to-modrinth-green-light flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+					<div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-modrinth-green to-modrinth-green-light flex items-center justify-center shadow-lg">
 						<svg className="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
 						</svg>
@@ -78,7 +78,7 @@ export default function ExtensionBanner() {
 							href="https://chromewebstore.google.com/detail/modrinth-redirect/poamgpbaabemlgienajmcolicdiapekg"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="hidden sm:inline-flex items-center justify-center gap-2 bg-modrinth-green hover:bg-modrinth-green-light text-black px-5 py-3 rounded-lg font-bold text-base transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-modrinth-green/50"
+							className="hidden sm:inline-flex items-center justify-center gap-2 bg-modrinth-green hover:bg-modrinth-green-light text-black px-5 py-3 rounded-lg font-bold text-base transition-all duration-300 hover:scale-95 shadow-lg hover:shadow-modrinth-green/50"
 						>
 							<svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
 								<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
@@ -88,7 +88,7 @@ export default function ExtensionBanner() {
 					</div>
 				</div>
 
-				<div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-modrinth-green via-modrinth-green-light to-emerald-500 opacity-50"></div>
+				<div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-modrinth-green via-modrinth-green-light to-modrinth-green opacity-50"></div>
 			</div>
 		</div>
 	)

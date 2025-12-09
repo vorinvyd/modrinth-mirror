@@ -115,8 +115,8 @@ function getCommitType(message) {
     { 
       keywords: ['add', 'new', 'добавл', 'создан', 'добавлено', 'добавлена', 'добавлен'], 
       icon: '✨', 
-      color: 'from-green-500 to-emerald-500',
-      bg: 'from-green-500/20 to-emerald-500/20',
+      color: 'from-modrinth-green to-modrinth-green-light',
+      bg: 'from-modrinth-green/20 to-modrinth-green-light/20',
       label: 'Новое',
       priority: 3
     },
@@ -240,7 +240,7 @@ export default async function NewsPage() {
                               className="w-6 h-6 rounded-full ring-1 ring-white/10 hover:ring-white/30 transition-all duration-300 hover:scale-110 shadow-md"
                             />
                           ) : (
-                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-modrinth-green to-emerald-500 flex items-center justify-center text-white text-xs font-bold shadow-md">
+                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-modrinth-green to-modrinth-green-light flex items-center justify-center text-white text-xs font-bold shadow-md">
                               {commit.commit.author.name.charAt(0).toUpperCase()}
                             </div>
                           )}
@@ -278,9 +278,9 @@ export default async function NewsPage() {
                           </svg>
                           <code className="font-mono font-semibold">{getShortSha(commit.sha)}</code>
                           
-                          <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-4 py-2 bg-gradient-to-r from-modrinth-green to-emerald-500 text-black text-xs font-semibold rounded-lg shadow-xl opacity-0 group-hover/commit:opacity-100 pointer-events-none transition-all duration-300 whitespace-nowrap transform group-hover/commit:-translate-y-1">
+                          <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-4 py-2 bg-gradient-to-r from-modrinth-green to-modrinth-green-light text-black text-xs font-semibold rounded-lg shadow-xl opacity-0 group-hover/commit:opacity-100 pointer-events-none transition-all duration-300 whitespace-nowrap transform group-hover/commit:-translate-y-1">
                             Перейти к коммиту на GitHub
-                            <span className="absolute top-full left-1/2 -translate-x-1/2 -mt-px border-4 border-transparent border-t-emerald-500"></span>
+                            <span className="absolute top-full left-1/2 -translate-x-1/2 -mt-px border-4 border-transparent border-t-modrinth-green-light"></span>
                           </span>
                         </a>
                       </div>
