@@ -5,6 +5,8 @@ import { usePathname, useSearchParams } from 'next/navigation'
 import { useEffect, useState, useRef } from 'react'
 import CurrentDomain from './CurrentDomain'
 
+const ICON_VERSION = '2'
+
 export default function Logo() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -112,13 +114,13 @@ export default function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2 md:gap-3 group flex-shrink-0 relative">
       <img
-        src="/icon.png"
+        src={`/icon.png?v=${ICON_VERSION}`}
         alt="Logo"
         draggable="false"
-        className={`w-8 h-8 md:w-9 md:h-9 object-contain drop-shadow-[0_0_8px_rgba(26,230,109,0.5)] transition-all duration-300 select-none pointer-events-none ${
+        className={`w-8 h-8 md:w-9 md:h-9 object-contain drop-shadow-[0_0_8px_rgba(236,127,171,0.5)] transition-all duration-300 select-none pointer-events-none ${
           isLoading 
-            ? 'animate-spin scale-110 drop-shadow-[0_0_12px_rgba(26,230,109,0.7)]' 
-            : 'group-hover:scale-110 group-hover:rotate-6 group-hover:drop-shadow-[0_0_12px_rgba(26,230,109,0.7)]'
+            ? 'animate-spin scale-110 drop-shadow-[0_0_12px_rgba(236,127,171,0.7)]' 
+            : 'group-hover:scale-110 group-hover:rotate-6 group-hover:drop-shadow-[0_0_12px_rgba(236,127,171,0.7)]'
         }`}
         style={isLoading ? { animationDuration: '0.8s' } : {}}
       />
