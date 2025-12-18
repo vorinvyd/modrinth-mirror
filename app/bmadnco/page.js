@@ -389,7 +389,10 @@ export default function AboutPage() {
                   <div className="flex-1 text-center md:text-left">
                     <h3 className="text-lg font-bold text-white mb-2">Связь с администрацией</h3>
                     <p className="text-gray-300 text-sm leading-relaxed mb-3">
-                      Если у вас есть вопросы о блокировках, предложения по фильтрации контента или официальные запросы от РКН и других государственных органов — напишите нам на указанный email.
+                      Данный email предназначен <span className="font-semibold text-white">исключительно для официальных запросов</span> от государственных органов (РКН, прокуратура, суды и другие уполномоченные структуры) по вопросам блокировок и фильтрации контента.
+                    </p>
+                    <p className="text-gray-400 text-xs leading-relaxed mb-3 italic">
+                      Пожалуйста, не используйте этот адрес для обращений авторов контента, коммерческих предложений, рекламных запросов или других неофициальных целей. Такие обращения не будут рассмотрены.
                     </p>
                     <div className="flex justify-center md:justify-start">
                       <EmailCopyButton email="black-minecraft@proton.me" />
