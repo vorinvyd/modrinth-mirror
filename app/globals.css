@@ -1250,3 +1250,230 @@ input[type="url"]:-webkit-autofill {
     text-shadow: 0 0 15px rgba(219, 39, 119, 0.8), 0 0 30px rgba(219, 39, 119, 0.8), 0 0 45px rgba(219, 39, 119, 0.6);
   }
 }
+
+.garland-svg {
+  color: #000;
+  overflow: visible;
+  z-index: 1;
+}
+
+.garland-item {
+  display: inline-flex;
+  position: relative;
+}
+
+.garland-item:not(.garland-item--visible) {
+  opacity: 0;
+}
+
+.garland-item--visible.garland-item--fade-in {
+  animation: garland-fade-in 0.4s forwards;
+}
+
+.garland-item--animated .garland-light,
+.garland-item--animated .garland-light--glow {
+  animation-duration: 12s;
+  animation-iteration-count: infinite;
+  animation-timing-function: steps(24);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.garland-svg--pos-1 {
+  margin-left: -9px;
+  margin-top: -5px;
+}
+
+[dir="rtl"] .garland-svg--pos-1 {
+  margin-left: 0;
+  margin-right: -9px;
+}
+
+.garland-svg--pos-1 .garland-light,
+.garland-svg--pos-1 .garland-light--glow {
+  animation-name: garland-color-sequence-1;
+}
+
+.garland-svg--pos-2 {
+  margin-left: -8px;
+  margin-top: -3px;
+}
+
+[dir="rtl"] .garland-svg--pos-2 {
+  margin-left: 0;
+  margin-right: -8px;
+}
+
+.garland-svg--pos-2 .garland-light,
+.garland-svg--pos-2 .garland-light--glow {
+  animation-name: garland-color-sequence-2;
+}
+
+.garland-svg--pos-3 {
+  margin-left: -8px;
+  margin-top: -8px;
+}
+
+[dir="rtl"] .garland-svg--pos-3 {
+  margin-left: 0;
+  margin-right: -8px;
+}
+
+.garland-svg--pos-3 .garland-light,
+.garland-svg--pos-3 .garland-light--glow {
+  animation-name: garland-color-sequence-3;
+}
+
+.garland-svg--pos-4 {
+  margin-left: -8px;
+  margin-top: -6px;
+}
+
+[dir="rtl"] .garland-svg--pos-4 {
+  margin-left: 0;
+  margin-right: -8px;
+}
+
+.garland-svg--pos-4 .garland-light,
+.garland-svg--pos-4 .garland-light--glow {
+  animation-name: garland-color-sequence-4;
+}
+
+.garland-svg--pos-5 {
+  margin-left: -10px;
+  margin-top: -7px;
+}
+
+[dir="rtl"] .garland-svg--pos-5 {
+  margin-left: 0;
+  margin-right: -10px;
+}
+
+.garland-svg--pos-5 .garland-light,
+.garland-svg--pos-5 .garland-light--glow {
+  animation-name: garland-color-sequence-5;
+}
+
+.garland-container {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 2147483647;
+}
+
+@keyframes garland-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes garland-color-sequence-1 {
+  0% {
+    color: #07f;
+  }
+  20% {
+    color: #17d685;
+  }
+  40% {
+    color: #ffd91d;
+  }
+  60% {
+    color: #f679ff;
+  }
+  80% {
+    color: #ab47e9;
+  }
+  100% {
+    color: #07f;
+  }
+}
+
+@keyframes garland-color-sequence-2 {
+  0% {
+    color: #f679ff;
+  }
+  20% {
+    color: #ffd91d;
+  }
+  40% {
+    color: #ab47e9;
+  }
+  60% {
+    color: #07f;
+  }
+  80% {
+    color: #17d685;
+  }
+  100% {
+    color: #f679ff;
+  }
+}
+
+@keyframes garland-color-sequence-3 {
+  0% {
+    color: #17d685;
+  }
+  20% {
+    color: #07f;
+  }
+  40% {
+    color: #ab47e9;
+  }
+  60% {
+    color: #f679ff;
+  }
+  80% {
+    color: #ffd91d;
+  }
+  100% {
+    color: #17d685;
+  }
+}
+
+@keyframes garland-color-sequence-4 {
+  0% {
+    color: #ffd91d;
+  }
+  20% {
+    color: #f679ff;
+  }
+  40% {
+    color: #17d685;
+  }
+  60% {
+    color: #07f;
+  }
+  80% {
+    color: #ab47e9;
+  }
+  100% {
+    color: #ffd91d;
+  }
+}
+
+@keyframes garland-color-sequence-5 {
+  0% {
+    color: #ab47e9;
+  }
+  20% {
+    color: #07f;
+  }
+  40% {
+    color: #17d685;
+  }
+  60% {
+    color: #ffd91d;
+  }
+  80% {
+    color: #f679ff;
+  }
+  100% {
+    color: #ab47e9;
+  }
+}

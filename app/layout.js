@@ -11,6 +11,7 @@ import Footer from './components/Footer'
 import Logo from './components/Logo'
 import VersionsPreloader from './components/VersionsPreloader'
 import BannerPreloader from './components/BannerPreloader'
+import Garland from './components/Garland'
 
 const nunito = Nunito({
   subsets: ['latin', 'cyrillic'],
@@ -72,6 +73,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className={`${nunito.className} min-h-screen m-0`}>
         <noscript dangerouslySetInnerHTML={{ __html: '<div><img src="https://mc.yandex.ru/watch/105182235" style="position:absolute; left:-9999px;" alt="" /></div>' }} />
+        <Garland />
         <VersionsPreloader />
         <BannerPreloader />
         <TopNav />
