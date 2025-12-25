@@ -7,7 +7,6 @@ import SortDropdown from '@/app/components/SortDropdown'
 import ActiveFilters from '@/app/components/ActiveFilters'
 import ResourceCard from '@/app/components/ResourceCard'
 import ReloadButton from '@/app/components/ReloadButton'
-import AdCard from '@/app/components/2'
 
 export async function generateMetadata({ searchParams }) {
   const page = parseInt(searchParams?.page || '1');
@@ -341,17 +340,9 @@ export default async function ModpacksPage({ searchParams }) {
           )}
 
           <div className="space-y-3">
-            {data.hits.map((modpack, index) => {
-              const items = [
-                <ResourceCard key={modpack.project_id} resource={modpack} type="modpack" />
-              ]
-              
-              if (data.hits.length >= 19 && index === 18) {
-                items.push(<AdCard key="ad-card" />)
-              }
-              
-              return items
-            }).flat()}
+            {data.hits.map((modpack, index) => (
+              <ResourceCard key={modpack.project_id} resource={modpack} type="modpack" />
+            ))}
           </div>
 
           {totalPages > 1 && (

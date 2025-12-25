@@ -7,7 +7,6 @@ import SortDropdown from '@/app/components/SortDropdown'
 import ActiveFilters from '@/app/components/ActiveFilters'
 import ResourceCard from '@/app/components/ResourceCard'
 import ReloadButton from '@/app/components/ReloadButton'
-import AdCard from '@/app/components/2'
 
 export async function generateMetadata({ searchParams }) {
   const page = parseInt(searchParams?.page || '1');
@@ -329,17 +328,9 @@ export default async function ShadersPage({ searchParams }) {
           )}
 
           <div className="space-y-3">
-            {data.hits.map((shader, index) => {
-              const items = [
-                <ResourceCard key={shader.project_id} resource={shader} type="shader" />
-              ]
-              
-              if (data.hits.length >= 19 && index === 18) {
-                items.push(<AdCard key="ad-card" />)
-              }
-              
-              return items
-            }).flat()}
+            {data.hits.map((shader, index) => (
+              <ResourceCard key={shader.project_id} resource={shader} type="shader" />
+            ))}
           </div>
 
           {totalPages > 1 && (
