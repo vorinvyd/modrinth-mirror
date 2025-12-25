@@ -6,6 +6,10 @@ import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { MOD_LOADERS, MAIN_LOADERS_COUNT } from '@/lib/loaders'
 import { CATEGORIES } from '@/lib/categories'
 
+const MOD_CATEGORIES = CATEGORIES.filter(cat =>
+  ['adventure', 'cursed', 'decoration', 'economy', 'equipment', 'food', 'game-mechanics', 'library', 'magic', 'management', 'minigame', 'mobs', 'optimization', 'social', 'storage', 'technology', 'transportation', 'utility', 'worldgen'].includes(cat.id)
+)
+
 const ENVIRONMENTS = [
   { id: 'client', name: 'Клиент' },
   { id: 'server', name: 'Сервер' },
@@ -279,7 +283,7 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
             Категории
           </h3>
           <div className="flex flex-col gap-1 pr-2">
-            {CATEGORIES.map(cat => {
+            {MOD_CATEGORIES.map(cat => {
               const isSelected = selectedCategories.includes(cat.id)
               
               return (

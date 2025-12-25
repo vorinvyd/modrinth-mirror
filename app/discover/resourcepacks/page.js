@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { searchMods, getMinecraftVersions } from '@/lib/modrinth'
 import { filterModsList } from '@/lib/contentFilter'
-import ResourcepackSidebarFilters from './ResourcepackSidebarFilters'
-import MobileMenu from './MobileMenu'
+import ResourcepackSidebarFilters from '@/app/resourcepacks/ResourcepackSidebarFilters'
+import MobileMenu from '@/app/resourcepacks/MobileMenu'
 import SortDropdown from '@/app/components/SortDropdown'
 import ActiveFilters from '@/app/components/ActiveFilters'
 import ResourceList from '@/app/components/ResourceList'
@@ -179,7 +179,7 @@ export default async function ResourcepacksPage({ searchParams }) {
     excludedResolutions.forEach(r => params.append('f', `categories!=${r}`));
     if (sortBy !== 'relevance') params.set('sort', sortBy);
     params.set('page', newPage.toString());
-    return `/resourcepacks?${params.toString()}`;
+    return `/discover/resourcepacks?${params.toString()}`;
   };
 
   return (
@@ -210,7 +210,7 @@ export default async function ResourcepacksPage({ searchParams }) {
               <SearchInput 
                 defaultValue={query}
                 placeholder="Поиск ресурспаков..."
-                categoryPath="resourcepacks"
+                categoryPath="discover/resourcepacks"
               />
             </div>
             
@@ -220,11 +220,11 @@ export default async function ResourcepacksPage({ searchParams }) {
                   currentSort={sortBy} 
                   query={query} 
                   version={version} 
-                  categoryPath="resourcepacks"
+                  categoryPath="discover/resourcepacks"
                   searchParams={searchParams}
                 />
               </div>
-              <ActiveFilters categoryPath="resourcepacks" />
+              <ActiveFilters categoryPath="discover/resourcepacks" />
             </div>
           </div>
 
@@ -327,7 +327,4 @@ export default async function ResourcepacksPage({ searchParams }) {
     </>
   )
 }
-
-
-
 

@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { searchMods, getMinecraftVersions } from '@/lib/modrinth'
 import { filterModsList } from '@/lib/contentFilter'
-import ResourcepackSidebarFilters from './ResourcepackSidebarFilters'
-import MobileMenu from './MobileMenu'
+import ShaderSidebarFilters from '@/app/shaders/ShaderSidebarFilters'
+import MobileMenu from '@/app/shaders/MobileMenu'
 import SortDropdown from '@/app/components/SortDropdown'
 import ActiveFilters from '@/app/components/ActiveFilters'
 import ResourceList from '@/app/components/ResourceList'
@@ -12,16 +12,16 @@ import SearchInput from '@/app/components/SearchInput'
 export async function generateMetadata({ searchParams }) {
   const page = parseInt(searchParams?.page || '1');
   const title = page > 1 
-    ? `Ресурспаки для Minecraft - Скачать бесплатно (стр. ${page}) | ModrinthProxy`
-    : 'Ресурспаки для Minecraft - Скачать бесплатно | ModrinthProxy';
+    ? `Шейдеры для Minecraft - Скачать бесплатно (стр. ${page}) | ModrinthProxy`
+    : 'Шейдеры для Minecraft - Скачать бесплатно | ModrinthProxy';
   
   return {
     title,
-    description: 'Скачать ресурспаки для Minecraft. Текстуры, модели, звуки. Реалистичные, мультяшные, HD. Тысячи ресурспаков для любой версии.',
+    description: 'Скачать шейдеры для Minecraft. Iris, OptiFine, Canvas. Реалистичная графика, тени, отражения для любой версии Minecraft.',
   };
 }
 
-export default async function ResourcepacksPage({ searchParams }) {
+export default async function ShadersPage({ searchParams }) {
   const query = searchParams.q || '';
   const version = searchParams.v || '';
   const sortBy = searchParams.sort || 'relevance';
@@ -40,59 +40,80 @@ export default async function ResourcepacksPage({ searchParams }) {
   } catch (error) {
     console.error('Failed to load Minecraft versions:', error);
   }
+
   const fParams = Array.isArray(searchParams.f) ? searchParams.f : (searchParams.f ? [searchParams.f] : []);
   const gParams = Array.isArray(searchParams.g) ? searchParams.g : (searchParams.g ? [searchParams.g] : []);
-
-  let categories = [];
-  let excludedCategories = [];
+  
+  let styles = [];
+  let excludedStyles = [];
   let features = [];
   let excludedFeatures = [];
-  let resolutions = [];
-  let excludedResolutions = [];
+  let performance = [];
+  let excludedPerformance = [];
+  let loaders = [];
+  let excludedLoaders = [];
 
-  const CATEGORY_IDS = ['combat', 'cursed', 'decoration', 'modded', 'realistic', 'simplistic', 'themed', 'tweaks', 'utility', 'vanilla-like'];
-  const FEATURE_IDS = ['audio', 'blocks', 'core-shaders', 'entities', 'environment', 'equipment', 'fonts', 'gui', 'items', 'locale', 'models'];
-  const RESOLUTION_IDS = ['8x-', '16x', '32x', '48x', '64x', '128x', '256x'];
+  const STYLE_IDS = ['cartoon', 'cursed', 'fantasy', 'realistic', 'semi-realistic', 'vanilla-like'];
+  const FEATURE_IDS = ['atmosphere', 'bloom', 'colored-lighting', 'foliage', 'path-tracing', 'pbr', 'reflections', 'shadows'];
+  const PERFORMANCE_IDS = ['high', 'low', 'medium', 'potato', 'screenshot'];
 
-  const processParam = (param) => {
-    let decoded = decodeURIComponent(param.replace(/\+/g, '%2B'));
-    
+  fParams.forEach(param => {
+    const decoded = decodeURIComponent(param);
     if (decoded.includes('categories:') || decoded.includes('categories!=')) {
       const isExcluded = decoded.includes('categories!=');
       const value = decoded.replace('categories:', '').replace('categories!=', '');
       
-      if (CATEGORY_IDS.includes(value)) {
-        if (isExcluded) excludedCategories.push(value);
-        else categories.push(value);
+      if (STYLE_IDS.includes(value)) {
+        if (isExcluded) excludedStyles.push(value);
+        else styles.push(value);
       } else if (FEATURE_IDS.includes(value)) {
         if (isExcluded) excludedFeatures.push(value);
         else features.push(value);
-      } else if (RESOLUTION_IDS.includes(value)) {
-        if (isExcluded) excludedResolutions.push(value);
-        else resolutions.push(value);
+      } else if (PERFORMANCE_IDS.includes(value)) {
+        if (isExcluded) excludedPerformance.push(value);
+        else performance.push(value);
       }
     }
-  };
+  });
 
-  fParams.forEach(processParam);
-  gParams.forEach(processParam);
+  gParams.forEach(param => {
+    const decoded = decodeURIComponent(param);
+    if (decoded.includes('categories:')) {
+      const value = decoded.replace('categories:', '');
+      loaders.push(value);
+    } else if (decoded.includes('categories!=')) {
+      const value = decoded.replace('categories!=', '');
+      excludedLoaders.push(value);
+    }
+  });
 
-  const facets = [['project_type:resourcepack']];
+  const lParam = searchParams.l;
+  const openSourceState = lParam === 'open_source:true' ? 'selected' : lParam === 'open_source:false' ? 'excluded' : 'none';
+
+  const facets = [['project_type:shader']];
   
   if (version) {
     facets.push([`versions:${version}`]);
   }
   
-  if (categories.length > 0) {
-    categories.forEach(c => facets.push([`categories:${c}`]));
+  if (styles.length > 0) {
+    styles.forEach(s => facets.push([`categories:${s}`]));
   }
   
   if (features.length > 0) {
     features.forEach(f => facets.push([`categories:${f}`]));
   }
   
-  if (resolutions.length > 0) {
-    resolutions.forEach(r => facets.push([`categories:${r}`]));
+  if (performance.length > 0) {
+    performance.forEach(p => facets.push([`categories:${p}`]));
+  }
+  
+  if (loaders.length > 0) {
+    loaders.forEach(l => facets.push([`categories:${l}`]));
+  }
+  
+  if (openSourceState === 'selected') {
+    facets.push(['open_source:true']);
   }
 
   let data = null;
@@ -162,40 +183,45 @@ export default async function ResourcepacksPage({ searchParams }) {
       };
     }
   } catch (err) {
-    console.error('Failed to load resourcepacks:', err);
+    console.error('Failed to load shaders:', err);
     error = err;
   }
+
   const totalPages = data ? Math.ceil(data.total_hits / limit) : 0;
 
   const buildPageUrl = (newPage) => {
     const params = new URLSearchParams();
     if (query) params.set('q', query);
     if (version) params.set('v', version);
-    categories.forEach(c => params.append('f', `categories:${c}`));
-    excludedCategories.forEach(c => params.append('f', `categories!=${c}`));
+    styles.forEach(s => params.append('f', `categories:${s}`));
+    excludedStyles.forEach(s => params.append('f', `categories!=${s}`));
     features.forEach(f => params.append('f', `categories:${f}`));
     excludedFeatures.forEach(f => params.append('f', `categories!=${f}`));
-    resolutions.forEach(r => params.append('f', `categories:${r}`));
-    excludedResolutions.forEach(r => params.append('f', `categories!=${r}`));
+    performance.forEach(p => params.append('f', `categories:${p}`));
+    excludedPerformance.forEach(p => params.append('f', `categories!=${p}`));
+    loaders.forEach(l => params.append('g', `categories:${l}`));
+    excludedLoaders.forEach(l => params.append('g', `categories!=${l}`));
+    if (openSourceState === 'selected') params.set('l', 'open_source:true');
+    else if (openSourceState === 'excluded') params.set('l', 'open_source:false');
     if (sortBy !== 'relevance') params.set('sort', sortBy);
     params.set('page', newPage.toString());
-    return `/resourcepacks?${params.toString()}`;
+    return `/discover/shaders?${params.toString()}`;
   };
 
   return (
     <>
       <MobileMenu />
       <div className="flex gap-6">
-        <ResourcepackSidebarFilters initialVersions={mcVersions} />
+        <ShaderSidebarFilters initialVersions={mcVersions} />
         <div className="flex-1 min-w-0">
           <div className="flex flex-col gap-4 mb-6">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <h1 className="text-2xl md:text-3xl font-bold mb-2">Minecraft ресурспаки</h1>
+                <h1 className="text-2xl md:text-3xl font-bold mb-2">Minecraft шейдеры</h1>
                 <p className="text-gray-400 text-sm md:text-base">
                   {data ? (
                     <>
-                      {data.total_hits.toLocaleString('ru-RU')} ресурспаков найдено
+                      {data.total_hits.toLocaleString('ru-RU')} шейдеров найдено
                       {blockedCount > 0 && (
                         <span className="text-red-400 ml-2">
                           (из поисковой выдачи удалено {blockedCount} {blockedCount % 10 === 1 && blockedCount % 100 !== 11 ? 'ресурс' : blockedCount % 10 >= 2 && blockedCount % 10 <= 4 && (blockedCount % 100 < 10 || blockedCount % 100 >= 20) ? 'ресурса' : 'ресурсов'})
@@ -209,8 +235,8 @@ export default async function ResourcepacksPage({ searchParams }) {
               </div>
               <SearchInput 
                 defaultValue={query}
-                placeholder="Поиск ресурспаков..."
-                categoryPath="resourcepacks"
+                placeholder="Поиск шейдеров..."
+                categoryPath="discover/shaders"
               />
             </div>
             
@@ -220,11 +246,11 @@ export default async function ResourcepacksPage({ searchParams }) {
                   currentSort={sortBy} 
                   query={query} 
                   version={version} 
-                  categoryPath="resourcepacks"
+                  categoryPath="discover/shaders"
                   searchParams={searchParams}
                 />
               </div>
-              <ActiveFilters categoryPath="resourcepacks" />
+              <ActiveFilters categoryPath="discover/shaders" />
             </div>
           </div>
 
@@ -234,7 +260,7 @@ export default async function ResourcepacksPage({ searchParams }) {
             <svg className="w-16 h-16 mx-auto text-orange-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <h2 className="text-xl font-bold text-white mb-2">Не удалось загрузить ресурспаки</h2>
+            <h2 className="text-xl font-bold text-white mb-2">Не удалось загрузить шейдеры</h2>
             <p className="text-gray-400 mb-6">Попробуйте обновить страницу через несколько секунд</p>
             <ReloadButton />
           </div>
@@ -246,9 +272,9 @@ export default async function ResourcepacksPage({ searchParams }) {
               <svg className="w-16 h-16 mx-auto text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
-              <p className="text-xl font-semibold text-red-400 mb-3">Все ресурспаки на этой странице заблокированы</p>
+              <p className="text-xl font-semibold text-red-400 mb-3">Все шейдеры на этой странице заблокированы</p>
               <p className="text-gray-400 text-sm">
-                Из {data.total_hits.toLocaleString('ru-RU')} найденных ресурспаков, все {blockedCount} на текущей странице заблокированы по требованиям РКН
+                Из {data.total_hits.toLocaleString('ru-RU')} найденных шейдеров, все {blockedCount} на текущей странице заблокированы по требованиям РКН
                 {blockedByProject > 0 && blockedByOrganization > 0 && (
                   <> ({blockedByProject} по проекту, {blockedByOrganization} по организации)</>
                 )}
@@ -262,7 +288,7 @@ export default async function ResourcepacksPage({ searchParams }) {
               </p>
             </div>
           ) : (
-            <p className="text-xl text-gray-400">Ресурспаки не найдены</p>
+            <p className="text-xl text-gray-400">Шейдеры не найдены</p>
           )}
         </div>
       ) : (
@@ -293,7 +319,7 @@ export default async function ResourcepacksPage({ searchParams }) {
             </div>
           )}
 
-          <ResourceList resources={data.hits} type="resourcepack" />
+          <ResourceList resources={data.hits} type="shader" />
 
           {totalPages > 1 && (
             <div className="flex justify-center gap-2 mt-8">
@@ -327,7 +353,3 @@ export default async function ResourcepacksPage({ searchParams }) {
     </>
   )
 }
-
-
-
-

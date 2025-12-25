@@ -16,12 +16,14 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
     const decoded = decodeURIComponent(param)
       if (decoded.startsWith('categories:')) {
         const categoryId = decoded.substring(11)
-        activeFilters.push({
-          type: 'category',
-          id: categoryId,
-          label: getCategoryName(categoryId, config),
-          param: param
-        })
+        if (config.categories && config.categories.some(cat => cat.id === categoryId)) {
+          activeFilters.push({
+            type: 'category',
+            id: categoryId,
+            label: getCategoryName(categoryId, config),
+            param: param
+          })
+        }
       }
   })
   
