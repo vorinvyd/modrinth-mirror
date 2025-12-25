@@ -8,12 +8,12 @@
 
 ## Быстрые ссылки
 
-- **[Моды](https://modrinth.black/mods)** - модификации для Minecraft
-- **[Плагины](https://modrinth.black/plugins)** - плагины для серверов
-- **[Модпаки](https://modrinth.black/modpacks)** - готовые сборки модов
-- **[Шейдеры](https://modrinth.black/shaders)** - графические улучшения
-- **[Ресурспаки](https://modrinth.black/resourcepacks)** - текстуры и звуки
-- **[Датапаки](https://modrinth.black/datapacks)** - игровая механика
+- **[Моды](https://modrinth.black/discover/mods)** - модификации для Minecraft
+- **[Плагины](https://modrinth.black/discover/plugins)** - плагины для серверов
+- **[Модпаки](https://modrinth.black/discover/modpacks)** - готовые сборки модов
+- **[Шейдеры](https://modrinth.black/discover/shaders)** - графические улучшения
+- **[Ресурспаки](https://modrinth.black/discover/resourcepacks)** - текстуры и звуки
+- **[Датапаки](https://modrinth.black/discover/datapacks)** - игровая механика
 
 - **[Лаунчер](https://modrinth.black/app)** - официальный лаунчер Modrinth
 
