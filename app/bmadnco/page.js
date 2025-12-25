@@ -473,59 +473,6 @@ export default function AboutPage() {
               <ProtectionBlock />
             </div>
           </section>
-
-          <section className="bg-gradient-to-br from-indigo-900/30 to-indigo-800/20 rounded-2xl p-8 border border-indigo-700/50 shadow-2xl">
-            <h2 className="text-3xl font-bold mb-4 flex items-center gap-3">
-              <svg className="w-8 h-8 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              О рекламе на сайте
-            </h2>
-            <div className="text-gray-300 space-y-4 leading-relaxed">
-              <p className="text-lg">
-                ModrinthProxy — это <span className="font-semibold text-indigo-300">полностью бесплатный проект</span>, созданный для удобства русскоязычных пользователей.
-              </p>
-              
-              <div className="bg-indigo-950/30 border border-indigo-700/30 rounded-lg p-6 mt-6">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-indigo-500/20 rounded-full flex-shrink-0">
-                    <svg className="w-6 h-6 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-white mb-3">Почему на сайте есть реклама?</h3>
-                    <p className="text-gray-300 leading-relaxed mb-4">
-                      Мы не взимаем плату с пользователей за использование сервиса. Однако для поддержания работы сайта требуются финансовые затраты:
-                    </p>
-                    <ul className="space-y-2 ml-4">
-                      <li className="flex items-start gap-2">
-                        <span className="text-indigo-400 text-lg flex-shrink-0">•</span>
-                        <span><strong className="text-white">Хостинг:</strong> аренда серверов для обработки запросов и развертывания проекта</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gradient-to-r from-indigo-900/20 via-purple-900/20 to-indigo-900/20 rounded-xl p-6 mt-6">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-green-500/20 rounded-full flex-shrink-0">
-                    <svg className="w-6 h-6 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-white mb-2">Наши принципы</h3>
-                    <p className="text-gray-300 leading-relaxed">
-                      Мы стараемся, чтобы реклама не мешала пользователю сайта и была как украшением дизайна. 
-                      Реклама на сайте принимается только та, продуктами которой мы сами пользуемся.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
         </div>
       </div>
     </div>
