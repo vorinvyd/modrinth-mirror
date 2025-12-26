@@ -7,14 +7,15 @@
 **Сайт:** https://modrinth.black/
 
 ## Быстрые ссылки
-- **<a href="https://modrinth.black/discover/mods" target="_blank" rel="noopener noreferrer">Моды</a>** - модификации для Minecraft
-- **<a href="https://modrinth.black/discover/plugins" target="_blank" rel="noopener noreferrer">Плагины</a>** - плагины для серверов
-- **<a href="https://modrinth.black/discover/modpacks" target="_blank" rel="noopener noreferrer">Модпаки</a>** - готовые сборки модов
-- **<a href="https://modrinth.black/discover/shaders" target="_blank" rel="noopener noreferrer">Шейдеры</a>** - графические улучшения
-- **<a href="https://modrinth.black/discover/resourcepacks" target="_blank" rel="noopener noreferrer">Ресурспаки</a>** - текстуры и звуки
-- **<a href="https://modrinth.black/discover/datapacks" target="_blank" rel="noopener noreferrer">Датапаки</a>** - игровая механика
 
-- **<a href="https://modrinth.black/app" target="_blank" rel="noopener noreferrer">Лаунчер</a>** - официальный лаунчер Modrinth
+- **[Моды](https://modrinth.black/discover/mods)** - модификации для Minecraft
+- **[Плагины](https://modrinth.black/discover/plugins)** - плагины для серверов
+- **[Модпаки](https://modrinth.black/discover/modpacks)** - готовые сборки модов
+- **[Шейдеры](https://modrinth.black/discover/shaders)** - графические улучшения
+- **[Ресурспаки](https://modrinth.black/discover/resourcepacks)** - текстуры и звуки
+- **[Датапаки](https://modrinth.black/discover/datapacks)** - игровая механика
+
+- **[Лаунчер](https://modrinth.black/app)** - официальный лаунчер Modrinth
 
 ## О проекте
 
