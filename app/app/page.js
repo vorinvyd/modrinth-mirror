@@ -15,9 +15,9 @@ export default async function AppPage() {
     <div className="min-h-screen">
       <div className="relative">
         <div className="landing-hero relative mt-4 mb-16">
-          <div className="max-w-7xl mx-auto px-4 py-12 md:py-20">
+          <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <h1 className="main-header text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-6 text-white max-w-[60rem] mx-auto leading-tight">
+              <h1 className="main-header text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-6 text-gray-900 dark:text-white max-w-[60rem] mx-auto leading-tight">
                 Скачайте Modrinth App для Windows
               </h1>
               
@@ -31,16 +31,15 @@ export default async function AppPage() {
                 <img 
                   src="https://cdn-raw.modrinth.com/app-landing/app-screenshot.webp" 
                   alt="Modrinth App Screenshot" 
-                  className="w-full h-auto rounded-3xl shadow-2xl border border-gray-800"
+                  className="w-full h-auto"
                 />
-                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-950 to-transparent rounded-b-3xl"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="features-section max-w-7xl mx-auto px-4 py-20">
+      <div className="features-section max-w-7xl mx-auto">
         <h1 className="subheader text-4xl md:text-5xl lg:text-6xl font-black text-center mb-16 bg-gradient-to-r from-modrinth-green via-blue-400 to-purple-400 bg-clip-text text-transparent">
           Не похож ни на один лаунчер,<br />который вы использовали раньше
         </h1>
@@ -48,43 +47,43 @@ export default async function AppPage() {
         <div className="feature-grid grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold text-white mb-3">Управление модами</h3>
-              <p className="text-gray-400">Modrinth упрощает управление всеми вашими модами в одном месте. Вы можете устанавливать, удалять и обновлять моды одним кликом.</p>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Управление модами</h3>
+              <p className="text-gray-600 dark:text-gray-400">Modrinth упрощает управление всеми вашими модами в одном месте. Вы можете устанавливать, удалять и обновлять моды одним кликом.</p>
             </div>
           </div>
 
           <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold text-white mb-3">Играйте с любимыми модами</h3>
-              <p className="text-gray-400">Используйте Modrinth App для скачивания и игры с вашими любимыми модами и модпаками.</p>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Играйте с любимыми модами</h3>
+              <p className="text-gray-600 dark:text-gray-400">Используйте Modrinth App для скачивания и игры с вашими любимыми модами и модпаками.</p>
             </div>
           </div>
 
           <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold text-white mb-3">Делитесь модпаками</h3>
-              <p className="text-gray-400">Создавайте, делитесь и играйте в модпаки с любыми из тысяч модов и модпаков, размещенных здесь на Modrinth.</p>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Делитесь модпаками</h3>
+              <p className="text-gray-600 dark:text-gray-400">Создавайте, делитесь и играйте в модпаки с любыми из тысяч модов и модпаков, размещенных здесь на Modrinth.</p>
             </div>
           </div>
 
           <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold text-white mb-3">Производительность</h3>
-              <p className="text-gray-400">Modrinth App работает лучше, чем многие ведущие менеджеры модов, используя всего 150 МБ оперативной памяти!</p>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Производительность</h3>
+              <p className="text-gray-600 dark:text-gray-400">Modrinth App работает лучше, чем многие ведущие менеджеры модов, используя всего 150 МБ оперативной памяти!</p>
             </div>
           </div>
 
           <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold text-white mb-3">Интеграция с сайтом</h3>
-              <p className="text-gray-400">Modrinth App полностью интегрирован с сайтом, поэтому вы можете получить доступ ко всем вашим любимым проектам из приложения!</p>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Интеграция с сайтом</h3>
+              <p className="text-gray-600 dark:text-gray-400">Modrinth App полностью интегрирован с сайтом, поэтому вы можете получить доступ ко всем вашим любимым проектам из приложения!</p>
             </div>
           </div>
 
           <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold text-white mb-3">Импорт профилей</h3>
-              <p className="text-gray-400">Импортируйте все ваши любимые профили из лаунчера, который вы использовали раньше, и начните работу с Modrinth App за секунды!</p>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Импорт профилей</h3>
+              <p className="text-gray-600 dark:text-gray-400">Импортируйте все ваши любимые профили из лаунчера, который вы использовали раньше, и начните работу с Modrinth App за секунды!</p>
             </div>
           </div>
         </div>
@@ -103,7 +102,7 @@ export default async function AppPage() {
               </svg>
               <h3 className="text-2xl font-bold text-white">Открытый исходный код</h3>
             </div>
-            <div className="description text-gray-400">
+            <div className="description text-gray-600 dark:text-gray-400">
               Лаунчер Modrinth полностью открыт. Вы можете просмотреть исходный код на нашем{' '}
               <a href="https://github.com/modrinth/code" rel="noopener" target="_blank" className="text-modrinth-green hover:underline">GitHub</a>!
             </div>
@@ -132,7 +131,7 @@ export default async function AppPage() {
               </svg>
               <h3 className="text-2xl font-bold text-white">Офлайн режим</h3>
             </div>
-            <div className="description text-gray-400">
+            <div className="description text-gray-600 dark:text-gray-400">
               Играйте в свои моды, подключены ли вы к интернету или нет.
             </div>
           </div>
@@ -150,7 +149,7 @@ export default async function AppPage() {
               </svg>
               <h3 className="text-2xl font-bold text-white">Отслеживание проектов</h3>
             </div>
-            <div className="description text-gray-400">
+            <div className="description text-gray-600 dark:text-gray-400">
               Сохраняйте контент, который вам нравится, и получайте обновления одним кликом.
             </div>
           </div>
@@ -161,8 +160,8 @@ export default async function AppPage() {
 
         <div className="mb-8">
           <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Варианты загрузки</h2>
-            <p className="text-lg text-gray-400">Выберите версию для вашей операционной системы</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Варианты загрузки</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400">Выберите версию для вашей операционной системы</p>
           </div>
 
           <div className="flex flex-col md:flex-row gap-6 items-center justify-center">
@@ -170,11 +169,11 @@ export default async function AppPage() {
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-gray-900/50 to-transparent rounded-3xl p-8 shadow-2xl">
-          <p className="text-sm text-gray-400 text-center mb-4 max-w-3xl mx-auto">
+        <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
+          <p className="text-sm text-gray-600 dark:text-gray-400 text-center mb-4 max-w-3xl mx-auto">
             modrinth.black is an independent project and has no relation to the original Modrinth and Rinth, Inc. Modrinth App is a product of Rinth, Inc. All rights to Modrinth App belong to Rinth, Inc.
           </p>
-          <p className="text-sm text-gray-400 text-center mb-4 max-w-3xl mx-auto">
+          <p className="text-sm text-gray-600 dark:text-gray-400 text-center mb-4 max-w-3xl mx-auto">
             Все ссылки для скачивания берутся напрямую с официальных серверов Modrinth.
             <br />
             Подробнее о проекте:{' '}

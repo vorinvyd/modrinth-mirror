@@ -23,14 +23,14 @@ export default function HomeClient() {
         <div className="flex items-center justify-center">
           <div className="max-w-7xl mx-auto px-2 sm:px-4 text-center">
           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-3 sm:mb-4 md:mb-6 animate-fade-in-up animation-delay-200 px-2 sm:px-4">
-              <span className="text-white drop-shadow-2xl">
+              <span className="text-gray-900 dark:text-white drop-shadow-2xl">
               ModrinthProxy
             </span>
           </h1>
            
           
           <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-2 sm:mb-3 md:mb-4 animate-fade-in-up animation-delay-400 font-black px-2 sm:px-4">
-            <span className="text-white drop-shadow-2xl">
+            <span className="text-gray-900 dark:text-white drop-shadow-2xl">
               МЕСТО ДЛЯ МАЙНКРАФТ
             </span>
           </div>
@@ -59,7 +59,7 @@ export default function HomeClient() {
             </div>
           </div>
           
-            <p className="text-sm sm:text-base md:text-lg text-gray-200 max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8 animate-fade-in-up animation-delay-600 px-2 sm:px-4 drop-shadow-md font-light leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg text-gray-700 dark:text-gray-200 max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8 animate-fade-in-up animation-delay-600 px-2 sm:px-4 drop-shadow-md font-light leading-relaxed">
               Открывайте, играйте и делитесь контентом Minecraft через нашу платформу, созданную сообществом для сообщества!
             </p>
           </div>

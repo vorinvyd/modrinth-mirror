@@ -1,3 +1,5 @@
+import ThemeSwitcher from './ThemeSwitcher'
+
 export default function TopNav() {
   return (
     <nav className="top-nav">
@@ -23,6 +25,7 @@ export default function TopNav() {
             Пинг Серверов
           </a>
         </div>
+        <ThemeSwitcher />
       </div>
     </nav>
   )

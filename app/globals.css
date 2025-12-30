@@ -144,6 +144,176 @@
   --glow-color-7: rgba(219, 39, 119, 0.9);
 }
 
+html:not(.dark) {
+  --bg-primary: #ebebeb;
+  --bg-primary-rgb: 235, 235, 235;
+  --bg-secondary: #f8f8f8;
+  --bg-tertiary: #dee2e6;
+  --bg-hover: #ced4da;
+  --bg-hover-alt: #f1f3f5;
+  --bg-dark: #e9ecef;
+  --bg-darker: #f8f9fa;
+  --bg-black: #000000;
+  --bg-black-rgb: 0, 0, 0;
+  --bg-tooltip: #1f2937;
+  --bg-code: #e9ecef;
+  --bg-gradient-start: #f1f3f5;
+  --bg-gradient-mid: #dee2e6;
+  --bg-gradient-trans: 241, 243, 245;
+  --bg-gradient-overlay: 233, 236, 239;
+  --border-color: #ced4da;
+  --border-gray: #adb5bd;
+  --scrollbar: #adb5bd;
+  --scrollbar-hover: #868e96;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --color-green: #ec7fab;
+  --color-green-hover: #e0659f;
+  --color-green-rgb: 236, 127, 171;
+  --color-green-bright: #e0659f;
+  --color-green-light: #c16fff;
+  --color-download-link: #ec7fab;
+  --color-blue-light: #3b82f6;
+  --text-primary: #212529;
+  --text-secondary: #495057;
+  --text-light: #343a40;
+  --text-muted: #6c757d;
+  --text-gray: #495057;
+  --text-link: #495057;
+  --text-subdued: #868e96;
+  --landing-border-color: rgba(107, 114, 128, 0.3);
+  --glow-color-0: rgba(236, 127, 171, 0.6);
+  --glow-color-1: rgba(59, 130, 246, 0.6);
+  --glow-color-2: rgba(168, 85, 247, 0.6);
+  --glow-color-3: rgba(236, 72, 153, 0.6);
+  --glow-color-4: rgba(251, 146, 60, 0.6);
+  --glow-color-5: rgba(193, 111, 255, 0.6);
+  --glow-color-6: rgba(99, 102, 241, 0.6);
+  --glow-color-7: rgba(219, 39, 119, 0.6);
+}
+
+html:not(.dark) .text-white {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity, 1));
+}
+
+html:not(.dark) .text-gray-300 {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity, 1));
+}
+
+html:not(.dark) .from-white {
+  --tw-gradient-from: rgb(15 23 42) var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgb(15 23 42 / 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+html:not(.dark) .from-white.via-modrinth-green {
+  --tw-gradient-from: rgb(15 23 42) var(--tw-gradient-from-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--color-green) var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
+}
+
+html:not(.dark) .bg-gradient-to-r.from-white.via-modrinth-green.to-blue-400 {
+  --tw-gradient-from: rgb(15 23 42) var(--tw-gradient-from-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--color-green) var(--tw-gradient-via-position), rgb(96 165 250) var(--tw-gradient-to-position) !important;
+}
+
+html:not(.dark) footer {
+  background: transparent !important;
+}
+
+html:not(.dark) footer > div[class*="absolute"] {
+  display: none !important;
+}
+
+html:not(.dark) footer > div.absolute.inset-0 {
+  display: none !important;
+}
+
+html:not(.dark) footer .bg-black\/40 {
+  background-color: transparent !important;
+}
+
+html:not(.dark) footer .text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity, 1)) !important;
+}
+
+html:not(.dark) footer .text-white {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity, 1)) !important;
+}
+
+html:not(.dark) .bg-gray-800 {
+  --tw-bg-opacity: 1;
+  background-color: var(--bg-secondary) !important;
+}
+
+html:not(.dark) .hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity, 1)) !important;
+}
+
+html:not(.dark) .landing-hero {
+  background: var(--bg-primary) !important;
+}
+
+html:not(.dark) .feature {
+  background: var(--bg-secondary) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: none !important;
+}
+
+html:not(.dark) .disclaimer-badge {
+  color: rgb(17 24 39) !important;
+}
+
+html:not(.dark) .disclaimer-badge a {
+  color: rgb(17 24 39) !important;
+}
+
+html:not(.dark) .text-gray-200 {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity, 1)) !important;
+}
+
+html:not(.dark) .text-gray-300 {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity, 1)) !important;
+}
+
+html:not(.dark) section[class*="bg-gradient-to-br"] {
+  background: var(--bg-secondary) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: none !important;
+}
+
+html:not(.dark) section[class*="bg-gradient-to-br"] > div[class*="absolute"] {
+  display: none !important;
+}
+
+html:not(.dark) .bg-purple-950\/30 {
+  background-color: var(--bg-tertiary) !important;
+}
+
+html:not(.dark) .bg-blue-950\/30 {
+  background-color: var(--bg-tertiary) !important;
+}
+
+html:not(.dark) .text-purple-300 {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity, 1)) !important;
+}
+
+html:not(.dark) .text-blue-200 {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity, 1)) !important;
+}
+
+html:not(.dark) .text-purple-200 {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity, 1)) !important;
+}
+
 @keyframes bubbleUpNagliy {
   0% {
     opacity: 0;
@@ -302,7 +472,7 @@ html {
 
 body {
   background-color: var(--bg-primary);
-  color: white;
+  color: var(--text-primary);
 }
 
 @supports (view-transition-name: none) {
@@ -930,7 +1100,7 @@ button.text-white {
   border: 2px solid transparent;
   border-radius: 1rem;
   box-shadow: inset 0 0 0 transparent;
-  color: #000;
+  color: #fff;
   cursor: pointer;
   display: flex;
   flex-direction: row;
