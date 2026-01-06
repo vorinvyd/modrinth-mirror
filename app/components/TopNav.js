@@ -18,7 +18,7 @@ export default function TopNav() {
           <a href="https://jar.modrinth.black" className="top-nav-link" data-tooltip="Перевод плагинов онлайн (InJarTranslator)">
             Перевод Плагинов
           </a>
-          <a href="https://dm.modrinth.black" className="top-nav-link" data-tooltip="Редактор DeluxeMenu и AbstractMenus">
+          <a href="https://dm.modrinth.black" className="top-nav-link" data-tooltip="Редактор DeluxeMenu и AbstractMenu's">
             Редактор DeluxeMenu
           </a>
         </div>
