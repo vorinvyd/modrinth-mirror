@@ -38,6 +38,7 @@ const withPWA = require('@ducanh2912/next-pwa').default({
 })
 
 const nextConfig = {
+  basePath: '',
   images: {
     domains: ['cdn.modrinth.com'],
     unoptimized: true,
