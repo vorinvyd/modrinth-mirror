@@ -408,6 +408,13 @@ html:not(.dark) .text-purple-200 {
   animation: tooltipFadeIn 0.2s ease;
 }
 
+html:not(.dark) .top-nav-link[data-tooltip]:hover::after {
+  background: #ffffff;
+  color: #212529;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
 .top-nav-link[data-tooltip]:hover::before {
   content: '';
   position: absolute;
@@ -419,6 +426,11 @@ html:not(.dark) .text-purple-200 {
   z-index: 1001;
   pointer-events: none;
   animation: tooltipFadeIn 0.2s ease;
+}
+
+html:not(.dark) .top-nav-link[data-tooltip]:hover::before {
+  border-bottom-color: #ffffff;
+  filter: drop-shadow(0 -2px 2px rgba(0, 0, 0, 0.05));
 }
 
 @keyframes tooltipFadeIn {
@@ -435,6 +447,12 @@ html:not(.dark) .text-purple-200 {
 .top-nav-link:hover {
   background: rgba(var(--color-green-rgb), 0.08);
   color: var(--color-green);
+}
+
+html:not(.dark) .top-nav-link:hover {
+  background: rgba(var(--color-green-rgb), 0.12);
+  color: var(--color-green);
+  box-shadow: 0 2px 8px rgba(var(--color-green-rgb), 0.15);
 }
 
 .top-nav-link-here {

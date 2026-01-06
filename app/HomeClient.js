@@ -71,7 +71,7 @@ export default function HomeClient() {
             <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
               Откройте для себя более 75 000 творений
             </h2>
-            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-modrinth-green/20 to-blue-500/20 text-modrinth-green px-6 py-3 rounded-full text-base font-bold mb-4 ">
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-pink-100 to-blue-100 dark:from-modrinth-green/20 dark:to-blue-500/20 text-pink-700 dark:text-modrinth-green px-6 py-3 rounded-full text-base font-bold mb-4 border border-pink-200/50 dark:border-transparent">
               <span>Для игроков Minecraft</span>
             </div>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">
@@ -246,7 +246,7 @@ export default function HomeClient() {
             <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
               Тысячи плагинов для вашего сервера
             </h2>
-            <div className="inline-block bg-yellow-500/20 text-orange-300 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            <div className="inline-block bg-yellow-100 dark:bg-yellow-500/20 text-orange-700 dark:text-orange-300 px-4 py-2 rounded-full text-sm font-semibold mb-4 border border-yellow-300/50 dark:border-transparent">
               Для создателей серверов
             </div>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">
