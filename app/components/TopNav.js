@@ -21,9 +21,6 @@ export default function TopNav() {
           <a href="https://dm.modrinth.black" className="top-nav-link" data-tooltip="Редактор DeluxeMenu и AbstractMenus">
             Редактор DeluxeMenu
           </a>
-          <a href="https://ping.modrinth.black" className="top-nav-link" data-tooltip="Проверить доступность Minecraft серверов">
-            Пинг Серверов
-          </a>
         </div>
         <ThemeSwitcher />
       </div>
