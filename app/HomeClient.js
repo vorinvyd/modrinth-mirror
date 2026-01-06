@@ -71,7 +71,7 @@ export default function HomeClient() {
             <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
               Откройте для себя более 75 000 творений
             </h2>
-            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-pink-100 to-blue-100 dark:from-pink-500/20 dark:to-blue-500/20 text-pink-700 dark:text-pink-300 px-6 py-3 rounded-full text-base font-bold mb-4 border border-pink-200/50 dark:border-pink-400/30">
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-pink-100 to-blue-100 dark:from-pink-500/20 dark:to-blue-500/20 text-pink-700 dark:text-pink-300 px-6 py-3 rounded-full text-base font-bold mb-4 border border-pink-200/50 dark:border-transparent">
               <span>Для игроков Minecraft</span>
             </div>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">
