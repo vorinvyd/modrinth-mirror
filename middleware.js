@@ -3,6 +3,18 @@ import { NextResponse } from 'next/server'
 export function middleware(request) {
   const { pathname, search } = request.nextUrl
   
+  if (pathname === '/' || pathname === '/app') {
+    console.log('Middleware:', {
+      pathname,
+      url: request.url,
+      headers: {
+        'x-forwarded-prefix': request.headers.get('x-forwarded-prefix'),
+        'x-forwarded-path': request.headers.get('x-forwarded-path'),
+        'x-original-uri': request.headers.get('x-original-uri'),
+      }
+    })
+  }
+  
   const redirects = {
     '/mods': '/discover/mods',
     '/resourcepacks': '/discover/resourcepacks',
