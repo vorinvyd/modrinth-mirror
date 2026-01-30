@@ -26,11 +26,8 @@ export default function Footer() {
 
           <div className="text-center md:text-left">
             <h3 className="text-lg font-bold text-white mb-3">
-              Открытый код
-            </h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-3">
               Полностью открытый проект
-            </p>
+            </h3>
             <a 
               href="https://github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0/modrinth-proxy" 
               target="_blank" 
