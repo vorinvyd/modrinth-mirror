@@ -217,7 +217,7 @@ export default function VersionsList({ versions, contentType, slug, initialLoade
                             {range}
                           </span>
                         ))}
-                        {version.loaders.filter(l => l !== 'minecraft').slice(0, 2).map((loaderId) => {
+                        {version.loaders.filter(l => l !== 'minecraft').map((loaderId) => {
                           const loaderData = LOADERS.find(l => l.id === loaderId)
                           if (!loaderData) return null
                           
@@ -270,7 +270,7 @@ export default function VersionsList({ versions, contentType, slug, initialLoade
                         ))}
                       </div>
 
-                      <div className="relative z-10 hidden xl:flex flex-wrap gap-1 items-start content-start max-h-20 overflow-hidden">
+                      <div className="relative z-10 hidden xl:flex flex-wrap gap-1 items-start content-start">
                         {version.loaders.filter(l => l !== 'minecraft').map((loaderId) => {
                           const loaderData = LOADERS.find(l => l.id === loaderId)
                           if (!loaderData) return null
@@ -314,7 +314,7 @@ export default function VersionsList({ versions, contentType, slug, initialLoade
                             ))}
                           </div>
                           <div className="flex flex-wrap gap-1 max-[390px]:justify-center">
-                            {version.loaders.filter(l => l !== 'minecraft').slice(0, 3).map((loaderId) => {
+                            {version.loaders.filter(l => l !== 'minecraft').map((loaderId) => {
                               const loaderData = LOADERS.find(l => l.id === loaderId)
                               if (!loaderData) return null
                               
