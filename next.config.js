@@ -39,6 +39,12 @@ const withPWA = require('@ducanh2912/next-pwa').default({
 
 const nextConfig = {
   basePath: '',
+  async rewrites() {
+    return [
+      { source: '/app', destination: '/launcher' },
+      { source: '/app/', destination: '/launcher' },
+    ]
+  },
   images: {
     domains: ['cdn.modrinth.com'],
     unoptimized: true,
