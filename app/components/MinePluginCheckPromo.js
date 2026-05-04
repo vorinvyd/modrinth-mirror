@@ -1,6 +1,5 @@
 const BOT_URL = 'https://bm.wtf/bot'
 
-/** Узкая стрелка вниз сразу под кнопкой «Скачать» / FAB — центрируй через родителя `flex flex-col items-center`. */
 export function DownloadPromoConnector({ className = '' }) {
   return (
     <div className={`flex flex-col items-center text-modrinth-green ${className}`} aria-hidden>
