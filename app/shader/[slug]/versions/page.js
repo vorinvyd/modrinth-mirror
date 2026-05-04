@@ -62,7 +62,7 @@ export default async function ShaderVersionsPage({ params, searchParams = {} }) 
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
         <div className="min-w-0">
-          <VersionsList versions={versions} contentType="shader" slug={slug} initialLoader={searchParams.l || 'all'} />
+          <VersionsList versions={versions} contentType="shader" slug={slug} initialLoader={searchParams.l || 'all'} projectColor={shader.color} />
         </div>
         <div className="lg:sticky lg:top-4 lg:self-start">
           <ResourceSidebar resource={shader} teamMembers={teamMembers} />

@@ -83,7 +83,7 @@ export default async function PluginVersionsPage({ params, searchParams }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
         <div className="min-w-0">
-          <VersionsList versions={versions} contentType="plugin" slug={slug} initialLoader={initialLoader} />
+          <VersionsList versions={versions} contentType="plugin" slug={slug} initialLoader={initialLoader} projectColor={plugin.color} />
         </div>
         
         <div className="lg:sticky lg:top-4 lg:self-start">

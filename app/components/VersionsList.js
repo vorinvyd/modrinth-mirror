@@ -3,7 +3,8 @@
 import { useState, useMemo, useEffect } from 'react'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { compressVersionRanges } from '@/lib/modrinth'
+import { useTheme } from 'next-themes'
+import { compressVersionRanges, resolveModrinthProjectAccent } from '@/lib/modrinth'
 import { versionChannelLetterRingClass } from '@/lib/versionChannelStyles'
 import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
 import { LOADERS } from '@/lib/loaders'
@@ -22,11 +23,27 @@ const ROW_GRID_XL_NO_ENV =
 const ROW_GRID_XL_RESOURCEPACK =
   'xl:grid-cols-[40px_minmax(150px,1fr)_minmax(100px,200px)_minmax(100px,150px)_minmax(80px,100px)_40px]'
 
-export default function VersionsList({ versions, contentType, slug, initialLoader = 'all' }) {
+export default function VersionsList({
+  versions,
+  contentType,
+  slug,
+  initialLoader = 'all',
+  projectColor,
+}) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  
+  const { resolvedTheme } = useTheme()
+  const [themeMounted, setThemeMounted] = useState(false)
+  useEffect(() => setThemeMounted(true), [])
+
+  const accent = useMemo(
+    () => resolveModrinthProjectAccent(projectColor),
+    [projectColor],
+  )
+  const paginationAccent =
+    themeMounted && accent && resolvedTheme === 'dark' ? accent : null
+
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedMcVersion, setSelectedMcVersion] = useState('all')
   const [selectedLoaders, setSelectedLoaders] = useState([])
@@ -470,7 +487,21 @@ export default function VersionsList({ versions, contentType, slug, initialLoade
                     </button>
                   )}
 
-                  <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-modrinth-green text-black font-bold">
+                  <div
+                    className={`w-10 h-10 flex items-center justify-center rounded-lg font-bold ${
+                      paginationAccent
+                        ? 'hover:!brightness-[1.08]'
+                        : 'bg-modrinth-green text-black'
+                    }`}
+                    style={
+                      paginationAccent
+                        ? {
+                            backgroundColor: paginationAccent.accentHex,
+                            color: paginationAccent.activeFgHex,
+                          }
+                        : undefined
+                    }
+                  >
                     {currentPage}
                   </div>
 

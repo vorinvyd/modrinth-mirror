@@ -62,7 +62,7 @@ export default async function ModpackVersionsPage({ params, searchParams }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
         <div className="lg:col-span-2">
-          <VersionsList versions={versions} contentType="modpack" slug={slug} initialLoader={initialLoader} />
+          <VersionsList versions={versions} contentType="modpack" slug={slug} initialLoader={initialLoader} projectColor={modpack.color} />
         </div>
 
         <div className="lg:sticky lg:top-4 lg:self-start">

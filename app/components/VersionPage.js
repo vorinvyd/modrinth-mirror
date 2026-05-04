@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { formatDownloads, formatDate, formatFileSize, groupVersionsByMajor } from '@/lib/modrinth'
+import { formatDownloads, formatDate, formatFileSize, groupVersionsByMajor, resolveModrinthProjectAccent } from '@/lib/modrinth'
 import { filterVersionChangelog, filterAvatar } from '@/lib/contentFilter'
 import { CATEGORIES } from '@/lib/categories'
 import { RESOURCEPACK_CATEGORIES } from '@/lib/resourcepackCategories'
@@ -194,8 +194,9 @@ function formatVersionsCompact(versions) {
 }
 
 class FilesList {
-  constructor(files) {
+  constructor(files, projectAccent) {
     this.files = files
+    this.projectAccent = projectAccent
   }
 
   render() {
@@ -204,7 +205,7 @@ class FilesList {
         <h2 className="text-xl font-bold mb-3">Файлы</h2>
         <div className="space-y-2">
           {this.files.map(file => (
-            <FileItem key={file.hashes.sha1} file={file} />
+            <FileItem key={file.hashes.sha1} file={file} projectAccent={this.projectAccent} />
           ))}
         </div>
       </div>
@@ -212,9 +213,10 @@ class FilesList {
   }
 }
 
-function FileItem({ file }) {
+function FileItem({ file, projectAccent }) {
   const isPrimary = file.primary
-  
+  const useAccent = Boolean(isPrimary && projectAccent)
+
   return (
     <div 
       className={`flex items-center justify-between gap-3 p-2 transition rounded-xl ${
@@ -247,9 +249,19 @@ function FileItem({ file }) {
         download
         className={`flex-shrink-0 inline-flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition ${
           isPrimary
-            ? 'bg-modrinth-green hover:bg-modrinth-green-light text-black'
+            ? useAccent
+              ? 'hover:!brightness-[1.08]'
+              : 'bg-modrinth-green hover:bg-modrinth-green-light text-black'
             : 'bg-modrinth-dark hover:bg-[var(--bg-hover-alt)] text-gray-400'
         }`}
+        style={
+          useAccent
+            ? {
+                backgroundColor: projectAccent.accentHex,
+                color: projectAccent.activeFgHex,
+              }
+            : undefined
+        }
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -265,7 +277,8 @@ export default function VersionPage({ project, version, author, contentType, plu
   const primaryFile = pageData.getPrimaryFile()
   const versionType = pageData.getVersionTypeInfo()
   const metadata = new VersionMetadata(version, author)
-  const filesList = new FilesList(version.files)
+  const projectAccent = resolveModrinthProjectAccent(project.color)
+  const filesList = new FilesList(version.files, projectAccent)
 
   return (
     <div className="max-w-7xl mx-auto">

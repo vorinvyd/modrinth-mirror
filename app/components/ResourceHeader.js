@@ -163,11 +163,11 @@ export default function ResourceHeader({ resource, contentType, versions = [] })
 
                 {showMinePluginCheckPromo ? (
                   <div className="flex shrink-0 flex-col items-center gap-1">
-                    <MobileDownloadButton accent={downloadAccent} />
+                    <MobileDownloadButton accent={downloadAccent} resourceTitle={resource.title} />
                     <DownloadPromoConnector />
                   </div>
                 ) : (
-                  <MobileDownloadButton accent={downloadAccent} />
+                  <MobileDownloadButton accent={downloadAccent} resourceTitle={resource.title} />
                 )}
               </div>
             </div>

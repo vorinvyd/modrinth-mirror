@@ -1,4 +1,8 @@
+'use client'
+
+import { useTheme } from 'next-themes'
 import Link from 'next/link'
+import { useEffect, useMemo, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
@@ -40,13 +44,42 @@ export function ChangelogTimelineRow({ channel, isLast, header, children, resour
   )
 }
 
+const CHANGELOG_ITEMS_PER_PAGE = 20
+
 export default function ChangelogVersionEntries({
   versions,
   slug,
   contentType,
   projectColor,
 }) {
-  const resourceBarHex = resolveModrinthProjectAccent(projectColor)?.accentHex
+  const { resolvedTheme } = useTheme()
+  const [themeMounted, setThemeMounted] = useState(false)
+  useEffect(() => setThemeMounted(true), [])
+  const accent = useMemo(
+    () => resolveModrinthProjectAccent(projectColor),
+    [projectColor],
+  )
+  const resourceBarHex = accent?.accentHex
+  const paginationAccent =
+    themeMounted && accent && resolvedTheme === 'dark' ? accent : null
+
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const totalPages = versions?.length
+    ? Math.ceil(versions.length / CHANGELOG_ITEMS_PER_PAGE)
+    : 1
+
+  useEffect(() => {
+    setCurrentPage((p) => Math.min(Math.max(1, p), totalPages))
+  }, [totalPages])
+
+  const page = Math.min(Math.max(1, currentPage), totalPages)
+
+  const paginatedVersions = useMemo(() => {
+    if (!versions?.length) return []
+    const start = (page - 1) * CHANGELOG_ITEMS_PER_PAGE
+    return versions.slice(start, start + CHANGELOG_ITEMS_PER_PAGE)
+  }, [versions, page])
 
   const versionHref = (version) => {
     const id = version.id ?? version.version_number
@@ -55,13 +88,14 @@ export default function ChangelogVersionEntries({
   }
 
   return (
-    <ul className="m-0 list-none p-0">
-      {versions.map((version, index) => {
-        const href = versionHref(version)
-        const title = version.name || version.version_number
-        const isLast = index === versions.length - 1
-        return (
-          <ChangelogTimelineRow
+    <>
+      <ul className="m-0 list-none p-0">
+        {paginatedVersions.map((version, index) => {
+          const href = versionHref(version)
+          const title = version.name || version.version_number
+          const isLast = index === paginatedVersions.length - 1
+          return (
+            <ChangelogTimelineRow
             key={version.id ?? version.version_number}
             channel={version.version_type}
             isLast={isLast}
@@ -109,6 +143,102 @@ export default function ChangelogVersionEntries({
           </ChangelogTimelineRow>
         )
       })}
-    </ul>
+
+      </ul>
+
+      {versions?.length > 0 && totalPages > 1 && (
+        <div className="flex items-center justify-center gap-2 mt-6 pt-4 border-t border-gray-800">
+          <button
+            type="button"
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+            disabled={page === 1}
+            className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-2"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Назад
+          </button>
+
+          <div className="flex items-center gap-2">
+            {page > 2 && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setCurrentPage(1)}
+                  className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition"
+                >
+                  1
+                </button>
+                {page > 3 && <span className="text-gray-500">...</span>}
+              </>
+            )}
+
+            {page > 1 && (
+              <button
+                type="button"
+                onClick={() => setCurrentPage(page - 1)}
+                className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition"
+              >
+                {page - 1}
+              </button>
+            )}
+
+            <div
+              className={`w-10 h-10 flex items-center justify-center rounded-lg font-bold ${
+                paginationAccent
+                  ? 'hover:!brightness-[1.08]'
+                  : 'bg-modrinth-green text-black'
+              }`}
+              style={
+                paginationAccent
+                  ? {
+                      backgroundColor: paginationAccent.accentHex,
+                      color: paginationAccent.activeFgHex,
+                    }
+                  : undefined
+              }
+            >
+              {page}
+            </div>
+
+            {page < totalPages && (
+              <button
+                type="button"
+                onClick={() => setCurrentPage(page + 1)}
+                className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition"
+              >
+                {page + 1}
+              </button>
+            )}
+
+            {page < totalPages - 1 && (
+              <>
+                {page < totalPages - 2 && <span className="text-gray-500">...</span>}
+                <button
+                  type="button"
+                  onClick={() => setCurrentPage(totalPages)}
+                  className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition"
+                >
+                  {totalPages}
+                </button>
+              </>
+            )}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+            disabled={page === totalPages}
+            className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-2"
+          >
+            Вперёд
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      )}
+    </>
   )
 }
