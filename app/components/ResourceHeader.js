@@ -5,6 +5,9 @@ import { RESOURCEPACK_CATEGORIES } from '@/lib/resourcepackCategories'
 import { SHADER_STYLES, SHADER_FEATURES, SHADER_PERFORMANCE } from '@/lib/shaderCategories'
 import DownloadModal from './DownloadModal'
 import MobileDownloadButton from './MobileDownloadButton'
+import MinePluginCheckPromo, { DownloadPromoConnector } from './MinePluginCheckPromo'
+
+const MINEPLUGIN_PROMO_MAX_DOWNLOADS = 100_000
 
 const CONTENT_TYPE_NAMES = {
   mod: 'Моды',
@@ -45,6 +48,11 @@ export default function ResourceHeader({ resource, contentType, versions = [] })
     ...(resource.categories || []),
     ...(resource.additional_categories || [])
   ]
+
+  const downloads = resource.downloads
+  const showMinePluginCheckPromo =
+    (contentType === 'mod' || contentType === 'plugin') &&
+    (downloads == null || downloads < MINEPLUGIN_PROMO_MAX_DOWNLOADS)
 
   return (
     <>
@@ -119,35 +127,57 @@ export default function ResourceHeader({ resource, contentType, versions = [] })
             </div>
           </div>
 
-          <div className="w-full lg:w-auto lg:flex lg:items-center">
-            <div className="w-full lg:w-auto">
-              <DownloadModal mod={resource} versions={versions} contentType={contentTypeRoute} />
+          <div className="flex w-full flex-col lg:w-auto">
+            <div className="w-full lg:flex lg:justify-end">
+              {showMinePluginCheckPromo ? (
+                <div className="flex flex-col items-center gap-2 lg:inline-flex lg:gap-2">
+                  <DownloadModal mod={resource} versions={versions} contentType={contentTypeRoute} />
+                  <DownloadPromoConnector className="hidden lg:flex pb-px" />
+                </div>
+              ) : (
+                <DownloadModal mod={resource} versions={versions} contentType={contentTypeRoute} />
+              )}
             </div>
-            
-            <div className="block lg:hidden flex items-center gap-3 justify-between w-full">
-              <div className="flex flex-col gap-2 text-xs">
-                {resource.downloads != null && (
-                  <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-400">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg>
-                    <span className="font-semibold text-gray-900 dark:text-white">{formatDownloads(resource.downloads)}</span>
+
+            <div className="mt-3 w-full lg:mt-0">
+              <div className="flex w-full items-center justify-between gap-3 lg:hidden">
+                <div className="flex min-w-0 flex-col gap-2 text-xs">
+                  {resource.downloads != null && (
+                    <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-400">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                      </svg>
+                      <span className="font-semibold text-gray-900 dark:text-white">{formatDownloads(resource.downloads)}</span>
+                    </div>
+                  )}
+                  {(resource.followers != null || resource.follows != null) && (
+                    <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-400">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                      <span className="font-semibold text-gray-900 dark:text-white">{formatDownloads(resource.followers || resource.follows)}</span>
+                    </div>
+                  )}
+                </div>
+
+                {showMinePluginCheckPromo ? (
+                  <div className="flex shrink-0 flex-col items-center gap-1">
+                    <MobileDownloadButton />
+                    <DownloadPromoConnector />
                   </div>
-                )}
-                {(resource.followers != null || resource.follows != null) && (
-                  <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-400">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                    </svg>
-                    <span className="font-semibold text-gray-900 dark:text-white">{formatDownloads(resource.followers || resource.follows)}</span>
-                  </div>
+                ) : (
+                  <MobileDownloadButton />
                 )}
               </div>
-              
-              <MobileDownloadButton />
             </div>
           </div>
         </div>
+
+        {showMinePluginCheckPromo && (
+          <div className="mt-5 w-full min-w-0 lg:mt-4">
+            <MinePluginCheckPromo contentType={contentType} />
+          </div>
+        )}
       </div>
     </>
   )
