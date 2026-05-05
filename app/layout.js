@@ -11,6 +11,7 @@ import Footer from './components/Footer'
 import Logo from './components/Logo'
 import VersionsPreloader from './components/VersionsPreloader'
 import AppTooltipProvider from './components/AppTooltipProvider'
+import ExtensionBanner from './components/ExtensionBanner'
 
 const nunito = Nunito({
   subsets: ['latin', 'cyrillic'],
@@ -120,6 +121,7 @@ export default function RootLayout({ children }) {
           </main>
           <MobileNav />
           <Footer />
+          <ExtensionBanner />
           </AppTooltipProvider>
         </ThemeProvider>
       </body>
