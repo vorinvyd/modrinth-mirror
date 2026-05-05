@@ -340,7 +340,6 @@ html:not(.dark) .text-purple-200 {
   animation: bubbleUpNagliy 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-
 .top-nav {
   background: linear-gradient(180deg, transparent 0%, rgba(var(--bg-primary-rgb), 0.6) 40%, var(--bg-primary) 100%) !important;
   width: 100% !important;

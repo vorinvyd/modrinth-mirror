@@ -76,7 +76,7 @@ export default function ThemeSwitcher() {
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 md:right-0 md:left-auto mt-2 w-64 sm:w-72 md:w-56 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-2xl z-50 overflow-hidden rounded-lg">
+        <div className="absolute top-full right-0 left-auto mt-2 w-64 sm:w-72 md:w-56 max-w-[min(18rem,calc(100vw-1rem))] bg-white dark:bg-gray-800 shadow-2xl z-50 overflow-hidden rounded-lg">
           <div className="p-2">
             <div className="px-3 py-2 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">
               Тема
