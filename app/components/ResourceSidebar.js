@@ -2,15 +2,14 @@
 
 import Link from 'next/link'
 import { LOADERS } from '@/lib/loaders'
-import { compressVersionRanges } from '@/lib/modrinth'
-import { sortCompressedRangesDesc } from '@/lib/minecraftVersionSort'
+import { compressSidebarGameVersions } from '@/lib/minecraftVersionSort'
 import CompressedGameVersionsChips from './CompressedGameVersionsChips'
 
 export default function ResourceSidebar({ resource, teamMembers = [], contentType = null }) {
   const gameVersions = resource.game_versions || []
   const loaders = (resource.loaders || []).filter(l => l !== 'minecraft')
   const browseRoute = resolveContentTypeRoute(contentType, resource.project_type)
-  const gameVersionRanges = sortCompressedRangesDesc(compressVersionRanges(gameVersions))
+  const gameVersionRanges = compressSidebarGameVersions(gameVersions)
 
   const environment = getEnvironment(resource.client_side, resource.server_side)
 
@@ -33,6 +32,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], contentTyp
                   browseRoute={browseRoute}
                   rawVersions={gameVersions}
                   ranges={gameVersionRanges}
+                  maxVisible={12}
                 />
               </div>
             )}
