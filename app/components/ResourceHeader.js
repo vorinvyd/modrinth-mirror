@@ -7,8 +7,11 @@ import { SHADER_STYLES, SHADER_FEATURES, SHADER_PERFORMANCE } from '@/lib/shader
 import DownloadModal from './DownloadModal'
 import MobileDownloadButton from './MobileDownloadButton'
 import MinePluginCheckPromo, { DownloadPromoConnector } from './MinePluginCheckPromo'
+import AuthorPluginPromo from './AuthorPluginPromo'
 
 const MINEPLUGIN_PROMO_MAX_DOWNLOADS = 100_000
+
+const AUTHOR_PLUGIN_SLUGS = new Set(['borderplus', 'h1-(hp)', 'cutiedrops'])
 
 const CONTENT_TYPE_NAMES = {
   mod: 'Моды',
@@ -54,9 +57,16 @@ export default function ResourceHeader({ resource, contentType, versions = [] })
 
   const downloads = resource.downloads
   const downloadAccent = resolveModrinthProjectAccent(resource.color)
-  const showMinePluginCheckPromo =
+  const showDownloadPromoSlot =
     (contentType === 'mod' || contentType === 'plugin') &&
     (downloads == null || downloads < MINEPLUGIN_PROMO_MAX_DOWNLOADS)
+
+  const showAuthorPluginPromo =
+    showDownloadPromoSlot && contentType === 'plugin' && AUTHOR_PLUGIN_SLUGS.has(resource.slug)
+
+  const showMinePluginCheckPromo = showDownloadPromoSlot && !showAuthorPluginPromo
+
+  const showPromoBelowDownload = showMinePluginCheckPromo || showAuthorPluginPromo
 
   const iconUrl = resource.icon_url ? filterAvatar(resource.icon_url) : null
 
@@ -135,7 +145,7 @@ export default function ResourceHeader({ resource, contentType, versions = [] })
 
           <div className="flex w-full flex-col lg:w-auto">
             <div className="w-full lg:flex lg:justify-end">
-              {showMinePluginCheckPromo ? (
+              {showPromoBelowDownload ? (
                 <div className="flex flex-col items-center gap-2 lg:inline-flex lg:gap-2">
                   <DownloadModal mod={resource} versions={versions} contentType={contentTypeRoute} />
                   <DownloadPromoConnector className="hidden lg:flex pb-px" />
@@ -166,7 +176,7 @@ export default function ResourceHeader({ resource, contentType, versions = [] })
                   )}
                 </div>
 
-                {showMinePluginCheckPromo ? (
+                {showPromoBelowDownload ? (
                   <div className="flex shrink-0 flex-col items-center gap-1">
                     <MobileDownloadButton accent={downloadAccent} resourceTitle={resource.title} />
                     <DownloadPromoConnector />
@@ -179,6 +189,11 @@ export default function ResourceHeader({ resource, contentType, versions = [] })
           </div>
         </div>
 
+        {showAuthorPluginPromo && (
+          <div className="mt-5 w-full min-w-0 lg:mt-4">
+            <AuthorPluginPromo />
+          </div>
+        )}
         {showMinePluginCheckPromo && (
           <div className="mt-5 w-full min-w-0 lg:mt-4">
             <MinePluginCheckPromo contentType={contentType} />

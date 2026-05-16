@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import MarkCommitsRead from '../components/MarkCommitsRead'
+import NewsUnder16Button from '../components/NewsUnder16Button'
 import { ChangelogTimelineRow } from '../components/ChangelogVersionEntries'
 import nextDynamic from 'next/dynamic'
 
@@ -143,9 +144,12 @@ export default async function NewsPage() {
             <div className="flex shrink-0 items-center justify-center self-stretch rounded-md border border-gray-700 bg-gray-800/50 px-5 py-3 text-2xl font-black uppercase tracking-wide text-gray-200">
               16+
             </div>
-            <div className="min-w-0 flex-1 max-w-3xl rounded-md border border-gray-700/90 bg-gradient-to-br from-gray-800/70 via-gray-800/50 to-gray-900/60 px-4 py-3.5 text-base leading-[1.75] text-gray-300 md:px-5 md:py-4 md:text-lg md:leading-[1.8]">
-              <span className="font-semibold tracking-wide text-modrinth-green/90">Ахутунг.</span>{' '}
-              <span className="text-gray-400/95">{disclaimer}</span>
+            <div className="flex min-w-0 flex-1 max-w-3xl flex-col rounded-md border border-gray-700/90 bg-gradient-to-br from-gray-800/70 via-gray-800/50 to-gray-900/60 px-4 py-3.5 md:px-5 md:py-4">
+              <p className="text-base leading-[1.75] text-gray-300 md:text-lg md:leading-[1.8]">
+                <span className="font-semibold tracking-wide text-modrinth-green/90">Ахутунг.</span>{' '}
+                <span className="text-gray-400/95">{disclaimer}</span>
+              </p>
+              <NewsUnder16Button />
             </div>
           </div>
         </header>
