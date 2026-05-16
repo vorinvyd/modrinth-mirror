@@ -98,7 +98,6 @@ export default function RootLayout({ children }) {
           </main>
           <MobileNav />
           <Footer />
-          <ExtensionBanner />
           </AppTooltipProvider>
         </ThemeProvider>
       </body>
