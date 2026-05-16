@@ -469,7 +469,6 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <ProtectionBlock />
             </div>
           </section>
         </div>
