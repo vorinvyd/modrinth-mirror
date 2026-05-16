@@ -14,7 +14,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 justify-items-center">
           <div className="text-center md:text-left">
             <h3 className="text-lg font-bold bg-gradient-to-r from-modrinth-green to-modrinth-green-light bg-clip-text text-transparent mb-3 select-none">
-              ModrinthProxy
+              Modrinth.MomentariyModder.com
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed">
               Делаем Minecraft лучше для каждого игрока. 
@@ -75,7 +75,7 @@ export default function Footer() {
               <p className="text-gray-400 text-sm leading-relaxed">
                 Нашли баг? Есть предложения? 
                 <br/>
-                <a href="https://github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0/modrinth-proxy/issues" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-modrinth-green hover:text-modrinth-green-light transition-colors font-medium group">
+                <a href="https://github.com/MomentariyModderProjects/modrinth/issues" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-modrinth-green hover:text-modrinth-green-light transition-colors font-medium group">
                   <span>GitHub Issues</span>
                   <svg className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"></path>
@@ -135,3 +135,4 @@ export default function Footer() {
     </footer>
   )
 }
+
