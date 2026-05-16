@@ -1276,12 +1276,20 @@ body {
 .blocked-content {
   background-color: var(--bg-code);
   border: 2px dashed var(--border-gray);
-  padding: 2rem;
+  padding: 0.625rem 1rem;
   text-align: center;
   color: var(--text-muted);
   border-radius: 0.5rem;
-  margin: 1rem 0;
+  margin: 1rem auto !important;
+  width: fit-content !important;
+  max-width: min(100%, 42rem) !important;
+  box-sizing: border-box !important;
   font-size: 1.25rem;
+}
+
+.prose .blocked-content {
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 input.text-white,
