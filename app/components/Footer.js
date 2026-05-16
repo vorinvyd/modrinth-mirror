@@ -121,7 +121,9 @@ export default function Footer() {
                     Disclaimer
                   </p>
                   <p className="text-gray-500 text-sm leading-relaxed max-w-2xl">
-                    Not an official Minecraft service. Not approved by or associated with Mojang or Microsoft.<br>
+                    Not an official Minecraft service. Not approved by or associated with Mojang or Microsoft.
+                  </p>
+                  <p className="text-gray-500 text-sm leading-relaxed max-w-2xl">
 					Unofficial site, not affiliated with modrinth.com.
                   </p>
                 </div>
