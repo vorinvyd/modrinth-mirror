@@ -1,7 +1,7 @@
 import { searchMods } from '@/lib/modrinth'
 
 export default async function sitemap() {
-  const baseUrl = 'https://modrinth.black'
+  const baseUrl = 'https://modrinth.momentariymodder.com'
   
   const routes = [
     '',
@@ -12,9 +12,7 @@ export default async function sitemap() {
     '/datapacks',
     '/modpacks',
     '/news',
-    '/extension',
-    '/bmadnco',
-    '/protect-bot',
+	'/bmadnco'
   ]
 
   const staticPages = routes.map((route) => ({

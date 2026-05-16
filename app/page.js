@@ -2,7 +2,7 @@ import HomeClient from './HomeClient'
 import { getModrinthSixTypeCreationsTotal } from '@/lib/modrinthCatalogTotals'
 
 export const metadata = {
-  title: 'ModrinthProxy',
+  title: 'Modrinth.MomentariyModder.com',
   description: 'Скачать моды, плагины, шейдеры, ресурспаки и датапаки для Minecraft. Удобный каталог на русском языке. Тысячи модификаций для любой версии.',
 }
 
