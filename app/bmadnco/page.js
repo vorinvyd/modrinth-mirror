@@ -2,6 +2,7 @@ import { BLACKLIST_PROJECTS, BLACKLIST_ORGANIZATIONS, BLACKLIST_PATTERNS, BLACKL
 import EmailCopyButton from '@/app/components/EmailCopyButton'
 import TiltCard from '@/app/components/TiltCard'
 import TiltCardDirectional from '@/app/components/TiltCardDirectional'
+import ProtectionBlock from './ProtectionBlock'
 import InfrastructureIcon from './InfrastructureIcon'
 
 export const metadata = {
@@ -116,6 +117,7 @@ export default function AboutPage() {
                       </div>
                     </div>
                   </div>
+                </div>
 
                 <div className="mt-8 bg-gradient-to-r from-modrinth-green/10 via-blue-500/10 to-purple-500/10 border border-modrinth-green/30 rounded-xl p-6">
                   <div className="flex items-start gap-4">
@@ -332,3 +334,5 @@ export default function AboutPage() {
     </div>
   )
 }
+
+
