@@ -1,5 +1,5 @@
 import './globals.css'
-import { Nunito } from "next/font/google"
+import { Lexend } from "next/font/google"
 import Script from 'next/script'
 import { Suspense } from 'react'
 import Link from 'next/link'
