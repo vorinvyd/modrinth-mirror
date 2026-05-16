@@ -117,21 +117,6 @@ export default function AboutPage() {
                     </div>
                   </div>
 
-                  <div className="group bg-gradient-to-br from-orange-500/5 to-transparent rounded-xl p-5 border border-orange-500/20 hover:border-orange-500/40 transition-all duration-300 hover:scale-[1.02] cursor-default select-none">
-                    <div className="flex items-start gap-3">
-                      <div className="p-2 bg-orange-500/20 rounded-lg mt-1">
-                        <svg className="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-white mb-1">Фильтрация контента</h3>
-                        <p className="text-sm text-gray-400">Применяем фильтры для соблюдения законодательства РФ. Блокировка запрещённого контента происходит автоматически.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
                 <div className="mt-8 bg-gradient-to-r from-modrinth-green/10 via-blue-500/10 to-purple-500/10 border border-modrinth-green/30 rounded-xl p-6">
                   <div className="flex items-start gap-4">
                     <div className="p-3 bg-modrinth-green/20 rounded-full">
@@ -273,135 +258,6 @@ export default function AboutPage() {
             </div>
           </section>
 
-          <section className="bg-gradient-to-br from-purple-900/30 to-purple-800/20 rounded-2xl p-8 border border-purple-700/50 shadow-2xl">
-            <h2 className="text-3xl font-bold mb-4 flex items-center gap-3">
-              <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-              Соблюдение законодательства РФ
-            </h2>
-            <div className="text-gray-300 space-y-4 leading-relaxed">
-              <p>
-                Мы стремимся соблюдать действующее законодательство Российской Федерации и применяем меры по фильтрации контента:
-              </p>
-              <ul className="space-y-3 ml-4">
-                <li className="flex items-start gap-3">
-                  <span className="text-modrinth-green-light text-xl flex-shrink-0">✓</span>
-                  <div>
-                    <strong className="text-white">Блокировка проектов:</strong> Проекты, содержащие запрещенный контент, 
-                    автоматически исключаются из поиска и недоступны для просмотра.
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-modrinth-green-light text-xl flex-shrink-0">✓</span>
-                  <div>
-                    <strong className="text-white">Фильтрация изображений:</strong> Изображения с запрещенной символикой 
-                    автоматически заменяются на нейтральные заглушки.
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-modrinth-green-light text-xl flex-shrink-0">✓</span>
-                  <div>
-                    <strong className="text-white">Замена текста:</strong> Запрещенные термины автоматически заменяются 
-                    на нейтральные символы в описаниях и названиях.
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-modrinth-green-light text-xl flex-shrink-0">✓</span>
-                  <div>
-                    <strong className="text-white">Блокировка организаций:</strong> Проекты от определенных организаций 
-                    могут быть ограничены в доступе.
-                  </div>
-                </li>
-              </ul>
-
-              <div className="mt-8 bg-gradient-to-br from-purple-950/50 to-indigo-950/50 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-purple-300 mb-6 text-center">Статистика фильтрации контента</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <TiltCard className="bg-gradient-to-br from-red-900/40 to-red-800/20 rounded-xl p-6 border border-red-600/30 hover:border-red-500/60 transition-all duration-500 select-none cursor-default" shadowColor="rgba(239, 68, 68, 0.2)">
-                    <div className="text-center">
-                      <div className="text-5xl font-bold text-red-400 mb-2 animate-pulse-slow">
-                        {projectsCount}
-                      </div>
-                      <div className="text-lg font-semibold text-white mb-1">{pluralize(projectsCount, 'Проект', 'Проекта', 'Проектов')}</div>
-                      <div className="text-sm text-gray-400">Заблокировано</div>
-                      <div className="mt-3 pt-3 border-t border-red-800/50">
-                        <p className="text-xs text-red-300/80 leading-relaxed">
-                          Отдельные моды, плагины, шейдеры, ресурспаки, датапаки и модпаки, содержащие запрещённый контент. 
-                          Эти материалы скрыты из поиска и каталога, доступ к их страницам ограничен.
-                        </p>
-                      </div>
-                    </div>
-                  </TiltCard>
-
-                  <TiltCard className="bg-gradient-to-br from-orange-900/40 to-orange-800/20 rounded-xl p-6 border border-orange-600/30 hover:border-orange-500/60 transition-all duration-500 select-none cursor-default" shadowColor="rgba(249, 115, 22, 0.2)">
-                    <div className="text-center">
-                      <div className="text-5xl font-bold text-orange-400 mb-2 animate-pulse-slow" style={{ animationDelay: '0.2s' }}>
-                        {orgsCount}
-                      </div>
-                      <div className="text-lg font-semibold text-white mb-1">{pluralize(orgsCount, 'Организация', 'Организации', 'Организаций')}</div>
-                      <div className="text-sm text-gray-400">Заблокировано</div>
-                      <div className="mt-3 pt-3 border-t border-orange-800/50">
-                        <p className="text-xs text-orange-300/80 leading-relaxed">
-                          Разработчики и команды, все проекты которых полностью скрыты. 
-                          Их моды, ресурспаки, шейдеры и другие материалы не отображаются на сайте и учитываются отдельно от индивидуально заблокированных проектов.
-                        </p>
-                      </div>
-                    </div>
-                  </TiltCard>
-
-                  <TiltCard className="bg-gradient-to-br from-yellow-900/40 to-yellow-800/20 rounded-xl p-6 border border-yellow-600/30 hover:border-yellow-500/60 transition-all duration-500 select-none cursor-default" shadowColor="rgba(234, 179, 8, 0.2)">
-                    <div className="text-center">
-                      <div className="text-5xl font-bold text-yellow-400 mb-2 animate-pulse-slow" style={{ animationDelay: '0.4s' }}>
-                        {mediaCount}
-                      </div>
-                      <div className="text-lg font-semibold text-white mb-1">{pluralize(mediaCount, 'Медиафайл', 'Медиафайла', 'Медиафайлов')}</div>
-                      <div className="text-sm text-gray-400">Заблокировано</div>
-                      <div className="mt-3 pt-3 border-t border-yellow-800/50">
-                        <p className="text-xs text-yellow-300/80 leading-relaxed">
-                          Изображения с запрещённой символикой: аватары авторов, иконки проектов, скриншоты в галереях и картинки в описаниях. 
-                          Заблокированные медиафайлы заменяются на нейтральные заглушки.
-                        </p>
-                      </div>
-                    </div>
-                  </TiltCard>
-                </div>
-              </div>
-
-              <div className="bg-purple-950/30 border border-purple-700/30 rounded-lg p-4 mt-4">
-                <p className="text-sm text-purple-200">
-                  Все фильтры работают автоматически на стороне нашего сервера. Мы регулярно обновляем списки 
-                  блокировок в соответствии с требованиями законодательства.
-                </p>
-              </div>
-
-              <div className="mt-6 bg-gradient-to-br from-purple-900/20 via-indigo-900/20 to-purple-900/20 rounded-2xl p-4 md:p-5">
-                <div className="flex flex-col md:flex-row items-center gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="p-3 bg-purple-500/20 rounded-full border-2 border-purple-400/40">
-                      <svg className="w-6 h-6 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                  </div>
-                  
-                  <div className="flex-1 text-center md:text-left">
-                    <h3 className="text-lg font-bold text-white mb-2">Связь с администрацией</h3>
-                    <p className="text-gray-300 text-sm leading-relaxed mb-3">
-                      Данный email предназначен <span className="font-semibold text-white">исключительно для официальных запросов</span> от государственных органов (РКН, прокуратура, суды и другие уполномоченные структуры) по вопросам блокировок и фильтрации контента.
-                    </p>
-                    <p className="text-gray-400 text-xs leading-relaxed mb-3 italic">
-                      Пожалуйста, не используйте этот адрес для обращений авторов контента, коммерческих предложений, рекламных запросов или других неофициальных целей. Такие обращения не будут рассмотрены.
-                    </p>
-                    <div className="flex justify-center md:justify-start">
-                      <EmailCopyButton email="black-minecraft@proton.me" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
           <section className="p-8 md:p-12">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -476,5 +332,3 @@ export default function AboutPage() {
     </div>
   )
 }
-
-
