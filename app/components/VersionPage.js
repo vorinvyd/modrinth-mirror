@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { formatDownloads, formatDate, formatFileSize, groupVersionsByMajor } from '@/lib/modrinth'
+import { formatDownloads, formatDate, formatFileSize, groupVersionsByMajor, resolveModrinthProjectAccent } from '@/lib/modrinth'
 import { filterVersionChangelog, filterAvatar } from '@/lib/contentFilter'
 import { CATEGORIES } from '@/lib/categories'
 import { RESOURCEPACK_CATEGORIES } from '@/lib/resourcepackCategories'
@@ -194,8 +194,9 @@ function formatVersionsCompact(versions) {
 }
 
 class FilesList {
-  constructor(files) {
+  constructor(files, projectAccent) {
     this.files = files
+    this.projectAccent = projectAccent
   }
 
   render() {
@@ -204,7 +205,7 @@ class FilesList {
         <h2 className="text-xl font-bold mb-3">Файлы</h2>
         <div className="space-y-2">
           {this.files.map(file => (
-            <FileItem key={file.hashes.sha1} file={file} />
+            <FileItem key={file.hashes.sha1} file={file} projectAccent={this.projectAccent} />
           ))}
         </div>
       </div>
@@ -212,20 +213,20 @@ class FilesList {
   }
 }
 
-function FileItem({ file }) {
+function FileItem({ file, projectAccent }) {
   const isPrimary = file.primary
-  
-  return (
-    <div 
-      className={`flex items-center justify-between gap-3 p-2 transition rounded-xl ${
-        isPrimary 
-          ? 'bg-[rgba(27,217,106,.25)] hover:bg-[rgba(27,217,106,.3)]' 
+  const useAccent = Boolean(isPrimary && projectAccent)
+  const dl = typeof file.url === 'string' && file.url.trim() ? file.url.trim() : null
+
+  const rowChrome = `${
+        isPrimary
+          ? 'bg-[rgba(27,217,106,.25)] hover:bg-[rgba(27,217,106,.3)]'
           : 'hover:bg-[var(--bg-hover)]'
-      }`}
-      style={!isPrimary ? { 
-        backgroundColor: 'var(--bg-tertiary)'
-      } : {}}
-    >
+      }`
+  const rowStyleInactive = !isPrimary ? { backgroundColor: 'var(--bg-tertiary)' } : {}
+
+  const inner = (
+    <>
       <div className="flex items-center gap-3 flex-1 min-w-0">
         <svg className="w-5 h-5 flex-shrink-0 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5zM14 2v6h6" />
@@ -242,20 +243,43 @@ function FileItem({ file }) {
           )}
         </div>
       </div>
-      <a
-        href={file.url}
-        download
-        className={`flex-shrink-0 inline-flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition ${
+      <span
+        className={`pointer-events-none flex-shrink-0 inline-flex items-center gap-2 px-3 py-2 rounded-lg font-semibold ${
           isPrimary
-            ? 'bg-modrinth-green hover:bg-modrinth-green-light text-black'
-            : 'bg-modrinth-dark hover:bg-[var(--bg-hover-alt)] text-gray-400'
+            ? useAccent
+              ? ''
+              : 'bg-modrinth-green text-black'
+            : 'bg-modrinth-dark text-gray-400'
         }`}
+        style={
+          useAccent
+            ? {
+                backgroundColor: projectAccent.accentHex,
+                color: projectAccent.activeFgHex,
+              }
+            : undefined
+        }
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
         </svg>
         <span className="text-sm">Скачать</span>
-      </a>
+      </span>
+    </>
+  )
+
+  return (
+    <div
+      className={`rounded-xl p-2 transition ${rowChrome}`}
+      style={rowStyleInactive}
+    >
+      {dl ? (
+        <a href={dl} download className="flex items-center justify-between gap-3 text-inherit no-underline hover:no-underline">
+          {inner}
+        </a>
+      ) : (
+        <div className="flex items-center justify-between gap-3">{inner}</div>
+      )}
     </div>
   )
 }
@@ -265,13 +289,14 @@ export default function VersionPage({ project, version, author, contentType, plu
   const primaryFile = pageData.getPrimaryFile()
   const versionType = pageData.getVersionTypeInfo()
   const metadata = new VersionMetadata(version, author)
-  const filesList = new FilesList(version.files)
+  const projectAccent = resolveModrinthProjectAccent(project.color)
+  const filesList = new FilesList(version.files, projectAccent)
 
   return (
     <div className="max-w-7xl mx-auto">
       <ResourceHeader resource={project} contentType={contentType} versions={versions} />
       
-      <ContentNavigation slug={project.slug} contentType={singularName} versionsCount={versions.length || 0} galleryCount={galleryCount || 0} />
+      <ContentNavigation slug={project.slug} contentType={singularName} versionsCount={versions.length || 0} galleryCount={galleryCount || 0} projectColor={project.color} />
 
       <div className="bg-modrinth-dark border border-gray-800 rounded-lg p-4 mb-6">
         <div className="flex items-center gap-2 text-sm text-gray-400 mb-2">

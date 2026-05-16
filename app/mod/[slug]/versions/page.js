@@ -122,11 +122,11 @@ export default async function ModVersionsPage({ params, searchParams }) {
       <IconPreload iconUrl={mod.icon_url} />
       <ResourceHeader resource={mod} contentType="mod" versions={versions} />
       
-      <ContentNavigation slug={slug} contentType="mod" versionsCount={versions.length} galleryCount={mod.gallery?.length || 0} />
+      <ContentNavigation slug={slug} contentType="mod" versionsCount={versions.length} galleryCount={mod.gallery?.length || 0} projectColor={mod.color} />
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
         <div className="min-w-0">
-          <VersionsList versions={versions} contentType="mod" slug={slug} initialLoader={initialLoader} />
+          <VersionsList versions={versions} contentType="mod" slug={slug} initialLoader={initialLoader} projectColor={mod.color} />
         </div>
         
         <div className="lg:sticky lg:top-4 lg:self-start">

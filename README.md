@@ -6,6 +6,16 @@
 
 **Сайт:** https://modrinth.black/
 
+## For rights holders
+
+> No drama — your work has **not been stolen**. We are only a small **proxy** in front of a great platform.
+>
+> We simply can’t build the same kind of payment system Modrinth has — royalties for views and downloads require infrastructure way beyond what we can realistically run. And to be clear: we make absolutely nothing from this site. No money from traffic, no money from downloads — we actually pay for the servers ourselves just to keep it alive. So please try to understand us too — we love Minecraft just as much as you do.
+>
+> Some authors assume we — the people behind this project — **oppose** the content we’re sometimes **forced** to filter. That is **absolutely not** the case: we’re **not against** that work. Restrictions exist only because we’re **obliged** to apply them so **modrinth.com** stays reachable here, **not** because we dislike you or your project.
+>
+> So extend a bit of goodwill and **please don’t demand we remove your project** from our pages over that alone.
+
 ## Быстрые ссылки
 
 - **[Моды](https://modrinth.black/discover/mods)** - модификации для Minecraft
@@ -23,7 +33,7 @@ Modrinth - один из лучших сайтов для модов Minecraft, 
 
 **Как работает:**
 - Вы открываете сайт и ищете мод
-- Мы запрашиваем инфу через Modrinth API v2
+- Мы запрашиваем инфу через Modrinth API v3
 - Показываем описание, версии, скриншоты
 - Файлы качаются напрямую с cdn.modrinth.com
 - Ничего не храним у себя, только кэшируем метаданные (от 3 часов до 7 дней в зависимости от типа данных)
@@ -43,7 +53,8 @@ Modrinth - один из лучших сайтов для модов Minecraft, 
 - Автоматическая фильтрация запрещённого контента (РКН blacklist)
 - Агрессивное кэширование - не нагружаем API Modrinth лишний раз
 
-## Деплой на Vercel
+## Деплой на Vercel 
+(хотя в рф та же фигня, и он не доступен)
 
 ### Через GitHub (рекомендуется)
 
@@ -110,7 +121,7 @@ npm run dev
 
 - **Next.js 14** (App Router) - React фреймворк с SSR/SSG
 - **Tailwind CSS** - утилитарный CSS фреймворк
-- **Modrinth API v2** - источник данных
+- **Modrinth API v3** - источник данных
 - **React Markdown** - рендеринг описаний
 
 Подробнее о технологиях и инфраструктуре можно узнать на [https://modrinth.black/bmadnco](https://modrinth.black/bmadnco)
@@ -120,7 +131,7 @@ npm run dev
 
 ### Фильтрация контента
 
-Сайт блокирует контент по требованиям Роскомнадзора через OOP систему блокировок.
+Сайт блокирует контент через систему блокировок.
 
 **Структура блокировок:**
 
@@ -176,4 +187,5 @@ API запросы кешируются через встроенную сист
 - Пользователи: 43200 секунд (12 часов)
 - Версии Minecraft: 86400 секунд (24 часа)
 - Категории: 604800 секунд (7 дней)
+- Подсчёт творений на главной: 86400 секунд (24 часа)
 

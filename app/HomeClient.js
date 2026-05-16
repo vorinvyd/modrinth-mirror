@@ -1,8 +1,25 @@
 'use client'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useMinecraftVersions } from './hooks/useMinecraftVersions'
+import { buildHomeModsVersionCopy } from '@/lib/minecraftVersionRange'
 
-export default function HomeClient() {
+function thousandsRu(n) {
+  return new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 }).format(n)
+}
+
+const CREATIONS_TOTAL_FALLBACK = 125000
+
+export default function HomeClient({ catalogCreationsTotal }) {
+  const creationsShown =
+    typeof catalogCreationsTotal === 'number' && catalogCreationsTotal > 0
+      ? catalogCreationsTotal
+      : CREATIONS_TOTAL_FALLBACK
+  const { release, full } = useMinecraftVersions()
+  const { stableLine, snapshotLine } = useMemo(
+    () => buildHomeModsVersionCopy(release, full),
+    [release, full]
+  )
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [isClient, setIsClient] = useState(false)
   const words = ['модов', 'плагинов', 'шейдеров', 'ресурспаков', 'датапаков']
@@ -69,7 +86,7 @@ export default function HomeClient() {
           <div className="text-center mb-12">
           
             <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
-              Откройте для себя более 75 000 творений
+              Откройте для себя {thousandsRu(creationsShown)} творений
             </h2>
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-pink-100 to-blue-100 dark:from-pink-500/20 dark:to-blue-500/20 text-pink-700 dark:text-pink-300 px-6 py-3 rounded-full text-base font-bold mb-4 border border-pink-200/50 dark:border-transparent" style={{backgroundOrigin: 'border-box', backgroundClip: 'border-box'}}>
               <span>Для игроков Minecraft</span>
@@ -109,7 +126,9 @@ export default function HomeClient() {
               </div>
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
-                  <div className="text-3xl font-black text-modrinth-green mb-2">75K+</div>
+                  <div className="text-3xl font-black text-modrinth-green mb-2">
+                    {thousandsRu(creationsShown)}
+                  </div>
                   <div className="text-gray-300 text-sm">Проектов</div>
                 </div>
                 <div className="text-center">
@@ -217,13 +236,16 @@ export default function HomeClient() {
                 ModrinthProxy поддерживает все популярные загрузчики модов и версии Minecraft.
               </p>
               <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-modrinth-green rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 bg-modrinth-green rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
                     </svg>
                   </div>
-                  <span className="text-gray-300">Все версии от 1.7.10 до 1.21+</span>
+                  <div className="flex flex-col gap-1 text-gray-300">
+                    <span>{stableLine}</span>
+                    {snapshotLine ? <span className="text-gray-400 text-sm">{snapshotLine}</span> : null}
+                  </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-modrinth-green rounded-full flex items-center justify-center flex-shrink-0">

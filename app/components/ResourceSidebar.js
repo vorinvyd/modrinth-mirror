@@ -2,14 +2,15 @@
 
 import Link from 'next/link'
 import { LOADERS } from '@/lib/loaders'
-import { groupVersionsByMajor } from '@/lib/modrinth'
+import { compressSidebarGameVersions } from '@/lib/minecraftVersionSort'
+import CompressedGameVersionsChips from './CompressedGameVersionsChips'
 
 export default function ResourceSidebar({ resource, teamMembers = [], contentType = null }) {
   const gameVersions = resource.game_versions || []
   const loaders = (resource.loaders || []).filter(l => l !== 'minecraft')
-  
-  const versionRanges = groupVersionsByMajor(gameVersions)
-  
+  const browseRoute = resolveContentTypeRoute(contentType, resource.project_type)
+  const gameVersionRanges = compressSidebarGameVersions(gameVersions)
+
   const environment = getEnvironment(resource.client_side, resource.server_side)
 
   return (
@@ -27,13 +28,12 @@ export default function ResourceSidebar({ resource, teamMembers = [], contentTyp
             {gameVersions.length > 0 && (
               <div>
                 <h4 className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-2">Minecraft: Java Edition</h4>
-                <div className="flex flex-wrap gap-1">
-                  {versionRanges.map((version, idx) => (
-                    <span key={idx} className="text-xs px-2 py-1 font-semibold bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors">
-                      {version}
-                    </span>
-                  ))}
-                </div>
+                <CompressedGameVersionsChips
+                  browseRoute={browseRoute}
+                  rawVersions={gameVersions}
+                  ranges={gameVersionRanges}
+                  maxVisible={12}
+                />
               </div>
             )}
 
@@ -45,7 +45,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], contentTyp
                     const loader = LOADERS.find(l => l.id === loaderId)
                     if (!loader) return null
                     
-                    const contentTypeRoute = resolveContentTypeRoute(contentType, resource.project_type)
+                    const contentTypeRoute = browseRoute
                     const filterUrl = `/${contentTypeRoute}?g=categories:${loaderId}`
                     
                     return (
@@ -286,14 +286,14 @@ function resolveContentTypeRoute(contentTypeProp, projectType) {
 
 function getEnvironment(clientSide, serverSide) {
   if (!clientSide && !serverSide) return null
-  
+
   const client = clientSide === 'required' || clientSide === 'optional'
   const server = serverSide === 'required' || serverSide === 'optional'
-  
+
   if (client && server) return 'Клиент и сервер'
   if (client) return 'Клиент'
   if (server) return 'Сервер'
-  
+
   return null
 }
 

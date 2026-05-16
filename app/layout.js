@@ -10,6 +10,8 @@ import TopNav from "./components/TopNav"
 import Footer from './components/Footer'
 import Logo from './components/Logo'
 import VersionsPreloader from './components/VersionsPreloader'
+import AppTooltipProvider from './components/AppTooltipProvider'
+import ExtensionBanner from './components/ExtensionBanner'
 
 const nunito = Nunito({
   subsets: ['latin', 'cyrillic'],
@@ -42,10 +44,22 @@ export const viewport = {
   themeColor: '#1bd96a'
 }
 
+const POSTERITY_COMMENT_BODY = ` _    _ 
+    (o)--(o)      
+   /\.______\\.       
+   \\________/     
+  ./        \\.    
+ ( .        , )
+  \\ \\_\\\\ //_/ /
+   ~~  ~~  ~~`
+
 export default function RootLayout({ children }) {
   return (
     <html lang="ru" className={`scroll-smooth ${nunito.variable}`} suppressHydrationWarning>
       <head>
+        <Script id="__posterity" strategy="beforeInteractive">
+          {`(function(){var h=document.documentElement,t=${JSON.stringify(POSTERITY_COMMENT_BODY)},c=document.createComment(t),f=h.firstChild;if(f)h.insertBefore(c,f);else h.appendChild(c);var s=document.currentScript||document.getElementById("__posterity");if(s&&s.parentNode)s.parentNode.removeChild(s);})();`}
+        </Script>
         <link rel="apple-touch-icon" href="/icon.png?v=2" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -58,6 +72,18 @@ export default function RootLayout({ children }) {
           })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105182235', 'ym');
           ym(105182235, 'init', {ssr:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});`}
         </Script>
+        <Script id="console-devtools-hint" strategy="afterInteractive">
+          {`(function(){
+  function warn(){
+    console.log("%c🐉","padding:50px 0px;font-size:300px;color:transparent;text-shadow:0 0 0 #1bd070");
+    console.log("%cСтоп-стоп-стоп!", "color: #2ca267; font-size: 70px; font-weight: bold;");
+    console.log("%cНе вставляйте в это окошко ничего. Это очень опасно!", "color: #d6d6d6; font-size: 21px;");
+    console.log("%cЕсли вас кто-то попросил сюда вставить что-то, сообщите незамедлительно об этом администрации сайта! ", "color: red; font-size: 21px;");
+  }
+  if (document.readyState === "complete") warn();
+  else window.addEventListener("load", warn);
+})();`}
+        </Script>
       </head>
       <body className={`${nunito.className} min-h-screen m-0`}>
         <ThemeProvider
@@ -67,10 +93,11 @@ export default function RootLayout({ children }) {
           disableTransitionOnChange
           storageKey="modrinth-theme"
         >
+          <AppTooltipProvider>
           <noscript dangerouslySetInnerHTML={{ __html: '<div><img src="https://mc.yandex.ru/watch/105182235" style="position:absolute; left:-9999px;" alt="" /></div>' }} />
           <VersionsPreloader />
           <TopNav />
-          <nav className="bg-modrinth-darker shadow-lg hidden lg:block">
+          <nav className="relative z-10 hidden lg:block">
             <div className="container mx-auto px-4 py-3 md:py-4">
               <div className="flex items-center gap-4 md:gap-6">
                 <Suspense fallback={<div className="w-9 h-9 flex-shrink-0"></div>}>
@@ -80,7 +107,7 @@ export default function RootLayout({ children }) {
               </div>
             </div>
           </nav>
-          <div className="bg-modrinth-darker flex justify-center pt-2 pb-2 -mt-1 rounded-b-2xl">
+          <div className="relative z-10 flex justify-center pb-2 -mt-1 rounded-b-2xl pt-[5px]">
             <div className="disclaimer-badge">
               <svg className="w-3 h-3 flex-shrink-0 relative z-10" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
@@ -94,6 +121,8 @@ export default function RootLayout({ children }) {
           </main>
           <MobileNav />
           <Footer />
+          <ExtensionBanner />
+          </AppTooltipProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -58,11 +58,11 @@ export default async function ModpackVersionsPage({ params, searchParams }) {
       <IconPreload iconUrl={modpack.icon_url} />
       <ResourceHeader resource={modpack} contentType="modpack" versions={versions} />
       
-      <ContentNavigation slug={slug} contentType="modpack" versionsCount={versions.length} galleryCount={modpack.gallery?.length || 0} />
+      <ContentNavigation slug={slug} contentType="modpack" versionsCount={versions.length} galleryCount={modpack.gallery?.length || 0} projectColor={modpack.color} />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
         <div className="lg:col-span-2">
-          <VersionsList versions={versions} contentType="modpack" slug={slug} initialLoader={initialLoader} />
+          <VersionsList versions={versions} contentType="modpack" slug={slug} initialLoader={initialLoader} projectColor={modpack.color} />
         </div>
 
         <div className="lg:sticky lg:top-4 lg:self-start">

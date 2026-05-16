@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation'
 import { getMod, getModVersions, getUser } from '@/lib/modrinth'
+import { filterModContent } from '@/lib/contentFilter'
 import VersionPage from '@/app/components/VersionPage'
 
 export async function generateMetadata({ params }) {
   try {
-    const plugin = await getMod(params.slug)
+    const plugin = filterModContent(await getMod(params.slug))
     const versions = await getModVersions(params.slug)
     const version = versions.find(v => v.version_number === decodeURIComponent(params.versionNumber) || v.id === decodeURIComponent(params.versionNumber))
     
@@ -64,6 +65,8 @@ export default async function PluginVersionPage({ params }) {
   } catch (error) {
     notFound()
   }
+
+  plugin = filterModContent(plugin)
 
   return (
     <VersionPage 

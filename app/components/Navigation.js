@@ -108,9 +108,8 @@ export default function Navigation() {
       <Link 
         ref={el => linksRef.current['/discover/mods'] = el}
         href="/discover/mods" 
-        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10">
-        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-modrinth-green/20 to-modrinth-green-light/20 dark:from-modrinth-green/20 dark:to-modrinth-green-light/20 from-pink-200/40 to-pink-100/40 dark:from-modrinth-green/20 dark:to-modrinth-green-light/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <span className={`relative text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/discover/mods') || isActive('/mods') ? 'text-modrinth-green' : 'text-gray-700 dark:text-gray-300 group-hover:text-pink-700 dark:group-hover:text-modrinth-green'}`}>
+        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-[rgba(var(--color-green-rgb),0.08)] dark:hover:bg-[rgba(var(--color-green-rgb),0.1)] hover:bg-[rgba(var(--color-green-rgb),0.18)] dark:hover:bg-[rgba(var(--color-green-rgb),0.1)]">
+        <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/discover/mods') || isActive('/mods') ? 'text-modrinth-green' : 'text-gray-700 dark:text-gray-300 group-hover:text-[color:var(--color-green-hover)] dark:group-hover:text-modrinth-green-light'}`}>
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16"></path>
             <path d="M3.29 7 12 12l8.71-5M12 22V12"></path>
@@ -189,9 +188,8 @@ export default function Navigation() {
       <Link 
         ref={el => linksRef.current['/app'] = el}
         href="/app" 
-        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10">
-        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-modrinth-green/10 to-modrinth-green-light/10 dark:from-modrinth-green/10 dark:to-modrinth-green-light/10 from-pink-200/40 to-pink-100/40 dark:from-modrinth-green/10 dark:to-modrinth-green-light/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <span className={`relative text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/app') ? 'text-emerald-700 dark:text-emerald-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-emerald-700 dark:group-hover:text-emerald-400'}`}>
+        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-emerald-500/10 dark:hover:bg-emerald-950/30 hover:bg-emerald-200/30 dark:hover:bg-emerald-950/30">
+        <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/app') ? 'text-emerald-700 dark:text-emerald-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-emerald-700 dark:group-hover:text-emerald-400'}`}>
           <svg className="hidden sm:inline w-4 h-4" fill="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
             <g>
               <g>

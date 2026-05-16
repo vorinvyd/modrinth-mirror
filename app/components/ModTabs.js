@@ -3,9 +3,13 @@
 import { useState, useMemo, useEffect } from 'react'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { formatDate } from '@/lib/modrinth'
+import { formatDate, resolveModrinthProjectAccent } from '@/lib/modrinth'
+import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
 import { filterVersionChangelog } from '@/lib/contentFilter'
+import { versionChannelLetterRingClass } from '@/lib/versionChannelStyles'
 import { LOADERS } from '@/lib/loaders'
+import DownloadsCompactTooltip from './DownloadsCompactTooltip'
+import { ChangelogTimelineRow } from './ChangelogVersionEntries'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
@@ -50,12 +54,7 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
     versions.forEach(v => {
       v.game_versions.forEach(gv => versionsSet.add(gv))
     })
-    const sorted = Array.from(versionsSet).sort((a, b) => {
-    
-      const aNum = parseFloat(a.match(/[\d.]+/)?.[0] || '0')
-      const bNum = parseFloat(b.match(/[\d.]+/)?.[0] || '0')
-      return bNum - aNum
-    })
+    const sorted = Array.from(versionsSet).sort(compareMinecraftVersionsDesc)
     return sorted
   }, [versions])
 
@@ -104,6 +103,13 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
       return true
     })
   }, [versions, searchQuery, selectedMcVersion, selectedLoader, selectedChannel, showOnlyReleases, releaseVersions])
+
+  const pathMatch = pathname?.match(
+    /^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)/,
+  )
+  const changelogContentType = pathMatch?.[1] ?? 'mod'
+  const changelogSlug = pathMatch?.[2] ?? mod.slug
+  const changelogResourceBarHex = resolveModrinthProjectAccent(mod.color)?.accentHex
 
   return (
     <div className="bg-modrinth-dark border border-gray-800 rounded-lg overflow-hidden">
@@ -154,35 +160,59 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
         )}
 
         {activeTab === 'changelog' && (
-          <div>
-            {versions.slice(0, 5).map((version) => (
-              <div key={version.id} className="mb-6 pb-6 border-b border-gray-800 last:border-0">
-                <div className="flex items-center gap-3 mb-2">
-                  <h3 className="text-lg font-semibold">{version.name}</h3>
-                  <span className={`text-xs px-2 py-0.5 rounded ${
-                    version.version_type === 'release' ? 'bg-green-900 text-green-300' :
-                    version.version_type === 'beta' ? 'bg-yellow-900 text-yellow-300' :
-                    'bg-red-900 text-red-300'
-                  }`}>
-                    {version.version_type}
-                  </span>
-                  <span className="text-sm text-gray-500">{formatDate(version.date_published)}</span>
-                </div>
-                <div className="text-gray-300 text-sm prose prose-invert prose-sm max-w-none">
-                  {version.changelog ? (
-                    <ReactMarkdown 
-                      remarkPlugins={[remarkGfm]}
-                      rehypePlugins={[rehypeRaw]}
-                    >
-                      {filterVersionChangelog(version.changelog)}
-                    </ReactMarkdown>
-                  ) : (
-                    <p className="text-gray-500 italic">Нет описания изменений</p>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
+          <ul className="m-0 list-none p-0">
+            {versions.slice(0, 5).map((version, index) => {
+              const vid = version.id ?? version.version_number
+              const vHref =
+                vid &&
+                `/${changelogContentType}/${changelogSlug}/version/${encodeURIComponent(vid)}`
+              const titleText = version.name || version.version_number
+              const isLast = index === Math.min(versions.length, 5) - 1
+              return (
+                <ChangelogTimelineRow
+                  key={version.id}
+                  channel={version.version_type}
+                  isLast={isLast}
+                  resourceBarHex={changelogResourceBarHex}
+                  header={
+                    <div className="flex flex-wrap items-center gap-3">
+                      <h3 className="text-lg font-semibold text-white">
+                        {vHref ? (
+                          <Link
+                            href={vHref}
+                            className="transition-colors hover:text-modrinth-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-modrinth-green rounded-sm"
+                          >
+                            {titleText}
+                          </Link>
+                        ) : (
+                          titleText
+                        )}
+                      </h3>
+                      <span
+                        className={`text-xs px-2 py-0.5 rounded ${versionChannelLetterRingClass(version.version_type)}`}
+                      >
+                        {version.version_type}
+                      </span>
+                      <span className="text-sm text-gray-500">{formatDate(version.date_published)}</span>
+                    </div>
+                  }
+                >
+                  <div className="text-gray-300 text-sm prose prose-invert prose-sm max-w-none">
+                    {version.changelog ? (
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        rehypePlugins={[rehypeRaw]}
+                      >
+                        {filterVersionChangelog(version.changelog)}
+                      </ReactMarkdown>
+                    ) : (
+                      <p className="text-gray-500 italic">Нет описания изменений</p>
+                    )}
+                  </div>
+                </ChangelogTimelineRow>
+              )
+            })}
+          </ul>
         )}
 
         {activeTab === 'versions' && (
@@ -246,8 +276,8 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
                     onClick={() => setSelectedChannel('release')}
                     className={`px-3 py-1 rounded text-sm transition ${
                       selectedChannel === 'release'
-                        ? 'bg-green-600 text-white font-semibold'
-                        : 'text-gray-400 hover:text-white'
+                        ? 'bg-version-release-bg text-version-release-fg font-semibold'
+                        : 'text-version-release-fg/90 hover:bg-version-release-bg/30'
                     }`}
                   >
                     Release
@@ -256,8 +286,8 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
                     onClick={() => setSelectedChannel('beta')}
                     className={`px-3 py-1 rounded text-sm transition ${
                       selectedChannel === 'beta'
-                        ? 'bg-yellow-600 text-white font-semibold'
-                        : 'text-gray-400 hover:text-white'
+                        ? 'bg-version-beta-bg text-version-beta-fg font-semibold'
+                        : 'text-version-beta-fg/90 hover:bg-version-beta-bg/30'
                     }`}
                   >
                     Beta
@@ -266,8 +296,8 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
                     onClick={() => setSelectedChannel('alpha')}
                     className={`px-3 py-1 rounded text-sm transition ${
                       selectedChannel === 'alpha'
-                        ? 'bg-red-600 text-white font-semibold'
-                        : 'text-gray-400 hover:text-white'
+                        ? 'bg-red-900 text-red-200 font-semibold'
+                        : 'text-red-400/90 hover:bg-red-900/40'
                     }`}
                   >
                     Alpha
@@ -314,28 +344,34 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
               <div>
                 {filteredVersions.map((version, index) => {
                   const primaryFile = version.files.find(f => f.primary) || version.files[0]
-                  const versionTypeColor = version.version_type === 'release' ? 'bg-green-900 text-green-300' :
-                                          version.version_type === 'beta' ? 'bg-yellow-900 text-yellow-300' :
-                                          'bg-red-900 text-red-300'
+                  const versionTypeColor = versionChannelLetterRingClass(version.version_type)
                   
+                  const versionHref =
+                    version.id &&
+                    `${pathname}/version/${encodeURIComponent(version.id)}`
+
                   return (
                     <div key={version.id}>
                       <div className="group relative">
-                        <Link 
-                          href={`${pathname}/version/${encodeURIComponent(version.version_number)}`}
-                          className="absolute before:absolute before:inset-0 before:transition-all before:content-[''] hover:before:backdrop-brightness-110"
-                          style={{ inset: 'calc(-1rem - 2px) -2rem' }}
-                        />
-                      
                       <div className="flex items-center gap-3 px-3 py-2">
-                        <div className={`relative z-10 w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 ${versionTypeColor}`}>
+                        <div className={`relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[18px] font-bold ${versionTypeColor}`}>
                           {version.version_type[0].toUpperCase()}
                         </div>
 
-                        <div className="relative z-10 pointer-events-none flex-1 min-w-0">
-                          <div className="font-bold text-sm group-hover:underline">{version.version_number || version.name}</div>
-                          <div className="text-xs font-medium text-gray-400">{version.name}</div>
-                        </div>
+                        {versionHref ? (
+                          <Link
+                            href={versionHref}
+                            className="relative z-10 min-w-0 flex-1 group-hover:underline"
+                          >
+                            <div className="font-bold text-sm">{version.version_number || version.name}</div>
+                            <div className="text-xs font-medium text-gray-400">{version.name}</div>
+                          </Link>
+                        ) : (
+                          <div className="relative z-10 min-w-0 flex-1">
+                            <div className="font-bold text-sm">{version.version_number || version.name}</div>
+                            <div className="text-xs font-medium text-gray-400">{version.name}</div>
+                          </div>
+                        )}
 
                         <div className="relative z-10 flex flex-wrap gap-1.5 items-center">
                           {version.game_versions.slice(0, 1).map((v) => (
@@ -389,10 +425,9 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                             </svg>
-                            {version.downloads >= 1000 
-                              ? `${(version.downloads / 1000).toFixed(1)}k`
-                              : version.downloads
-                            }
+                            <span className="pointer-events-auto">
+                              <DownloadsCompactTooltip downloads={version.downloads} />
+                            </span>
                           </div>
                         </div>
 

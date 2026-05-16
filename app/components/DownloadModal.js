@@ -2,9 +2,16 @@
 
 import { useState, useMemo, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
+import { resolveModrinthProjectAccent } from '@/lib/modrinth'
+import StyledTooltip from './StyledTooltip'
 
 export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
   const router = useRouter()
+  const accent = useMemo(() => resolveModrinthProjectAccent(mod?.color), [mod?.color])
+  const downloadBtnAccentStyle = accent
+    ? { backgroundColor: accent.accentHex, color: accent.activeFgHex }
+    : undefined
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
@@ -30,13 +37,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
     versions.forEach(version => {
       version.game_versions.forEach(v => versionsSet.add(v))
     })
-    const allVersions = Array.from(versionsSet).sort((a, b) => {
-      const getNum = (v) => {
-        const parts = v.split('.').map(n => parseInt(n) || 0)
-        return parts[0] * 1000000 + (parts[1] || 0) * 1000 + (parts[2] || 0)
-      }
-      return getNum(b) - getNum(a)
-    })
+    const allVersions = Array.from(versionsSet).sort(compareMinecraftVersionsDesc)
     
     if (showAllVersions) {
       return allVersions
@@ -95,18 +96,28 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
     return names[loader] || loader
   }
 
+  const downloadTooltipTitle =
+    typeof mod?.title === 'string' ? mod.title.trim() : ''
+  const downloadTooltip = downloadTooltipTitle
+    ? `Скачать ${downloadTooltipTitle}`
+    : 'Скачать'
+
   return (
     <>
-      <button
-        onClick={() => setIsOpen(true)}
-        data-download-modal
-        className="modrinth-download-button w-full lg:w-auto text-base"
-      >
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-        </svg>
-        <span>Скачать</span>
-      </button>
+      <StyledTooltip label={downloadTooltip}>
+        <button
+          type="button"
+          onClick={() => setIsOpen(true)}
+          data-download-modal
+          className={`modrinth-download-button w-full lg:w-auto text-base${accent ? ' hover:!brightness-[1.08]' : ''}`}
+          style={downloadBtnAccentStyle}
+        >
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          <span>Скачать</span>
+        </button>
+      </StyledTooltip>
 
       {isOpen && (
         <div 
@@ -267,8 +278,12 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
                   <a
                     href={matchingVersion.files[0].url}
                     download
-                    className="modrinth-download-button w-full animate-fade-in-up"
-                    style={{ animationDelay: '200ms' }}
+                    className={`modrinth-modal-download-button w-full animate-fade-in-up${accent ? ' hover:!brightness-[1.08]' : ''}`}
+                    style={
+                      accent
+                        ? { animationDelay: '200ms', ...downloadBtnAccentStyle }
+                        : { animationDelay: '200ms' }
+                    }
                   >
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
