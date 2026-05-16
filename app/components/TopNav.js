@@ -5,34 +5,10 @@ import ThemeSwitcher from './ThemeSwitcher'
 
 const EXTERNAL_LINKS = [
   {
-    href: 'https://client.modrinth.black',
-    tooltip: 'Скачать Minecraft клиент и сервер всех версий',
-    children: (
-      <>
-        Клиент<span className="top-nav-separator">/</span>Сервер
-      </>
-    ),
-  },
-  {
-    href: 'https://rp.modrinth.black',
-    tooltip: 'Перепаковка защищённых ресурспаков',
-    children: 'RP Перепак',
-  },
-  {
-    href: 'https://jar.modrinth.black',
-    tooltip: 'Перевод плагинов онлайн (InJarTranslator)',
-    children: 'Перевод Плагинов',
-  },
-  {
-    href: 'https://dm.modrinth.black',
-    tooltip: 'Редактор DeluxeMenu и AbstractMenus',
-    children: 'Редактор DeluxeMenu',
-  },
-  {
-    href: 'https://ping.modrinth.black',
-    tooltip: 'Пинг серверов (мб недоступен в РФ)',
-    children: 'Пинг Серверов',
-  },
+    href: 'https://momentariymodder.com',
+    tooltip: 'Официальный сайт Моддера, автора данного форка',
+    children: 'Сайт Моддера',
+  }
 ]
 
 const RAIL_MS = 520
