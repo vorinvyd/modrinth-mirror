@@ -117,14 +117,14 @@ export default function Logo() {
         src={`/icon.png?v=${ICON_VERSION}`}
         alt="Logo"
         draggable="false"
-        className={`w-8 h-8 md:w-9 md:h-9 object-contain drop-shadow-[0_0_8px_rgba(236,127,171,0.5)] transition-all duration-300 select-none pointer-events-none ${
+        className={`w-8 h-8 md:w-9 md:h-9 object-contain drop-shadow-[0_0_8px_rgba(27,217,106,0.5)] transition-all duration-300 select-none pointer-events-none ${
           isLoading 
-            ? 'animate-spin scale-110 drop-shadow-[0_0_12px_rgba(236,127,171,0.7)]' 
-            : 'group-hover:scale-110 group-hover:drop-shadow-[0_0_12px_rgba(236,127,171,0.7)]'
+            ? 'animate-spin scale-110 drop-shadow-[0_0_12px_rgba(27,217,106,0.7)]' 
+            : 'group-hover:scale-110 group-hover:drop-shadow-[0_0_12px_rgba(27,217,106,0.7)]'
         }`}
         style={isLoading ? { animationDuration: '0.8s' } : {}}
       />
-      <span className="text-lg md:text-xl font-bold bg-gradient-to-r from-modrinth-green to-modrinth-green-light bg-clip-text text-transparent hidden sm:block group-hover:from-modrinth-green-light group-hover:to-modrinth-green transition-all select-none">ModrinthProxy</span>
+      <span className="text-lg md:text-xl font-bold bg-gradient-to-r from-modrinth-green to-modrinth-green-light bg-clip-text text-transparent hidden sm:block group-hover:from-modrinth-green-light group-hover:to-modrinth-green transition-all select-none">Modrinth.MomentariyModder.com</span>
       <div className="hidden sm:block absolute top-full left-1/2 -translate-x-1/2 mt-[2px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 pointer-events-none z-50 select-none">
         <div className="relative select-none">
           <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-b-6 border-l-transparent border-r-transparent border-b-gray-800 select-none"></div>
