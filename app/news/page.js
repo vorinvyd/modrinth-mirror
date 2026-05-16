@@ -16,7 +16,7 @@ const CommitMessage = nextDynamic(() => import('../components/CommitMessage'), {
 async function getCommits() {
   try {
     const res = await fetch(
-      'https://api.github.com/repos/vorinvyd/modrinth-proxy/commits',
+      'https://api.github.com/repos/vorinvyd/modrinth-mirror/commits',
       {
         next: { revalidate: 1800 },
         headers: {
