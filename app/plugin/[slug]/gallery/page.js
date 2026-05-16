@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getMod, getModVersions } from '@/lib/modrinth'
-import { isProjectBlocked, isOrganizationBlocked, filterGalleryImages } from '@/lib/contentFilter'
+import { isProjectBlocked, isOrganizationBlocked, filterGalleryImages, filterModContent } from '@/lib/contentFilter'
 import ContentNavigation from '@/app/components/ContentNavigation'
 import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ResourceHeader from '@/app/components/ResourceHeader'
@@ -10,7 +10,7 @@ import IconPreload from '@/app/components/IconPreload'
 
 export async function generateMetadata({ params }) {
   try {
-    const plugin = await getMod(params.slug)
+    const plugin = filterModContent(await getMod(params.slug))
     const url = `https://modrinth.black/plugin/${params.slug}/gallery`
     return {
       title: `${plugin.title} - Галерея | ModrinthProxy`,
@@ -97,6 +97,8 @@ export default async function PluginGalleryPage({ params }) {
   } catch (error) {
     notFound()
   }
+
+  plugin = filterModContent(plugin)
 
   const gallery = plugin.gallery || []
   const filteredGallery = filterGalleryImages(gallery)

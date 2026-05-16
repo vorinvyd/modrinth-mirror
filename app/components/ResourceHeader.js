@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { formatDownloads, resolveModrinthProjectAccent } from '@/lib/modrinth'
+import { filterAvatar } from '@/lib/contentFilter'
 import { CATEGORIES } from '@/lib/categories'
 import { RESOURCEPACK_CATEGORIES } from '@/lib/resourcepackCategories'
 import { SHADER_STYLES, SHADER_FEATURES, SHADER_PERFORMANCE } from '@/lib/shaderCategories'
@@ -57,6 +58,8 @@ export default function ResourceHeader({ resource, contentType, versions = [] })
     (contentType === 'mod' || contentType === 'plugin') &&
     (downloads == null || downloads < MINEPLUGIN_PROMO_MAX_DOWNLOADS)
 
+  const iconUrl = resource.icon_url ? filterAvatar(resource.icon_url) : null
+
   return (
     <>
       <div className="mb-4 md:mb-6 flex items-center gap-2 text-sm flex-wrap">
@@ -73,9 +76,9 @@ export default function ResourceHeader({ resource, contentType, versions = [] })
       <div className="border-b pb-4 md:pb-6 mb-6 md:mb-8" style={{ borderBottomColor: 'var(--bg-tertiary)' }}>
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 lg:items-start">
           <div className="flex gap-3 md:gap-4 flex-1">
-            {resource.icon_url && (
+            {iconUrl && (
               <img
-                src={resource.icon_url}
+                src={iconUrl}
                 alt={resource.title}
                 className="w-16 h-16 md:w-20 md:h-20 rounded-lg object-cover flex-shrink-0"
               />

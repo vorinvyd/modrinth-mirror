@@ -1,9 +1,18 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 export default function GalleryModal({ image, onClose, onPrev, onNext, hasPrev, hasNext }) {
+  const [portalTarget, setPortalTarget] = useState(null)
+
   useEffect(() => {
+    setPortalTarget(document.body)
+  }, [])
+
+  useEffect(() => {
+    if (!image || !portalTarget) return
+
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') onClose()
       if (e.key === 'ArrowLeft' && hasPrev) onPrev()
@@ -17,23 +26,24 @@ export default function GalleryModal({ image, onClose, onPrev, onNext, hasPrev, 
       document.removeEventListener('keydown', handleKeyDown)
       document.body.style.overflow = 'unset'
     }
-  }, [onClose, onPrev, onNext, hasPrev, hasNext])
+  }, [image, portalTarget, onClose, onPrev, onNext, hasPrev, hasNext])
 
-  if (!image) return null
+  if (!image || !portalTarget) return null
 
-  return (
-    <div 
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[220] flex items-center justify-center bg-black/86 backdrop-blur-[2px]"
+      role="presentation"
       onClick={onClose}
     >
       <img
         src={image.raw_url}
         alt={image.title || 'Gallery image'}
-        className="max-h-[85vh] max-w-[90vw] w-auto h-auto object-contain rounded-lg"
+        className="relative z-[221] max-h-[85vh] max-w-[90vw] w-auto h-auto object-contain rounded-lg"
         onClick={(e) => e.stopPropagation()}
       />
 
-      <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 flex items-center gap-2 bg-black/40 backdrop-blur-sm rounded-full px-2 py-2 opacity-60 hover:opacity-100 transition-all duration-200">
+      <div className="fixed bottom-8 left-1/2 z-[222] flex -translate-x-1/2 transform items-center gap-2 rounded-full bg-black/40 px-2 py-2 opacity-60 backdrop-blur-sm transition-all duration-200 hover:opacity-100">
         
         <button
           onClick={onClose}
@@ -88,7 +98,8 @@ export default function GalleryModal({ image, onClose, onPrev, onNext, hasPrev, 
           </button>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }
 

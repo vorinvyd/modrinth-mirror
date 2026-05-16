@@ -346,24 +346,32 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
                   const primaryFile = version.files.find(f => f.primary) || version.files[0]
                   const versionTypeColor = versionChannelLetterRingClass(version.version_type)
                   
+                  const versionHref =
+                    version.id &&
+                    `${pathname}/version/${encodeURIComponent(version.id)}`
+
                   return (
                     <div key={version.id}>
                       <div className="group relative">
-                        <Link 
-                          href={`${pathname}/version/${encodeURIComponent(version.version_number)}`}
-                          className="absolute before:absolute before:inset-0 before:transition-all before:content-[''] hover:before:backdrop-brightness-110"
-                          style={{ inset: 'calc(-1rem - 2px) -2rem' }}
-                        />
-                      
                       <div className="flex items-center gap-3 px-3 py-2">
                         <div className={`relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[18px] font-bold ${versionTypeColor}`}>
                           {version.version_type[0].toUpperCase()}
                         </div>
 
-                        <div className="relative z-10 pointer-events-none flex-1 min-w-0">
-                          <div className="font-bold text-sm group-hover:underline">{version.version_number || version.name}</div>
-                          <div className="text-xs font-medium text-gray-400">{version.name}</div>
-                        </div>
+                        {versionHref ? (
+                          <Link
+                            href={versionHref}
+                            className="relative z-10 min-w-0 flex-1 group-hover:underline"
+                          >
+                            <div className="font-bold text-sm">{version.version_number || version.name}</div>
+                            <div className="text-xs font-medium text-gray-400">{version.name}</div>
+                          </Link>
+                        ) : (
+                          <div className="relative z-10 min-w-0 flex-1">
+                            <div className="font-bold text-sm">{version.version_number || version.name}</div>
+                            <div className="text-xs font-medium text-gray-400">{version.name}</div>
+                          </div>
+                        )}
 
                         <div className="relative z-10 flex flex-wrap gap-1.5 items-center">
                           {version.game_versions.slice(0, 1).map((v) => (

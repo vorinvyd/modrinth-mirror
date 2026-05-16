@@ -216,18 +216,17 @@ class FilesList {
 function FileItem({ file, projectAccent }) {
   const isPrimary = file.primary
   const useAccent = Boolean(isPrimary && projectAccent)
+  const dl = typeof file.url === 'string' && file.url.trim() ? file.url.trim() : null
 
-  return (
-    <div 
-      className={`flex items-center justify-between gap-3 p-2 transition rounded-xl ${
-        isPrimary 
-          ? 'bg-[rgba(27,217,106,.25)] hover:bg-[rgba(27,217,106,.3)]' 
+  const rowChrome = `${
+        isPrimary
+          ? 'bg-[rgba(27,217,106,.25)] hover:bg-[rgba(27,217,106,.3)]'
           : 'hover:bg-[var(--bg-hover)]'
-      }`}
-      style={!isPrimary ? { 
-        backgroundColor: 'var(--bg-tertiary)'
-      } : {}}
-    >
+      }`
+  const rowStyleInactive = !isPrimary ? { backgroundColor: 'var(--bg-tertiary)' } : {}
+
+  const inner = (
+    <>
       <div className="flex items-center gap-3 flex-1 min-w-0">
         <svg className="w-5 h-5 flex-shrink-0 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5zM14 2v6h6" />
@@ -244,15 +243,13 @@ function FileItem({ file, projectAccent }) {
           )}
         </div>
       </div>
-      <a
-        href={file.url}
-        download
-        className={`flex-shrink-0 inline-flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition ${
+      <span
+        className={`pointer-events-none flex-shrink-0 inline-flex items-center gap-2 px-3 py-2 rounded-lg font-semibold ${
           isPrimary
             ? useAccent
-              ? 'hover:!brightness-[1.08]'
-              : 'bg-modrinth-green hover:bg-modrinth-green-light text-black'
-            : 'bg-modrinth-dark hover:bg-[var(--bg-hover-alt)] text-gray-400'
+              ? ''
+              : 'bg-modrinth-green text-black'
+            : 'bg-modrinth-dark text-gray-400'
         }`}
         style={
           useAccent
@@ -267,7 +264,22 @@ function FileItem({ file, projectAccent }) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
         </svg>
         <span className="text-sm">Скачать</span>
-      </a>
+      </span>
+    </>
+  )
+
+  return (
+    <div
+      className={`rounded-xl p-2 transition ${rowChrome}`}
+      style={rowStyleInactive}
+    >
+      {dl ? (
+        <a href={dl} download className="flex items-center justify-between gap-3 text-inherit no-underline hover:no-underline">
+          {inner}
+        </a>
+      ) : (
+        <div className="flex items-center justify-between gap-3">{inner}</div>
+      )}
     </div>
   )
 }
